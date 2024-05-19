@@ -1,0 +1,11 @@
+{
+  "name": "knowledge_cube",
+  "version": "1.0.0",
+  "description": "This is project AUPP bootcampe course and working in frontend.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
