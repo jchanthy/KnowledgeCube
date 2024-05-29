@@ -1,12 +1,16 @@
 import './App.css';
+import Login from './components/Auth/Login';
+import PageNotFound from './pages/404';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h3>Welcome to KnowledgeCube</h3>
-      </header>
-    </div>
+    <>
+      <h1 className="text-3xl font-bold underline">
+      Hello world!
+    </h1>
+    <Login />
+    </>
+  
   );
 }
 
