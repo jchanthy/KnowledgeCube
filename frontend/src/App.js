@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import CourseList from "./components/CourseList/courseList";
+import CourseList from "./components/CourseList/courseList.js";
 
 const App = () => {
 	const [courses, setCourses] = useState([]);
