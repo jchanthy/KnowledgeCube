@@ -1,0 +1,24 @@
+{
+  "name": "knowledge-cube",
+  "version": "1.0.0",
+  "description": "capstone project for elearning platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jchanthy/KnowledgeCube.git"
+  },
+  "keywords": [
+    "elearning",
+    "knowledge",
+    "cube"
+  ],
+  "author": "john chanthy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jchanthy/KnowledgeCube/issues"
+  },
+  "homepage": "https://github.com/jchanthy/KnowledgeCube#readme"
+}
