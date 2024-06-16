@@ -6,9 +6,16 @@ const App = () => {
 	const [courses, setCourses] = useState([]);
 
 	useEffect(() => {
-		fetch("/courses")
-			.then((response) => response.json())
-			.then((data) => setCourses(data));
+		const courseData = async () => {
+			try {
+				const response = await fetch("/courses");
+				const data = await response.json();
+				setCourses(data);
+			} catch (error) {
+				console.log("Erorr fetching courses:", error);
+			}
+			courseData();
+		};
 	}, []);
 
 	return (
