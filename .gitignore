@@ -1,5 +1,5 @@
 # Node modules
-node_modules/
+*/node_modules/
 
 # Logs
 logs/
@@ -10,7 +10,7 @@ yarn-error.log*
 
 # Environment variables
 .env
-
+*/.env
 # Local environment directories
 .vscode/
 .idea/
