@@ -12,10 +12,10 @@ const App = () => {
 				const data = await response.json();
 				setCourses(data);
 			} catch (error) {
-				console.log("Erorr fetching courses:", error);
+				console.error("Erorr fetching courses:", error);
 			}
-			courseData();
 		};
+		courseData();
 	}, []);
 
 	return (
