@@ -20,5 +20,16 @@
   "bugs": {
     "url": "https://github.com/jchanthy/KnowledgeCube/issues"
   },
-  "homepage": "https://github.com/jchanthy/KnowledgeCube#readme"
+  "homepage": "https://github.com/jchanthy/KnowledgeCube#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.6",
+    "cookie-session": "^2.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.4.1",
+    "morgan": "^1.10.0",
+    "session": "^0.1.0"
+  }
 }
