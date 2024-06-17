@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import CourseList from "./components/CourseList/courseList.js";
+import Home from "./pages/Home.js";
 
 const App = () => {
 	const [courses, setCourses] = useState([]);
@@ -19,11 +19,8 @@ const App = () => {
 	}, []);
 
 	return (
-		<div className='App'>
-			<header className='bg-gray-800 text-white p-4'>
-				<h3>E-Learning Platform</h3>
-			</header>
-			<CourseList courses={courses}></CourseList>
+		<div className='container'>
+			<Home />
 		</div>
 	);
 };
