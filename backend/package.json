@@ -4,6 +4,7 @@
   "description": "capstone project for elearning platform",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon -r dotenv/config ./bin/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,14 +23,20 @@
   },
   "homepage": "https://github.com/jchanthy/KnowledgeCube#readme",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
     "cookie-session": "^2.1.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "esm": "^3.2.25",
     "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "moment": "^2.30.1",
     "mongoose": "^8.4.1",
     "morgan": "^1.10.0",
+    "nodemon": "^3.1.3",
     "session": "^0.1.0"
   }
 }
