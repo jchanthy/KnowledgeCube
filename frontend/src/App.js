@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import Home from "./pages/Home.js";
+import Header from "./pages/header.js";
+import Home from "./pages/home.js";
 
 const App = () => {
 	const [courses, setCourses] = useState([]);
@@ -19,9 +20,9 @@ const App = () => {
 	}, []);
 
 	return (
-		<div className='container'>
+		<>
 			<Home />
-		</div>
+		</>
 	);
 };
 
