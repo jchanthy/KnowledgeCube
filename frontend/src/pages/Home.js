@@ -1,9 +1,10 @@
+import Footer from "../pages/footer.js";
 import Header from "../pages/header.js";
 
 const Home = () => {
 	return (
 		<>
-			<div className='bg-white'>
+			<div className='bg-white flex flex-col min-h-screen'>
 				<div className='relative isolate'>
 					<Header />
 					<div
@@ -67,6 +68,7 @@ const Home = () => {
 						/>
 					</div>
 				</div>
+				<Footer />
 			</div>
 		</>
 	);

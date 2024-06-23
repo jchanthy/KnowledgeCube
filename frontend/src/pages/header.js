@@ -6,17 +6,14 @@ import {
 	MenuButton,
 	MenuItem,
 	MenuItems,
-	Input,
 } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import clsx from "clsx";
-import { Fragment } from "react";
 
 const navigation = [
-	{ name: "Dashboard", href: "#", current: true },
-	{ name: "Team", href: "#", current: false },
-	{ name: "Projects", href: "#", current: false },
-	{ name: "Calendar", href: "#", current: false },
+	{ name: "Dashboard", href: "/dashboard", current: false },
+	{ name: "Team", href: "/team", current: false },
+	{ name: "Projects", href: "/projects", current: false },
+	{ name: "Calendar", href: "/calendar", current: false },
 ];
 
 function classNames(...classes) {
@@ -27,7 +24,7 @@ export default function Header() {
 	return (
 		<Disclosure
 			as='nav'
-			className='bg-gray-800'>
+			className='bg-white-800 text-black'>
 			{({ open }) => (
 				<>
 					<div className='mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
@@ -52,11 +49,9 @@ export default function Header() {
 							</div>
 							<div className='flex flex-1 items-center justify-center sm:items-stretch sm:justify-start'>
 								<div className='flex flex-shrink-0 items-center'>
-									<img
-										className='h-8 w-auto'
-										src='https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500'
-										alt='Your Company'
-									/>
+									<span className='font-bold text-gray-900'>
+										<a href='/'>Knowledge Cube</a>
+									</span>
 								</div>
 								<div className='hidden sm:ml-6 sm:block'>
 									<div className='flex space-x-4'>
@@ -66,8 +61,8 @@ export default function Header() {
 												href={item.href}
 												className={classNames(
 													item.current
-														? "bg-gray-900 text-white"
-														: "text-gray-300 hover:bg-gray-700 hover:text-white",
+														? "bg-indigo-600 text-white"
+														: "text-gray-900 hover:bg-indigo-600 hover:text-white",
 													"rounded-md px-3 py-2 text-sm font-medium",
 												)}
 												aria-current={item.current ? "page" : undefined}>
@@ -77,23 +72,17 @@ export default function Header() {
 									</div>
 								</div>
 							</div>
-							<div className='absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0'>
-								<Input
-									className={clsx(
-										"block w-full rounded-lg border-none bg-white/5 py-1.5 px-3 text-sm/6 text-white",
-										"focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25",
-									)}
-								/>
-							</div>
 
 							<div className='absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0'>
 								<button
 									type='button'
-									className='relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'>
+									className='relative rounded-full bg-indigo-600 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'>
 									<span className='absolute -inset-1.5' />
+
 									<span className='sr-only'>View notifications</span>
+
 									<BellIcon
-										className='h-6 w-6'
+										className='h-6 w-6 text-white'
 										aria-hidden='true'
 									/>
 								</button>
@@ -105,6 +94,7 @@ export default function Header() {
 									<div>
 										<MenuButton className='relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'>
 											<span className='absolute -inset-1.5' />
+
 											<span className='sr-only'>Open user menu</span>
 											<img
 												className='h-8 w-8 rounded-full'
@@ -119,7 +109,7 @@ export default function Header() {
 										<MenuItem>
 											{({ focus }) => (
 												<a
-													href='#'
+													href='/profile'
 													className={classNames(
 														focus ? "bg-gray-100" : "",
 														"block px-4 py-2 text-sm text-gray-700",
@@ -131,7 +121,7 @@ export default function Header() {
 										<MenuItem>
 											{({ focus }) => (
 												<a
-													href='#'
+													href='/seettings'
 													className={classNames(
 														focus ? "bg-gray-100" : "",
 														"block px-4 py-2 text-sm text-gray-700",
@@ -143,7 +133,7 @@ export default function Header() {
 										<MenuItem>
 											{({ focus }) => (
 												<a
-													href='#'
+													href='/signout'
 													className={classNames(
 														focus ? "bg-gray-100" : "",
 														"block px-4 py-2 text-sm text-gray-700",
