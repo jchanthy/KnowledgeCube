@@ -741,10 +741,6 @@ select {
   border-width: 0;
 }
 
-.pointer-events-auto {
-  pointer-events: auto;
-}
-
 .absolute {
   position: absolute;
 }
@@ -787,14 +783,6 @@ select {
   top: -10rem;
 }
 
-.-top-full {
-  top: -100%;
-}
-
-.bottom-2\/3 {
-  bottom: 66.666667%;
-}
-
 .left-0 {
   left: 0px;
 }
@@ -829,10 +817,6 @@ select {
 
 .-z-10 {
   z-index: -10;
-}
-
-.z-0 {
-  z-index: 0;
 }
 
 .z-10 {
@@ -892,10 +876,6 @@ select {
   height: 4rem;
 }
 
-.h-4 {
-  height: 1rem;
-}
-
 .h-6 {
   height: 1.5rem;
 }
@@ -916,14 +896,6 @@ select {
   min-height: 100vh;
 }
 
-.w-10 {
-  width: 2.5rem;
-}
-
-.w-4 {
-  width: 1rem;
-}
-
 .w-48 {
   width: 12rem;
 }
@@ -936,16 +908,16 @@ select {
   width: 2rem;
 }
 
+.w-80 {
+  width: 20rem;
+}
+
 .w-\[36\.125rem\] {
   width: 36.125rem;
 }
 
 .w-\[72\.1875rem\] {
   width: 72.1875rem;
-}
-
-.w-px {
-  width: 1px;
 }
 
 .min-w-0 {
@@ -1030,10 +1002,6 @@ select {
   justify-content: space-between;
 }
 
-.gap-4 {
-  gap: 1rem;
-}
-
 .gap-x-4 {
   column-gap: 1rem;
 }
@@ -1107,14 +1075,6 @@ select {
   background-color: rgb(79 70 229 / var(--tw-bg-opacity));
 }
 
-.bg-slate-900\/10 {
-  background-color: rgb(15 23 42 / 0.1);
-}
-
-.bg-slate-900\/\[0\.2\] {
-  background-color: rgb(15 23 42 / 0.2);
-}
-
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -1122,11 +1082,6 @@ select {
 
 .bg-white\/5 {
   background-color: rgb(255 255 255 / 0.05);
-}
-
-.bg-gray-50 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
 
 .bg-gradient-to-tr {
@@ -1149,10 +1104,6 @@ select {
 
 .p-2 {
   padding: 0.5rem;
-}
-
-.p-4 {
-  padding: 1rem;
 }
 
 .px-2 {
@@ -1251,11 +1202,6 @@ select {
   line-height: 1.25rem;
 }
 
-.text-xs {
-  font-size: 0.75rem;
-  line-height: 1rem;
-}
-
 .font-bold {
   font-weight: 700;
 }
@@ -1334,12 +1280,6 @@ select {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.shadow-md {
-  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
 .shadow-sm {
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
@@ -1365,14 +1305,6 @@ select {
   --tw-ring-color: rgb(17 24 39 / 0.1);
 }
 
-.ring-slate-700\/10 {
-  --tw-ring-color: rgb(51 65 85 / 0.1);
-}
-
-.ring-slate-900\/5 {
-  --tw-ring-color: rgb(15 23 42 / 0.05);
-}
-
 .ring-white\/10 {
   --tw-ring-color: rgb(255 255 255 / 0.1);
 }
@@ -1381,8 +1313,27 @@ select {
   --tw-ring-color: rgb(107 114 128 / 0.1);
 }
 
+.ring-gray-300 {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(209 213 219 / var(--tw-ring-opacity));
+}
+
+.ring-gray-600 {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(75 85 99 / var(--tw-ring-opacity));
+}
+
+.ring-gray-400 {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(156 163 175 / var(--tw-ring-opacity));
+}
+
 .ring-opacity-5 {
   --tw-ring-opacity: 0.05;
+}
+
+.ring-offset-gray-500\/10 {
+  --tw-ring-offset-color: rgb(107 114 128 / 0.1);
 }
 
 .blur-3xl {
@@ -1400,19 +1351,6 @@ select {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
-}
-
-.duration-200 {
-  transition-duration: 200ms;
-}
-
-.ease-in-out {
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.\[mask-image\:linear-gradient\(to_top\2c transparent\2c white_4rem\2c white_calc\(100\%-4rem\)\2c transparent\)\] {
-  -webkit-mask-image: linear-gradient(to top,transparent,white 4rem,white calc(100% - 4rem),transparent);
-          mask-image: linear-gradient(to top,transparent,white 4rem,white calc(100% - 4rem),transparent);
 }
 
 .hover\:bg-gray-700:hover {
@@ -1638,12 +1576,6 @@ select {
 
   .sm\:leading-6 {
     line-height: 1.5rem;
-  }
-}
-
-@media (min-width: 768px) {
-  .md\:grid-cols-3 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 

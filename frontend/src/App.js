@@ -1,28 +1,32 @@
-import { useEffect, useState } from "react";
 import "./App.css";
-import Header from "./pages/header.js";
+import CourseList from "./components/CourseList/courseList.js";
+import Tutorials from "./components/Tutorials/tutorials.js";
 import Home from "./pages/home.js";
+import PageNotFound from "./pages/pageNotFound.js";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const App = () => {
-	const [courses, setCourses] = useState([]);
-
-	useEffect(() => {
-		const courseData = async () => {
-			try {
-				const response = await fetch("/courses");
-				const data = await response.json();
-				setCourses(data);
-			} catch (error) {
-				console.error("Erorr fetching courses:", error);
-			}
-		};
-		courseData();
-	}, []);
-
 	return (
-		<>
-			<Home />
-		</>
+		<BrowserRouter>
+			<Routes>
+				<Route
+					path='/'
+					element={<Home />}
+				/>
+				<Route
+					path='/courses'
+					element={<CourseList />}
+				/>
+				<Route
+					path='*'
+					element={<PageNotFound />}
+				/>
+				<Route
+					path='/tutorials'
+					element={<Tutorials />}
+				/>
+			</Routes>
+		</BrowserRouter>
 	);
 };
 

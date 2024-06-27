@@ -1,3 +1,4 @@
+import Search from "../components/Search/search";
 import {
 	Disclosure,
 	DisclosureButton,
@@ -10,9 +11,9 @@ import {
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const navigation = [
-	{ name: "Dashboard", href: "/dashboard", current: false },
-	{ name: "Team", href: "/team", current: false },
-	{ name: "Projects", href: "/projects", current: false },
+	{ name: "Courses", href: "/courses", current: false },
+	{ name: "Tutorials", href: "/tutorials", current: false },
+	{ name: "Resourses", href: "/resources", current: false },
 	{ name: "Calendar", href: "/calendar", current: false },
 ];
 
@@ -53,6 +54,7 @@ export default function Header() {
 										<a href='/'>Knowledge Cube</a>
 									</span>
 								</div>
+
 								<div className='hidden sm:ml-6 sm:block'>
 									<div className='flex space-x-4'>
 										{navigation.map((item) => (
@@ -72,7 +74,9 @@ export default function Header() {
 									</div>
 								</div>
 							</div>
-
+							<div>
+								<Search />
+							</div>
 							<div className='absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0'>
 								<button
 									type='button'
@@ -153,8 +157,8 @@ export default function Header() {
 							{navigation.map((item) => (
 								<DisclosureButton
 									key={item.name}
-									as='a'
-									href={item.href}
+									as='Link'
+									href={item.to}
 									className={classNames(
 										item.current
 											? "bg-gray-900 text-white"
