@@ -9,6 +9,7 @@ import {
 	MenuItems,
 } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Link } from "react-router-dom";
 
 const navigation = [
 	{ name: "Courses", href: "/courses", current: false },
@@ -136,14 +137,14 @@ export default function Header() {
 										</MenuItem>
 										<MenuItem>
 											{({ focus }) => (
-												<a
-													href='/signout'
+												<Link
+													to='/signout'
 													className={classNames(
 														focus ? "bg-gray-100" : "",
 														"block px-4 py-2 text-sm text-gray-700",
 													)}>
 													Sign out
-												</a>
+												</Link>
 											)}
 										</MenuItem>
 									</MenuItems>
