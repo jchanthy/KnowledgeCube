@@ -11,7 +11,7 @@ const Search = () => {
                     </svg>
                 </button>
                 <input type="text" id="search"
-                       className="w-full px-8 py-3 rounded-md border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
+                       className="w-full px-8 mr-5 py-3 rounded-md border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
                        placeholder="Search"/>
             </div>
         </>

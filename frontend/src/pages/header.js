@@ -133,7 +133,7 @@ export default function Header() {
                                         <MenuItem>
                                             {({focus}) => (
                                                 <Link
-                                                    to='/signout'
+                                                    to='/login'
                                                     className={classNames(
                                                         focus ? "bg-gray-100" : "",
                                                         "block px-4 py-2 text-sm text-gray-700",
@@ -153,8 +153,8 @@ export default function Header() {
                             {navigation.map((item) => (
                                 <DisclosureButton
                                     key={item.name}
-                                    as='a'
-                                    href={item.href}
+                                    as='Link'
+                                    href={item.to}
                                     className={classNames(
                                         item.current
                                             ? "bg-gray-900 text-white"
