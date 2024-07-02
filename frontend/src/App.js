@@ -1,28 +1,50 @@
-import { useEffect, useState } from "react";
 import "./App.css";
-import Home from "./pages/Home.js";
+import CourseList from "./components/CourseList/courseList.js";
+import Tutorials from "./components/Tutorials/tutorials.js";
+import Home from "./pages/home.js";
+import PageNotFound from "./pages/pageNotFound.js";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import UserProfile from "./components/Profile/UserProfile";
+import Settings from "./components/Settings/setting";
+import Login from "./components/Auth/Login";
 
 const App = () => {
-	const [courses, setCourses] = useState([]);
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route
+                    path='/'
+                    element={<Home/>}
+                />
+                <Route
+                    path='/courses'
+                    element={<CourseList/>}
+                />
+                <Route
+                    path='/tutorials'
+                    element={<Tutorials/>}
+                />
+                <Route
+                    path='/profile'
+                    element={<UserProfile/>}
+                >
+                </Route>
+                <Route
+                    path='/settings'
+                    element={<Settings/>}
+                >
+                </Route>
+                <Route path='/login' element={<Login/>}>
 
-	useEffect(() => {
-		const courseData = async () => {
-			try {
-				const response = await fetch("/courses");
-				const data = await response.json();
-				setCourses(data);
-			} catch (error) {
-				console.error("Erorr fetching courses:", error);
-			}
-		};
-		courseData();
-	}, []);
+                </Route>
+                <Route
+                    path='*'
+                    element={<PageNotFound/>}
+                />
 
-	return (
-		<div className='container'>
-			<Home />
-		</div>
-	);
+            </Routes>
+        </BrowserRouter>
+    );
 };
 
 export default App;
