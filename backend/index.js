@@ -2,27 +2,28 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { fileURLToPath } from "url";
-import { join, dirname } from "path";
+import path, { join } from "path";
 
 // user import
 import connectToDb from "./db/index.js";
 import home from "./routes/home/index.js";
-import apiRoutes from "./routes/api.js"; // Import your API routes
+import apiRoutes from "./routes/api.js";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const __filename = fileURLToPath( import.meta.url );
+const __dirname = path.dirname( __filename );
 
 const app = express();
 const port = process.env.PORT || 5001;
 // Use the CORS middleware before defining your routes
-app.use(cors());
+app.use( cors() );
 dotenv.config();
 
-app.use("/assets", express.static(join(__dirname, "public")));
-app.use(express.static(join(__dirname, "public", "build")));
+app.use( "/assets", express.static( join( __dirname, "public" ) ) );
+app.use( express.static( join( __dirname, "public", "build" ) ) );
 
 // Middleware
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use( express.urlencoded( { extended: true } ) );
+app.use( express.json() );
 
 // Connect to MongoDB
 // mongoose.Promise = global.Promise;
@@ -38,8 +39,8 @@ app.use(express.json());
 // });
 
 // Routes
-app.use("/api", apiRoutes);
-app.use("/", home);
+app.use( "/api", apiRoutes );
+app.use( "/", home );
 
 // Error handling middleware
 // app.use((err, req, res, next) => {
@@ -48,14 +49,14 @@ app.use("/", home);
 // });
 
 // Start the server
-Promise.all([connectToDb()])
-	.then(() =>
-		app.listen(port, () => console.log(`Blog Chef is cooking on port ${port}`)),
-	)
-	.catch((error) => {
-		console.error(`MongoDB Atlas Error: ${error}`);
-		process.exit();
-	});
+Promise.all( [ connectToDb() ] )
+    .then( () =>
+        app.listen( port, () => console.log( `server is running on port ${ port }` ) ),
+    )
+    .catch( ( error ) => {
+        console.error( `MongoDB Atlas Error: ${ error }` );
+        process.exit();
+    } );
 
 // const PORT = process.env.PORT || 3001;
 // app.listen(PORT, () => {

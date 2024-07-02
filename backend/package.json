@@ -1,11 +1,11 @@
 {
-  "name": "bank",
+  "name": "knowledge-cube-backend",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon app",
+    "start": "concurrently \"nodemon app \" \"cd ../frontend && npm start\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
