@@ -11,7 +11,6 @@ const Home = () => {
                     <div
                         className='absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80'
                         aria-hidden='true'>
-
                     </div>
                     <div className='mx-auto max-w-2xl py-32'>
                         <div className='hidden sm:mb-8 sm:flex sm:justify-center'>

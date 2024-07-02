@@ -1,19 +1,26 @@
 const Search = () => {
     return (
         <>
-            <div className="relative flex items-center">
-                <button type="button" className="absolute inset-y-0 left-0 flex items-center px-4 focus:outline-none">
-                    <svg className="w-4 h-4 text-gray-500 fill-current" viewBox="0 0 20 20"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path fillRule="evenodd"
-                              d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                              clipRule="evenodd"></path>
-                    </svg>
-                </button>
-                <input type="text" id="search"
-                       className="w-full px-8 mr-5 py-3 rounded-md border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
-                       placeholder="Search"/>
+            <div className="flex flex-1 w-80 items-center relative group">
+                <div className="flex w-full justify-between">
+                    <input autoComplete="off"
+                           className="w-full pl-10 pr-10 h-10 text-sm font-normal bg-transparent border border-neutral-300 rounded-lg  focus-visible:outline-none px-10.5 text-black placeholder:text-neutral-500"
+                           type="text"
+                           placeholder="What you want to learn today?"
+                           id="searchBox"/>
+                    <div className="absolute left-3.5 top-1/2 -translate-y-1/2 h-5 cursor-pointer">
+                        <svg className="h-5 w-5 text-neutral-500" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div className="absolute z-[999] top-0 shadow-neutralShadow rounded mt-[38px] w-full ">
+                    <div className="rounded w-full z-[999] bg-white hidden" id="searchList"></div>
+                </div>
             </div>
+
         </>
     );
 };
