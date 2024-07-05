@@ -23,20 +23,19 @@ const LoginForm = () => {
                 </form>
                 <p className="text-center m-8 text-sm text-gray-600">Or login with</p>
                 <div className="flex justify-center gap-4  text-center">
-                    <div className="flex justify-center space-x-4">
-                        <button type="button" onClick={() => {
-                        }}
-                                className="flex items-center px-4 py-2 rounded-md border border-gray-300 hover:bg-gray-100">
-                            Google Login
-                        </button>
+                    <div className="flex flex-wrap justify-center gap-2">
+                        <a href="https://moodle.academy/auth/oauth2/login.php?id=1&amp;wantsurl=https%3A%2F%2Fmoodle.academy%2Fcourse%2Fview.php%3Fid%3D57&amp;sesskey=17NRsDcdoz"
+                           className="inline-flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md">
+                            <img src="https://accounts.google.com/favicon.ico" alt="Google" className="w-6 h-6 mr-2"/>
+                            Google
+                        </a>
+                        <a href="https://moodle.academy/auth/oauth2/login.php?id=2&amp;wantsurl=https%3A%2F%2Fmoodle.academy%2Fcourse%2Fview.php%3Fid%3D57&amp;sesskey=17NRsDcdoz"
+                           className="inline-flex items-center px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded-md">
+                            <img src="https://www.microsoft.com/favicon.ico" alt="Microsoft" className="w-6 h-6 mr-2"/>
+                            Microsoft
+                        </a>
                     </div>
-                    <div className="flex justify-center space-x-4">
-                        <button type="button" onClick={() => {
-                        }}
-                                className="flex items-center px-4 py-2 rounded-md border border-gray-300 hover:bg-gray-100">
-                            Microsoft Login
-                        </button>
-                    </div>
+
                 </div>
 
             </div>
