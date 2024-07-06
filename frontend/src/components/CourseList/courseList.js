@@ -1,9 +1,13 @@
 import React from "react";
+import Header from "../../pages/header";
 
 const CourseList = ( { course } ) => (
     <>
+        <Header />
         <div className="px-spacing20 md:px-0 w-full 2xl:max-w-7xl mx-auto">
+
             <div className="grid grid-cols-12 gap-5">
+
                 <div className="col-span-12 md:flex-col">
                     <div
                         className="flex cursor-pointer flex-col justify-start items-start w-full relative gap-8 p-4 rounded-xl bg-white outline outline-1 outline-neutral-200 shadow-neutralShadow">
