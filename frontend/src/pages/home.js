@@ -12,7 +12,7 @@ const Home = () => {
                         className='absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80'
                         aria-hidden='true'>
                     </div>
-                    <div className='mx-auto max-w-2xl py-32'>
+                    <div className='mx-auto max-w-2xl py-16'>
                         <div className='hidden sm:mb-8 sm:flex sm:justify-center'>
                             <div
                                 className='relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20'>
