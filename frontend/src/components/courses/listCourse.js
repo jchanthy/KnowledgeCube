@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "../../pages/header";
+import Header from "../../pages/header.js";
 
-const CourseList = ( { course } ) => (
+const ListCourse = ({ course } ) => (
     <>
         <Header />
         <div className="px-spacing20 md:px-0 w-full 2xl:max-w-7xl mx-auto">
@@ -59,4 +59,4 @@ const CourseList = ( { course } ) => (
     </>
 );
 
-export default CourseList;
+export default ListCourse;

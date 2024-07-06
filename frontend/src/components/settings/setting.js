@@ -1,5 +1,5 @@
-import Footer from "../../pages/footer";
-import Header from "../../pages/header";
+import Footer from "../../pages/footer.js";
+import Header from "../../pages/header.js";
 
 const Settings = () => {
     return (
