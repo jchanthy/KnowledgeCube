@@ -9,11 +9,6 @@ const navigation = [
     { name: "Calendar", href: "/calendar", current: false },
 ];
 
-
-function classNames( ...classes ) {
-    return classes.filter( Boolean ).join( " " );
-}
-
 export default function Header() {
     return (
         <div className="navbar bg-base-100">
@@ -24,13 +19,16 @@ export default function Header() {
             <div className="gap-2">
                 {navigation.map((item) => (
                     <div key={item.name} className="dropdown dropdown-hover">
-                        <div className="btn m-1">{item.name}</div>
+                        <a className="menu link link-hover hover:bg-base-200 m-1">
+                            {item.subMenu ? item.name  : <Link to={item.href}>{item.name}
+                            </Link>}
+                        </a>
 
                         <ul tabIndex={0}
                             className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                            {item.subMenu && item.subMenu.map((subItem) => (
+                            {item.subMenu ? item.subMenu.map((subItem) => (
                                 <li key={subItem.name}><Link to={subItem.href}>{subItem.name}</Link></li>
-                            ))}
+                            )): null}
                         </ul>
                     </div>
                 ))}
