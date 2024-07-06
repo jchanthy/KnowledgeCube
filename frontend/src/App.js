@@ -1,32 +1,27 @@
 import "./App.css";
-import ListCourse from "./components/courses/listCourse.js";
-import Tutorials from "./components/tutorials/tutorials.js";
-import Home from "./pages/home.js";
-import PageNotFound from "./pages/pageNotFound.js";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-import UserProfile from "./components/profile/userProfile.js";
-import Settings from "./components/settings/setting.js";
-import Login from "./components/auth/login.js";
+import ThemeSwitcher from "./components/ThemeSwither.js";
+import Footer from "./components/footer.js";
+import Header from "./components/header.js";
+import Sidebar from "./components/sidebar.js";
+import ThemeContext from "./contexts/ThemeContext.js";
+import { useState } from "react";
+import { Outlet } from "react-router-dom";
 
 const App = () => {
-    return (
-        <>
-            <html data-theme="light">
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/courses" element={<ListCourse />} />
-                    <Route path="/tutorials" element={<Tutorials />} />
-                    <Route path="/profile" element={<UserProfile />} />
-                    <Route path="/settings" element={<Settings />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="*" element={<PageNotFound />} />
-                </Routes>
-            </BrowserRouter>
-            </html>
-        </>
-
-    );
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
+  const themeContextValue = { theme, setTheme };
+  return (
+    <>
+      <ThemeContext.Provider value={themeContextValue}>
+        <Header>
+          <Sidebar></Sidebar>
+          <ThemeSwitcher />
+        </Header>
+        <Outlet />
+        <Footer />
+      </ThemeContext.Provider>
+    </>
+  );
 };
 
 export default App;

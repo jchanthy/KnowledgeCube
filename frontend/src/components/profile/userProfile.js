@@ -1,16 +1,13 @@
-import Header from "../../pages/header.js";
-import Footer from "../../pages/footer.js";
-
+import Footer from "../footer.js";
+import Header from "../header.js";
 
 const UserProfile = () => {
-    return (
-        <>
-            <Header/>
-            <Footer/>
-        </>
-
-    );
-}
-
+  return (
+    <>
+      <Header />
+      <Footer />
+    </>
+  );
+};
 
 export default UserProfile;
