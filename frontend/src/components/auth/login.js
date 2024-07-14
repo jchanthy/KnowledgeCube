@@ -1,46 +1,55 @@
 // src/components/LoginForm.js
 import React from 'react';
+import {Link} from "react-router-dom";
 
 const LoginForm = () => {
 
     return (
-        <div className="flex justify-center items-center h-screen bg-gray-100">
-            <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm">
-                <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
-                <form className="space-y-4">
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700">Email</label>
-                        <input type="email" className="mt-1 block w-full p-2 border border-gray-300 rounded-md"/>
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700">Password</label>
-                        <input type="password" className="mt-1 block w-full p-2 border border-gray-300 rounded-md"/>
-                    </div>
-                    <button type="submit" className="w-full py-2 px-4 bg-blue-600 text-white rounded-md"
-                            onClick={() => {
-                            }}>Login
-                    </button>
-                </form>
-                <p className="text-center m-8 text-sm text-gray-600">Or login with</p>
-                <div className="flex justify-center gap-4  text-center">
-                    <div className="flex flex-wrap justify-center gap-2">
-                        <a href="https://moodle.academy/auth/oauth2/login.php?id=1&amp;wantsurl=https%3A%2F%2Fmoodle.academy%2Fcourse%2Fview.php%3Fid%3D57&amp;sesskey=17NRsDcdoz"
-                           className="inline-flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md">
-                            <img src="https://accounts.google.com/favicon.ico" alt="Google" className="w-6 h-6 mr-2"/>
-                            Google
-                        </a>
-                        <a href="https://moodle.academy/auth/oauth2/login.php?id=2&amp;wantsurl=https%3A%2F%2Fmoodle.academy%2Fcourse%2Fview.php%3Fid%3D57&amp;sesskey=17NRsDcdoz"
-                           className="inline-flex items-center px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded-md">
-                            <img src="https://www.microsoft.com/favicon.ico" alt="Microsoft" className="w-6 h-6 mr-2"/>
-                            Microsoft
-                        </a>
-                    </div>
+        <div className="hero bg-base-200 min-h-screen">
+            <div className="hero-content lg:flex-row-reverse">
+                <div className="text-center lg:text-left">
 
                 </div>
+                <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+                    <div className={'flex justify-center m-4 card-title text-3xl font-bold'}>
+                        Login now!
+                    </div>
+                    <form className="card-body">
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Email</span>
+                            </label>
+                            <input type="email" placeholder="email" className="input input-bordered" required/>
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Password</span>
+                            </label>
+                            <input type="password" placeholder="password" className="input input-bordered" required/>
+                            <label className="label">
+                                <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                            </label>
+                        </div>
+                        <div className="form-control mt-6">
+                            <button className="btn btn-primary">Login</button>
+                        </div>
+                    </form>
+                    <div className={'divider'}></div>
+                    <div className={'flex flex-row content-center justify-center'}>
+                        <Link to={'/google'}><img src="https://accounts.google.com/favicon.ico"
+                                                  alt="Google"
+                                                  className="w-6 h-6 mr-2"/>Google</Link>
+                        <div className={'divider divider-horizontal'}></div>
+                        <Link to={'/fa'}><img src="https://www.microsoft.com/favicon.ico" alt="Microsoft"
+                                              className="w-6 h-6 mr-2"/>Microsoft</Link>
+                    </div>
+                    <div className={'divider'}></div>
 
+                </div>
             </div>
         </div>
-    );
+    )
+        ;
 };
 
 export default LoginForm;

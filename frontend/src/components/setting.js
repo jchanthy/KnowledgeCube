@@ -2,12 +2,11 @@ import Footer from "./footer.js";
 import Header from "./header.js";
 
 const Settings = () => {
-  return (
-    <>
-      <Header />
-      <Footer />
-    </>
-  );
+    return (
+        <>
+
+        </>
+    );
 };
 
 export default Settings;
