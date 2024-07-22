@@ -16,7 +16,7 @@ const ThemeSwitcher = () => {
     }, [theme, theme.theme]);
 
     return (
-        <div className={'hidden'}>
+        <div className={''}>
             <label className="swap swap-rotate">
                 {/* this hidden checkbox controls the state */}
                 <input

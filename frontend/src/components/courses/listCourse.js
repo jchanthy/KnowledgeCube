@@ -1,5 +1,5 @@
-import Header from "../header.js";
 import {NavLink} from "react-router-dom";
+import HeaderPage from "../../pages/HeaderPage.js";
 
 const ListCourse = () => {
     const course = [
@@ -34,6 +34,8 @@ const ListCourse = () => {
     ];
     return (
         <>
+            <HeaderPage/>
+
             <div className="hero bg-base-200 min-h-screen">
                 <div className="hero-content text-center">
                     <div className="max-w-md">

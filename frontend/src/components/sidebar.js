@@ -36,8 +36,8 @@ const Sidebar = () => {
                 <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
                     {/* Sidebar content here */}
                     <li className="gap-1">
-                        <Link to={"home"}>Home</Link>
-                        <Link to={"courses"}>Courses</Link>
+                        <Link to={"/"}>Home</Link>
+                        <Link to={"/courses"}>Courses</Link>
                     </li>
                 </ul>
             </div>
