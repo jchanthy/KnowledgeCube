@@ -1,5 +1,5 @@
 import Footer from "./footer.js";
-import Home from "./home.js";
+import HomePage from "./HomePage.js";
 import HeaderPage from "./HeaderPage.js";
 
 const Layout = () => {
@@ -8,7 +8,7 @@ const Layout = () => {
 
             <HeaderPage/>
 
-            <Home/>
+            <HomePage/>
 
             <Footer/>
         </>

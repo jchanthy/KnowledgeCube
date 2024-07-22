@@ -1,6 +1,11 @@
 import {Link} from "react-router-dom";
 
 const UserProfile = () => {
+
+    const logoutUser = () => {
+        localStorage.clear();
+        window.location.href = '/'
+    }
     return (
         <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
@@ -20,7 +25,9 @@ const UserProfile = () => {
                     </Link>
                 </li>
                 <li><Link to={'/dashboard/settings'}>Settings</Link></li>
-                <li><Link to={'/login'}>Logout</Link></li>
+                <div className={'divider mt-0 mb-0'}></div>
+                <li><Link onClick={logoutUser} to={''}>Logout</Link></li>
+
             </ul>
         </div>
     );
