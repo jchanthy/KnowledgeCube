@@ -7,6 +7,7 @@ import Register from "./components/user/Register.js";
 import ForgotPassword from "./components/user/ForgotPassword.js";
 import Layout from "./pages/layout.js";
 import ListCourse from "./components/courses/listCourse.js";
+import Dashboard from "./pages/admin.js";
 
 const App = () => {
     const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
@@ -24,6 +25,7 @@ const App = () => {
                         <Route path={'/register'} element={<Register/>}/>
                         <Route path={'/forget-password'} element={<ForgotPassword/>}/>
                         <Route path={'/courses'} element={<ListCourse/>}/>
+                        <Route path={'/dashboard'} element={<Dashboard/>}/>
                     </Routes>
                 </Router>
             </ThemeContext.Provider>

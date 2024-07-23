@@ -35,10 +35,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "dev": "concurrently \"dotenv \" \"tailwindcss -i ./src/index.css -o ./src/App.css --watch\" \"npm run start\"",
+    "dev": "concurrently \"dotenv \" \"tailwindcss -i ./src/index.css -o ./src/App.css --watch\" \"npm run server \" \"npm run start\"",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "json-server --watch src/data/db.json --port 3001"
+    "server": "json-server --watch db.json --port 5000"
   },
   "eslintConfig": {
     "extends": [

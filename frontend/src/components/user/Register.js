@@ -51,7 +51,7 @@ function Register() {
                             <label className="label">
                                 <span className="label-text">Name</span>
                             </label>
-                            <input type="text" placeholder="text" className="input input-bordered" required/>
+                            <input type="text" placeholder="Full Name" className="input input-bordered" required/>
                         </div>
                         <div className="form-control">
                             <label className="label">
@@ -71,7 +71,7 @@ function Register() {
                         </div>
 
                         <div className='text-center mt-4'>Already have an account? <Link to="/login"><span
-                            className="  inline-block  hover:text-primary hover:underline hover:cursor-pointer transition duration-200">Login</span></Link>
+                            className="inline-block  hover:text-primary hover:underline hover:cursor-pointer transition duration-200">Login</span></Link>
                         </div>
                     </form>
                 </div>
