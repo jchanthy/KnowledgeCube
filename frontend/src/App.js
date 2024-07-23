@@ -1,31 +1,35 @@
 import "./App.css";
+import ThemeContext from "./contexts/ThemeContext.js";
+import {useState} from "react";
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import Login from "./pages/login.js";
+import Register from "./components/user/Register.js";
+import ForgotPassword from "./components/user/ForgotPassword.js";
+import Layout from "./pages/layout.js";
 import ListCourse from "./components/courses/listCourse.js";
-import Tutorials from "./components/tutorials/tutorials.js";
-import Home from "./pages/home.js";
-import PageNotFound from "./pages/pageNotFound.js";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-import UserProfile from "./components/profile/userProfile.js";
-import Settings from "./components/settings/setting.js";
-import Login from "./components/auth/login.js";
+import Dashboard from "./pages/admin.js";
 
 const App = () => {
+    const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
+    const themeContextValue = {theme, setTheme};
     return (
         <>
-            <html data-theme="light">
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/courses" element={<ListCourse />} />
-                    <Route path="/tutorials" element={<Tutorials />} />
-                    <Route path="/profile" element={<UserProfile />} />
-                    <Route path="/settings" element={<Settings />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="*" element={<PageNotFound />} />
-                </Routes>
-            </BrowserRouter>
-            </html>
-        </>
+            <ThemeContext.Provider value={themeContextValue}>
+                <Router>
+                    <Routes>
+                        <Route path={'/'} element={
+                            <Layout/>
+                        }/>
 
+                        <Route path={'/login'} element={<Login/>}/>
+                        <Route path={'/register'} element={<Register/>}/>
+                        <Route path={'/forget-password'} element={<ForgotPassword/>}/>
+                        <Route path={'/courses'} element={<ListCourse/>}/>
+                        <Route path={'/dashboard'} element={<Dashboard/>}/>
+                    </Routes>
+                </Router>
+            </ThemeContext.Provider>
+        </>
     );
 };
 
