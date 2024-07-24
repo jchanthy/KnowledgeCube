@@ -1,7 +1,9 @@
 import {Link} from "react-router-dom";
+import checkAuth from "../auth/auth.js";
 
 const UserProfile = () => {
 
+    const token = checkAuth();
     const logoutUser = () => {
         localStorage.clear();
         window.location.href = '/'
@@ -26,7 +28,11 @@ const UserProfile = () => {
                 </li>
                 <li><Link to={'/dashboard/settings'}>Settings</Link></li>
                 <div className={'divider mt-0 mb-0'}></div>
-                <li><Link onClick={logoutUser} to={''}>Logout</Link></li>
+                <li>
+                    {
+                        token ? <Link onClick={logoutUser} to={''}>Logout</Link> : <Link to={'/login'}>Login</Link>
+                    }
+                </li>
 
             </ul>
         </div>

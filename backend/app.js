@@ -1,56 +1,57 @@
-import express from 'express';
-import { join } from 'path';
-import { createWriteStream } from 'fs';
-import morgan from 'morgan';
-import session from 'express-session';
-import compression from 'compression';
-import home from './routes/home';
-import admin from './routes/admin';
-import api from './routes/api';
-import connectToDb from './db';
+import express from "express";
+// import { createWriteStream } from "fs";
+import morgan from "morgan";
+import session from "./session/index.js";
+import compression from "compression";
+import home from "./routes/home/index.js";
+import admin from "./routes/admin/index.js";
+import api from "./routes/api/index.js";
+import connectToDb from "./db/index.js";
+import {fileURLToPath} from "url";
+import {dirname, join} from "path";
+import helmet from "helmet";
 
 const app = express();
-const logFile = join(__dirname, 'blogchef.log');
+const __dirname = dirname(fileURLToPath(import.meta.url));
+// const logFile = join(__dirname, "blogchef.log");
+const PORT = process.env.PORT || 3000;
 
-const port = process.env.PORT || 3001;
-
+app.use(
+    helmet({
+        contentSecurityPolicy: {
+            directives: {
+                defaultSrc: ["'self'"],
+                scriptSrc: ["'self'", "'nonce-ps0QMWhuej5oqzobisuQnA=='"],
+                objectSrc: ["'self'"]
+                // Add other directives as needed
+            }
+        }
+    })
+);
 app.use(compression());
-app.use('/assets', express.static(join(__dirname, 'public')));
-app.use(express.static(join(__dirname, 'public', 'client')));
-app.use(express.urlencoded({ extended: false }));
+app.use("/assets", express.static(join(__dirname, "public")));
+app.use(express.static(join(__dirname, "public", "build")));
+app.use(express.urlencoded({extended: false}));
 app.use(express.json());
-app.use(
-	'/admin',
-	session({
-		name: 'sessId',
-		secret: process.env.sessionSecret,
-		resave: false,
-		saveUninitialized: true,
-		cookie: {
-			secure: app.get('env') === 'production' ? true : false,
-			httpOnly: true,
-			maxAge: 18000000, // 5 hours
-		},
-	}),
-);
-app.use(morgan(':method - :url - :date - :response-time ms'));
-app.use(
-	morgan(':method - :url - :date - :response-time ms', {
-		stream: createWriteStream(logFile, { flags: 'a' }),
-	}),
-);
+app.use("/admin", session(app));
+app.use(morgan(":method - :url - :date - :response-time ms"));
+// app.use(
+//   morgan(":method - :url - :date - :response-time ms", {
+//     stream: createWriteStream(logFile, { flags: "a" }),
+//   }),
+// );
 
-app.set('view engine', 'ejs');
+app.set("view engine", "pug");
 
-app.use('/admin', admin);
-app.use('/api', api);
-app.use('/', home);
+app.use("/admin", admin);
+app.use("/api", api);
+app.use("/", home);
 
 Promise.all([connectToDb()])
-	.then(() =>
-		app.listen(port, () => console.log(`Server is running on port ${port}`)),
-	)
-	.catch((error) => {
-		console.error(`MongoDB Atlas Error: ${error}`);
-		process.exit();
-	});
+    .then(() =>
+        app.listen(PORT, () => console.log(`Blog Chef is cooking on port ${PORT}!`))
+    )
+    .catch((error) => {
+        console.error(`MongoDB Atlas Error: ${error}`);
+        process.exit();
+    });
