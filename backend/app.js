@@ -10,6 +10,9 @@ import connectToDb from "./db/index.js";
 import {fileURLToPath} from "url";
 import {dirname, join} from "path";
 import helmet from "helmet";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
