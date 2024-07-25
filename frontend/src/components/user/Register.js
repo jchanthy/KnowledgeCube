@@ -1,38 +1,16 @@
-import {useState} from 'react'
+import React, {useState} from 'react'
 import {Link} from "react-router-dom";
 
 
-function Register() {
+const RegisterForm = ({handleRegister}) => {
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-    const INITIAL_REGISTER_OBJ = {
-        name: "",
-        password: "",
-        emailId: ""
-    }
-
-    const [loading, setLoading] = useState(false)
-    const [errorMessage, setErrorMessage] = useState("")
-    const [registerObj, setRegisterObj] = useState(INITIAL_REGISTER_OBJ)
-
-    const submitForm = (e) => {
+    const handleSubmit = (e) => {
+        console.log(e);
         e.preventDefault()
-        setErrorMessage("")
-
-        if (registerObj.name.trim() === "") return setErrorMessage("Name is required! (use any value)")
-        if (registerObj.emailId.trim() === "") return setErrorMessage("Email Id is required! (use any value)")
-        if (registerObj.password.trim() === "") return setErrorMessage("Password is required! (use any value)")
-        else {
-            setLoading(true)
-            // Call API to check user credentials and save token in localstorage
-            localStorage.setItem("token", "DumyTokenHere")
-            setLoading(false)
-            window.location.href = '/app/welcome'
-        }
-    }
-
-    const updateFormValue = ({updateType, value}) => {
-        setErrorMessage("")
-        setRegisterObj({...registerObj, [updateType]: value})
+        handleRegister(username, email, password);
     }
 
     return (
@@ -46,28 +24,34 @@ function Register() {
                     </p>
                 </div>
                 <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-                    <form className="card-body" onSubmit={submitForm}>
+                    <form className="card-body" onSubmit={handleSubmit}>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Name</span>
                             </label>
-                            <input type="text" placeholder="Full Name" className="input input-bordered" required/>
+                            <input type={'hidden'} name={'_csrf'}/>
+                            <input type="text" placeholder="Full Name" className="input input-bordered"
+                                   onChange={(e) => setUsername(e.target.value)} required/>
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input type="email" placeholder="email" className="input input-bordered" required/>
+                            <input type="email" placeholder="email" className="input input-bordered"
+                                   onChange={(e) => setEmail(e.target.value)} required/>
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input type="password" placeholder="password" className="input input-bordered" required/>
+                            <input type="password" placeholder="password" className="input input-bordered"
+                                   onChange={(e) => setPassword(e.target.value)} required/>
 
                         </div>
                         <div className="form-control mt-6">
-                            <button className="btn btn-primary">Register</button>
+                            <button type={"submit"} className="btn btn-primary" onSubmit={handleSubmit}>Register
+                            </button>
+
                         </div>
 
                         <div className='text-center mt-4'>Already have an account? <Link to="/login"><span
@@ -77,7 +61,7 @@ function Register() {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default Register
+export default RegisterForm

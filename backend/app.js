@@ -32,8 +32,8 @@ app.use(
     })
 );
 app.use(compression());
-app.use("/assets", express.static(join(__dirname, "public")));
-app.use(express.static(join(__dirname, "public", "build")));
+app.use("/assets", express.static(join(__dirname, "client", "static")));
+app.use(express.static(join(__dirname, "client")));
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use("/admin", session(app));
@@ -52,7 +52,7 @@ app.use("/", home);
 
 Promise.all([connectToDb()])
     .then(() =>
-        app.listen(PORT, () => console.log(`Blog Chef is cooking on port ${PORT}!`))
+        app.listen(PORT, () => console.log(`Knowledge Cube is running on port ${PORT}!`))
     )
     .catch((error) => {
         console.error(`MongoDB Atlas Error: ${error}`);
