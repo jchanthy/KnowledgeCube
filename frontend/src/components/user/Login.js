@@ -1,12 +1,14 @@
 import {Link} from "react-router-dom";
 import {useContext, useState} from "react";
 import {UserContext} from "../../services/authService.js";
-import axios from "axios";
 
 
 const LoginPage = () => {
     const {login} = useContext(UserContext);
-
+    const [loginObj, setLoginObj] = useState({
+        email: '',
+        password: ''
+    });
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -25,28 +27,15 @@ const LoginPage = () => {
     const handleSubmit = async (e) => {
         console.log(e);
         e.preventDefault();
-        try {
-            setLoading(true);
+        if (loginObj.email && loginObj.pass === '') {
 
-            // Create a userData object with email and password only
-            const userData = {
-                email: formData.email,
-                password: formData.password,
-            };
 
-            // Make an HTTP POST request to your backend login endpoint
-            const response = await axios.post('http://localhost:5000/users/login', userData);
-            console.log('user:', response);
-            if (response.status === 200) {
-                login(response.data.user, response.data.token);
-            }
-        } catch (error) {
-            setLoading(false);
-            if (error.response && error.response.status === 401) {
-                setError('Incorrect email or password.');
-            } else {
-                setError('Login failed. Please try again later.');
-            }
+        } else {
+            setLoading(true)
+            // Call API to check user credentials and save token in localstorage
+            localStorage.setItem("token", "knowledgeCube-token")
+            setLoading(false)
+            window.location.href = '/dashboard'
         }
     };
 
@@ -84,18 +73,13 @@ const LoginPage = () => {
                         </div>
                         <div className="form-control mt-6">
                             <button className="btn btn-primary" type={"submit"}>Login
-                                {loading && <span className="loading loading-spinner loading-xs"></span>}
+                                {loading && <span className="loading loading-spinner loading-lg"></span>}
                             </button>
                         </div>
                         <div className='text-center mt-4'>Don't have an account yet? <Link to="/register"><span
                             className="  inline-block  hover:text-primary hover:underline hover:cursor-pointer transition duration-200">Register</span></Link>
                         </div>
                     </form>
-                </div>
-            </div>
-            <div className="toast">
-                <div className="alert alert-success">
-                    <span>New message arrived.</span>
                 </div>
             </div>
         </div>
