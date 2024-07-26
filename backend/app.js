@@ -9,12 +9,13 @@ import api from "./routes/api/index.js";
 import connectToDb from "./db/index.js";
 import {fileURLToPath} from "url";
 import {dirname, join} from "path";
-import helmet from "helmet";
 import dotenv from "dotenv";
+import cors from "cors";
+import helmet from "helmet";
 
 dotenv.config();
-
 const app = express();
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 // const logFile = join(__dirname, "blogchef.log");
 const PORT = process.env.PORT || 3000;
@@ -37,12 +38,18 @@ app.use(express.static(join(__dirname, "client")));
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use("/admin", session(app));
+
+app.use(cors({
+    origin: process.env.ORIGIN,
+    credentials: true
+}))
 app.use(morgan(":method - :url - :date - :response-time ms"));
 // app.use(
 //   morgan(":method - :url - :date - :response-time ms", {
 //     stream: createWriteStream(logFile, { flags: "a" }),
 //   }),
 // );
+// app.options('*', cors());
 
 app.set("view engine", "pug");
 

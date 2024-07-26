@@ -14,7 +14,8 @@ const router = Router();
 //     .post(protectApi, storePostValidation, storePost)
 //     .delete(protectApi, deletePost);
 router.post("/login", loginUserValidation, loginUser);
-router.post("/signup", signUpUserValidation, signUpUser);
+router.post("/register", signUpUserValidation, signUpUser);
+// router.post("/signup", signUpUser);
 router.post("/verify", jwtValidation, verify);
 router.use(catchAll);
 

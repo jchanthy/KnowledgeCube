@@ -3,14 +3,14 @@ import {Link} from "react-router-dom";
 
 
 const RegisterForm = ({handleRegister}) => {
-    const [username, setUsername] = useState('');
+    const [name, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const handleSubmit = (e) => {
         console.log(e);
         e.preventDefault()
-        handleRegister(username, email, password);
+        handleRegister(name, email, password);
     }
 
     return (

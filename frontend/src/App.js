@@ -8,9 +8,9 @@ import ForgotPassword from "./components/user/ForgotPassword.js";
 import Layout from "./pages/layout.js";
 import ListCourse from "./components/courses/listCourse.js";
 import checkAuth from "./components/auth/auth.js";
-import initializeApp from "./components/auth/init.js";
 import Dashboard from "./pages/protected/Dashboard.js";
 import axios from "axios";
+import initializeApp from "./components/auth/init.js";
 
 
 initializeApp()
@@ -19,10 +19,10 @@ const token = checkAuth();
 const App = () => {
     const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
     const themeContextValue = {theme, setTheme};
-    const handleRegister = async (username, email, password) => {
+    const handleRegister = async (name, email, password) => {
         try {
-            const response = await axios.post("/api/signup", {
-                username,
+            const response = await axios.post(`/api/register`, {
+                name,
                 email,
                 password,
             });
@@ -30,7 +30,7 @@ const App = () => {
             localStorage.setItem("knowledgeUser", JSON.stringify({id: userId}));
             Navigate(`/login`);
         } catch (error) {
-            console.error("Registration failed:", error.response?.data?.message || error.message);
+            // console.error("Registration failed:", error.response?.data?.message || error.message);
             alert("Registration failed: " + (error.response?.data?.message || "An error occurred"));
         }
     };
@@ -52,7 +52,7 @@ const App = () => {
                         <Route path={'/dashboard'} element={<Dashboard/>}/>
 
 
-                        <Route path="*" element={<Navigate to={token ? "/app/welcome" : "/login"} replace/>}/>
+                        <Route path="*" element={<Navigate to={token ? "/dashboard" : "/login"} replace/>}/>
                     </Routes>
                 </Router>
             </ThemeContext.Provider>

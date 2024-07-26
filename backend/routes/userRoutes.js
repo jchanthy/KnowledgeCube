@@ -1,12 +1,8 @@
-import { Router } from "express";
+import {Router} from "express";
 import jwtProtection from "../middleware/jwtProtection.js";
+import {getUser, loginUser, registerUser, updateUser,} from "../controllers/user.js";
+
 const router = Router();
-import {
-	registerUser,
-	loginUser,
-	updateUser,
-	getUser,
-} from "../controllers/userController.js";
 
 router.post("/register", registerUser);
 router.post("/login", loginUser);
