@@ -1,25 +1,25 @@
-import { verifyUser } from "../controllers/user.js";
-import { csrfSync } from "csrf-sync";
+import {verifyUser} from "../controllers/userController.js";
+import {csrfSync} from "csrf-sync";
 
-const { generateToken, csrfSynchronisedProtection } = csrfSync({
-  getTokenFromRequest: (req) => {
-    return req.body["_csrf"];
-  },
+const {generateToken, csrfSynchronisedProtection} = csrfSync({
+    getTokenFromRequest: (req) => {
+        return req.body["_csrf"];
+    },
 });
 
 const protectRoute =
-  (redirectTo = "/") =>
-  async (req, res, next) => {
-    try {
-      if (req.session.user && (await verifyUser(req.session.user.email))) {
-        return next();
-      }
+    (redirectTo = "/") =>
+        async (req, res, next) => {
+            try {
+                if (req.session.user && (await verifyUser(req.session.user.email))) {
+                    return next();
+                }
 
-      res.redirect(redirectTo);
-    } catch {
-      res.redirect(redirectTo);
-    }
-  };
+                res.redirect(redirectTo);
+            } catch {
+                res.redirect(redirectTo);
+            }
+        };
 
 export default protectRoute;
-export { generateToken, csrfSynchronisedProtection };
+export {generateToken, csrfSynchronisedProtection};

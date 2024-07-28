@@ -1,8 +1,10 @@
-import {createContext, useEffect, useState} from "react";
+import React, {createContext, useEffect, useState} from 'react';
 
+// Create a context
 export const UserContext = createContext({});
-export const UserContextProvider = ({children}) => {
 
+// Create a provider
+const UserContextProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [token, setToken] = useState(null);
@@ -20,7 +22,6 @@ export const UserContextProvider = ({children}) => {
     }, []);
 
     function login(user, token) {
-
         // Save the user to localStorage
         localStorage.setItem('knowledgeCube-user', JSON.stringify(user));
         // Save the token to localStorage
@@ -31,5 +32,24 @@ export const UserContextProvider = ({children}) => {
         setToken(token);
     }
 
-    return UserContextProvider({user, token, isAuthenticated, login});
+    function updateUser(user) {
+        // Save the user to localStorage
+        localStorage.setItem('knowledgeCube-user', JSON.stringify(user));
+        // Set the user and token in state
+        setUser(user);
+    }
+
+    function logout() {
+        // Remove the user and token from localStorage
+        localStorage.removeItem('knowledgeCube-user');
+        localStorage.removeItem('knowledgeCube-token');
+        // Remove the user and token from state
+        setUser(null);
+        setIsAuthenticated(false);
+        setToken(null);
+    }
+
+    return <UserContext.Provider
+        value={{user, login, isAuthenticated, token, updateUser, logout}}>{children}</UserContext.Provider>;
 }
+export default UserContextProvider;

@@ -1,17 +1,51 @@
-import React, {useState} from 'react'
-import {Link} from "react-router-dom";
+import React, {useState} from 'react';
+import {Link, useNavigate} from "react-router-dom";
+import axios from "axios";
 
+const RegisterForm = () => {
+    const navigate = useNavigate();
 
-const RegisterForm = ({handleRegister}) => {
-    const [name, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        password: '',
+    });
 
-    const handleSubmit = (e) => {
-        console.log(e);
-        e.preventDefault()
-        handleRegister(name, email, password);
-    }
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    const handleChange = (e) => {
+        const {name, value} = e.target;
+        setFormData({
+            ...formData,
+            [name]: value,
+        });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            setLoading(true);
+            const userData = {
+                name: formData.name,
+                email: formData.email,
+                password: formData.password,
+            };
+
+            const response = await axios.post('/api/users/register', userData);
+            setLoading(false);
+
+            if (response.data.message === 'User registered successfully') {
+                navigate('/login');
+            } else if (response.data.message === 'User already exists') {
+                setError('User with this email already exists.');
+            }
+        } catch (error) {
+            setLoading(false);
+            console.error('Signup failed:', error);
+            setError('Sign-up failed. Please try again.');
+        }
+    };
 
     return (
         <div className="hero bg-base-200 min-h-screen">
@@ -29,33 +63,32 @@ const RegisterForm = ({handleRegister}) => {
                             <label className="label">
                                 <span className="label-text">Name</span>
                             </label>
-                            <input type={'hidden'} name={'_csrf'}/>
                             <input type="text" placeholder="Full Name" className="input input-bordered"
-                                   onChange={(e) => setUsername(e.target.value)} required/>
+                                   value={formData.name} name="name"
+                                   onChange={handleChange} required/>
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
                             <input type="email" placeholder="email" className="input input-bordered"
-                                   onChange={(e) => setEmail(e.target.value)} required/>
+                                   value={formData.email} name="email"
+                                   onChange={handleChange} required/>
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
                             <input type="password" placeholder="password" className="input input-bordered"
-                                   onChange={(e) => setPassword(e.target.value)} required/>
-
+                                   value={formData.password} name="password"
+                                   onChange={handleChange} required/>
                         </div>
                         <div className="form-control mt-6">
-                            <button type={"submit"} className="btn btn-primary" onSubmit={handleSubmit}>Register
-                            </button>
-
+                            <button type="submit" className="btn btn-primary">Register</button>
                         </div>
-
-                        <div className='text-center mt-4'>Already have an account? <Link to="/login"><span
-                            className="inline-block  hover:text-primary hover:underline hover:cursor-pointer transition duration-200">Login</span></Link>
+                        {error && <p className="text-red-500 text-center mt-4">{error}</p>}
+                        <div className="text-center mt-4">Already have an account? <Link to="/login"><span
+                            className="inline-block hover:text-primary hover:underline hover:cursor-pointer transition duration-200">Login</span></Link>
                         </div>
                     </form>
                 </div>
@@ -64,4 +97,4 @@ const RegisterForm = ({handleRegister}) => {
     );
 }
 
-export default RegisterForm
+export default RegisterForm;
