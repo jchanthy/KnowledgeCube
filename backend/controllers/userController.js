@@ -27,7 +27,6 @@ export const signUpAdmin = async ({name, email, password}) => {
         return Promise.reject({error});
     }
 };
-
 export const loginAdmin = async ({email, password}) => {
     try {
         const user = await User.findOne({email, isAdmin: true});
@@ -69,7 +68,6 @@ export const registerUser = async (req, res) => {
 };
 
 export const loginUser = async (req, res) => {
-    console.log(req.body);
     try {
         const {email, password} = req.body;
 

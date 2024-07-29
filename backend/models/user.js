@@ -13,13 +13,46 @@ const userSchema = new Schema({
     },
     password: {
         type: String,
-        required: true,
+        required:
+            true,
     },
-    createdAt: {type: Date, default: Date.now},
-    lastLoggedIn: {type: Date, default: Date.now},
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
+    lastLoggedIn: {
+        type: Date,
+        default: Date.now,
+    },
     isAdmin: {
         type: Boolean,
         default: false,
+    },
+    role: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Role',
+        required: false
+    },
+    profilePicture: {
+        type: String, // URL or reference to image storage
+    },
+    bio: {
+        type: String,
+    },
+    socialLinks: {
+        type: [String], // Array of social media profiles
+    },
+    enrollments: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'Enrollment', // Reference to Enrollment model
+    },
+    completedCourses: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'Course', // Reference to Course model
+    },
+    notifications: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'Notification', // Reference to Notification model (optional)
     },
 });
 

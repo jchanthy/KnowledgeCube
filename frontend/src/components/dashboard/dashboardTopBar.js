@@ -1,10 +1,7 @@
-import ArrowDownTrayIcon from '@heroicons/react/24/outline/ArrowDownTrayIcon'
 import ShareIcon from '@heroicons/react/24/outline/ShareIcon'
-import EnvelopeIcon from '@heroicons/react/24/outline/EnvelopeIcon'
 import EllipsisVerticalIcon from '@heroicons/react/24/outline/EllipsisVerticalIcon'
 import ArrowPathIcon from '@heroicons/react/24/outline/ArrowPathIcon'
 import {useState} from "react"
-import Datepicker from "react-tailwindcss-datepicker";
 
 
 const periodOptions = [
@@ -33,17 +30,6 @@ function DashboardTopBar({updateDashboardPeriod}) {
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="">
-                <Datepicker
-                    containerClassName="w-72 "
-                    value={dateValue}
-                    theme={"light"}
-                    inputClassName="input input-bordered w-72"
-                    popoverDirection={"down"}
-                    toggleClassName="invisible"
-                    onChange={handleDatePickerValueChange}
-                    showShortcuts={true}
-                    primaryColor={"white"}
-                />
                 {/* <SelectBox
                 options={periodOptions}
                 labelTitle="Period"
@@ -65,8 +51,8 @@ function DashboardTopBar({updateDashboardPeriod}) {
                         className="w-5"/></label>
                     <ul tabIndex={0}
                         className="dropdown-content menu menu-compact  p-2 shadow bg-base-100 rounded-box w-52">
-                        <li><a><EnvelopeIcon className="w-4"/>Email Digests</a></li>
-                        <li><a><ArrowDownTrayIcon className="w-4"/>Download</a></li>
+                        <li><a>Email Digests</a></li>
+                        <li><a>Download</a></li>
                     </ul>
                 </div>
             </div>

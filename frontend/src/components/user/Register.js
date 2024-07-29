@@ -1,9 +1,22 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 
 const RegisterForm = () => {
     const navigate = useNavigate();
+    const [roles, setRoles] = useState([]);
+    useEffect(() => {
+        const fetchRoles = async () => {
+            try {
+                const response = await axios.get('/api/roles');
+                setRoles(response.data);
+            } catch (error) {
+                console.error('Error fetching roles:', error);
+            }
+        };
+
+        fetchRoles();
+    }, []);
 
     const [formData, setFormData] = useState({
         name: '',
@@ -75,6 +88,22 @@ const RegisterForm = () => {
                                    value={formData.email} name="email"
                                    onChange={handleChange} required/>
                         </div>
+                        <form className={'form-control'}>
+                            <label className={'label'}>
+                                <span className={'label-text'}>
+                                    Select Role
+                                </span>
+                            </label>
+                            <select className="select select-primary input-bordered w-full max-w-xs" name={'role'}
+                                    onChange={handleChange}>
+                                {roles.map(role => (
+                                    <option key={role.id} value={role.name}>
+                                        {role.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </form>
+
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Password</span>
