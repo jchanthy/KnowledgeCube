@@ -1,7 +1,7 @@
 import React from "react";
 
 const Header = ({children}) => {
-    const [sidebar, logo, search, profile, notification, themeSwitcher] =
+    const [sidebar, logo, profile] =
         React.Children.toArray(children);
     return (
         <>
@@ -9,14 +9,11 @@ const Header = ({children}) => {
                 <div className="flex-none gap-2">
                     {sidebar}
                     {logo}
-                    {search}
                 </div>
                 <div className="flex-1">
                 </div>
                 <div className={'flex-none'}>
-                    {themeSwitcher}
                     {profile}
-                    {notification}
                 </div>
             </div>
         </>

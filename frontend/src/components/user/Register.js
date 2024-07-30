@@ -6,22 +6,24 @@ const RegisterForm = () => {
     const navigate = useNavigate();
     const [roles, setRoles] = useState([]);
     useEffect(() => {
-        const fetchRoles = async () => {
+        const getRole = async () => {
             try {
                 const response = await axios.get('/api/roles');
+                console.log(response);
                 setRoles(response.data);
             } catch (error) {
                 console.error('Error fetching roles:', error);
             }
         };
 
-        fetchRoles();
+        getRole();
     }, []);
 
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         password: '',
+        role: '',
     });
 
     const [error, setError] = useState('');
@@ -43,6 +45,7 @@ const RegisterForm = () => {
                 name: formData.name,
                 email: formData.email,
                 password: formData.password,
+                role: formData.role
             };
 
             const response = await axios.post('/api/users/register', userData);
@@ -50,13 +53,13 @@ const RegisterForm = () => {
 
             if (response.data.message === 'User registered successfully') {
                 navigate('/login');
-            } else if (response.data.message === 'User already exists') {
+            } else if (response.data.message === 'User already exists with this email') {
                 setError('User with this email already exists.');
             }
         } catch (error) {
             setLoading(false);
-            console.error('Signup failed:', error);
-            setError('Sign-up failed. Please try again.');
+            console.error('Register failed:', error);
+            setError('Register failed. Please try again.');
         }
     };
 
@@ -69,6 +72,9 @@ const RegisterForm = () => {
                         Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
                         quasi. In deleniti eaque aut repudiandae et a id nisi.
                     </p>
+                    <div>
+                        <Link to={'/'} className={'link link-success'}>Go back</Link>
+                    </div>
                 </div>
                 <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
                     <form className="card-body" onSubmit={handleSubmit}>
@@ -96,8 +102,8 @@ const RegisterForm = () => {
                             </label>
                             <select className="select select-primary input-bordered w-full max-w-xs" name={'role'}
                                     onChange={handleChange}>
-                                {roles.map(role => (
-                                    <option key={role.id} value={role.name}>
+                                {roles.map((role, index) => (
+                                    <option key={index} value={role.name}>
                                         {role.name}
                                     </option>
                                 ))}

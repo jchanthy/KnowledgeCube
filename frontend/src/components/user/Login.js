@@ -29,6 +29,7 @@ const LoginPage = () => {
             if (response.status === 200) {
                 login(response.data.user, response.data.token);
                 setLoading(false);
+                window.location.href = '/dashboard';
             }
         } catch (error) {
             setLoading(false);
@@ -49,6 +50,9 @@ const LoginPage = () => {
                         Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
                         quasi. In deleniti eaque aut repudiandae et a id nisi.
                     </p>
+                    <div>
+                        <Link to={'/'} className={'link link-success'}>{'Go back'}</Link>
+                    </div>
                 </div>
                 <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
                     <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
@@ -84,8 +88,7 @@ const LoginPage = () => {
                         </div>
                         <div className="form-control mt-6">
                             <button className="btn btn-primary" type="submit">
-                                Login
-                                {loading && <span className="loading loading-spinner loading-xs"></span>}
+                                {loading ? <span className="loading loading-spinner loading-xs"/> : 'Login'}
                             </button>
                         </div>
                         {error && <p className="text-red-500 text-center mt-4">{error}</p>}

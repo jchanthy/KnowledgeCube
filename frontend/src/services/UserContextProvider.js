@@ -1,4 +1,5 @@
 import React, {createContext, useEffect, useState} from 'react';
+import {themeChange} from "theme-change";
 
 // Create a context
 export const UserContext = createContext({});
@@ -14,6 +15,7 @@ const UserContextProvider = ({children}) => {
         const user = JSON.parse(localStorage.getItem('knowledgeCube-user'));
         // Load the token from localStorage
         const token = localStorage.getItem('knowledgeCube-token');
+        themeChange(false);
         if (user) {
             setUser(user);
             setIsAuthenticated(true);
