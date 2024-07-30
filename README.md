@@ -1,70 +1,92 @@
-# Getting Started with Create React App
+# Capstone Project - KnowledgeCube 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introduction
+KnowledgeCube is an online learning platform designed to empower individuals and organizations to create
+and share short courses on various subjects. The platform will be built using a modern technology stack to
+ensure a seamless and engaging user experience for both course creators and learners. Key components of
+the platform will include a course creation suite, a content delivery system, and a user management system.
+The front-end will be designed with a responsive and intuitive user interface, ensuring a seamless
+experience across various devices. The back-end will consist of a robust API that handles all data
+transactions and supports role-based access control to protect sensitive information. The database will
+store and manage all relevant data, including user information, course details, and learning progress.
 
-## Available Scripts
+#### IMPORTANT NOTE: This project is hosted on this account as part of the sample capstone projects in the Full-Stack Development Program provided by upGrad KnowledgeHut. Support shall only be provided through official channels and tickets through your PRISM account if you're a registered learner. For everyone else, the project is provided as is for tinkering and exploration only.
 
-In the project directory, you can run:
+## Setup Instructions
 
-### `npm start`
+### Prerequisites
+- Git
+- Node.js and npm
+- MongoDB Atlas account
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Getting Started
+1. **Clone the Repository**
+   ```sh
+   git clone https://github.com/jchanthy/KnowledgeCube.git
+   cd knowledge_cube 
+   ```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+2. **Install Dependencies**
+   Navigate to both backend and frontend directories and install the required packages.
+   ```sh
+   cd backend
+   npm install
+   cd ../frontend
+   npm install
+   ```
 
-### `npm test`
+3. **MongoDB Atlas Setup**
+    - Set up a MongoDB Atlas account [here](https://www.mongodb.com/cloud/atlas).
+    - Create a new user within your MongoDB Atlas dashboard.
+    - Ensure that network access is open (Note: This is only recommended for development purposes).
+    - Copy your MongoDB connection URL.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+4. **Environment Configuration**
+   Create a `.env` file in the root of the backend folder and add the following keys:
+   ```plaintext
+   JWT_SECRET=<unique-string>
+   DB_URI=<mongodb-url>
+   ```
 
-### `npm run build`
+5. **Start the Application**
+   Navigate to the backend folder and start the server and frontend application.
+   ```sh
+   cd backend
+   npm start
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+6. **Access the Application - Frontend**
+   Open your web browser and go to `http://localhost:3000`.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+7. **User Registration**
+   Sign up as a new user. You will need to specify an initial amount to seed your account, as part of the registration process as this is an academic project.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Features
 
-### `npm run eject`
+- **User Authentication**: This feature supports the registration, login, and role-based access control
+  for different user types, such as administrators, course creators, and learners. 
+- **Course Creation Suite**: This feature enables course creators to design, publish, and manage short
+  courses, including setting up course structure, uploading content, and creating quizzes or
+  assessments.
+- **Content Management**: This feature allows for the storage, organization, and retrieval of various
+  types of course content, such as text, images, videos, and documents. 
+- **Course Discovery**: This feature enables users to search, filter, and browse through available
+  courses based on various criteria, such as subject, difficulty level, or course creator. 
+- **Enrolment and Progress Tracking**: This feature allows learners to enrol in courses, track their
+  learning progress, and resume learning where they left off.
+- **Interactive Learning Experience**: This feature supports interactive elements, such as quizzes,
+  assessments, and gamification elements, to make the learning process more engaging and
+  effective.
+- **Learner Dashboard**: This feature provides learners with a personalized dashboard displaying their
+  enrolled courses, progress, and achievements.
+- **Course Creator Dashboard**: This feature offers course creators insights into course performance,
+  learner engagement, and feedback to help improve course quality.
+- **Social Features**: This feature allows users to interact with each other through comments,
+  discussion boards, and direct messaging, promoting a sense of community and collaborative
+  learning.
+- **Certificates and Badges**: This feature enables the issuance of completion certificates and
+  achievement badges to learners who successfully complete courses or reach specific milestones.
+- and more...
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Future Enhancements
+We plan to introduce a CLI tool for backend administrative operations to enhance the realism of this academic project.

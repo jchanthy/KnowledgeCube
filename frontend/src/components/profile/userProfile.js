@@ -5,7 +5,9 @@ const UserProfile = () => {
 
     const token = checkAuth();
     const logoutUser = () => {
-        localStorage.clear();
+        // localStorage.clear();
+        localStorage.removeItem('knowledgeCube-user');
+        localStorage.removeItem('knowledgeCube-token');
         window.location.href = '/'
     }
     return (

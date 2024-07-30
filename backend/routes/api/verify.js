@@ -1,4 +1,4 @@
-import {verifyToken} from "../../controllers/user.js";
+import {verifyToken} from "../../controllers/userController.js";
 
 export default async (req, res) => {
     try {

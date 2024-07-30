@@ -39,6 +39,9 @@ function ForgotPassword() {
                         Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
                         quasi. In deleniti eaque aut repudiandae et a id nisi.
                     </p>
+                    <div>
+                        <Link to={'/'} className={'link link-success'}>Go back</Link>
+                    </div>
                 </div>
                 <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
                     <form className="card-body" onSubmit={submitForm}>

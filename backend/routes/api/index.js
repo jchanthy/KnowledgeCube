@@ -1,22 +1,18 @@
 import {Router} from "express";
-import loginUser from "./login-user.js";
-import verify from "./verify.js";
-import {jwtValidation, loginUserValidation, signUpUserValidation,} from "../../utils/validation.js";
 import catchAll from "./catch-all.js";
-import {signUpUser} from "../../controllers/user.js";
+import userRoutes from "./userRoutes.js"
+import {loginUser, registerUser} from "../../controllers/userController.js";
+import getRoles from "./get-roles.js";
+import getRole from "./get-role.js";
 
 const router = Router();
 
-// router.get("/posts", servePostsFromCache(), getPosts);
-// router
-//     .route("/post/:postId?")
-//     .get(servePostFromCache(), getPost)
-//     .post(protectApi, storePostValidation, storePost)
-//     .delete(protectApi, deletePost);
-router.post("/login", loginUserValidation, loginUser);
-router.post("/register", signUpUserValidation, signUpUser);
-// router.post("/signup", signUpUser);
-router.post("/verify", jwtValidation, verify);
+router.use("/users", userRoutes)
+router.post("/signup", registerUser)
+router.post("/login", loginUser);
+router.route('/roles')
+    .get(getRoles)
+    .post(getRole);
 router.use(catchAll);
 
 export default router;

@@ -12,9 +12,9 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Sanjhp/Bank/issues"
+    "url": "https://github.com/jchanthy/knowledgeCube/issues"
   },
-  "homepage": "https://github.com/Sanjhp/Bank#readme",
+  "homepage": "https://github.com/jchanthy/knowledgeCube#readme",
   "dependencies": {
     "bad-words": "^3.0.4",
     "bcrypt": "^5.1.1",

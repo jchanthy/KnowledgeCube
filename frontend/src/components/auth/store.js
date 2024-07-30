@@ -1,10 +1,6 @@
 import {configureStore} from "@reduxjs/toolkit";
-import {headerSlice} from "../../common/headerSlice.js";
 
-const combinedReducer = {
-    header: headerSlice,
-
-}
+const combinedReducer = {}
 
 export default configureStore({
     reducer: combinedReducer

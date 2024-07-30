@@ -1,23 +1,46 @@
-import {lazy} from "react";
-
-
-const Dashboard = lazy(() => import('../pages/protected/Dashboard.js'));
-const Welcome = lazy(() => import('../pages/protected/Welcome.js'))
-const Page404 = lazy(() => import('../pages/protected/404.js'))
+import Layout from "../pages/HomePage/HomePageLayout.js";
+import ListCourse from "../components/courses/listCourse.js";
+import LoginPage from "../pages/LoginPage.js";
+import PageNotFound from "../pages/pageNotFound.js";
+import RegisterForm from "../components/user/Register.js";
+import ForgotPassword from "../components/user/ForgotPassword.js";
+import Dashboard from "../pages/dashboard/index.js";
 
 const routes = [
     {
-        path: '/dashboard',
-        component: Dashboard,
+        path: "/dashboard",
+        component: (<Dashboard/>)
     },
     {
-        path: '/welcome',
-        component: Welcome
+        path: '/courses',
+        component: (<ListCourse/>)
     },
+
     {
-        path: '404',
-        component: Page404
+        path: '/login',
+        component: (<LoginPage/>)
+    },
+
+    {
+        path: '/register',
+        component: (<RegisterForm/>)
+    },
+
+    {
+        path: '/forget-password',
+        component: (<ForgotPassword/>)
+    },
+
+    {
+        path: '/',
+        component: (<Layout/>)
+    },
+
+    {
+        path: '/*',
+        component: (<PageNotFound/>)
     }
+
 
 ]
 

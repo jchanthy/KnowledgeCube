@@ -1,6 +1,6 @@
-import {loginUser} from "../../controllers/user.js";
+import {loginUser} from "../../controllers/userController.js";
 
-export default async (req, res) => {
+const LoginUser = async (req, res) => {
     try {
         const {email, password} = req.body;
         const {user, token} = await loginUser({email, password});
@@ -9,3 +9,4 @@ export default async (req, res) => {
         res.status(403).json(error);
     }
 };
+export default LoginUser;
