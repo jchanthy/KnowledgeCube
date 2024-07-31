@@ -4,9 +4,7 @@ function ExternalPage() {
 
 
     return (
-        <div className="">
-            <Login/>
-        </div>
+        <Login/>
     )
 }
 

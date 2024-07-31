@@ -1,21 +1,15 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import BellIcon from '@heroicons/react/24/outline/BellIcon'
-import Bars3Icon from '@heroicons/react/24/outline/Bars3Icon'
 
 import {Link} from 'react-router-dom'
+import ThemeSwitcher from "../../components/ThemeSwither.js";
+import {useSelector} from "react-redux";
 
 
 function Header() {
-
-
-    useEffect(() => {
-        // themeChange(false)
-        // 👆 false parameter is required for react project
-    }, [])
-
+    const {noOfNotifications, pageTitle} = useSelector((state) => state.header);
 
     // Opening right sidebar for notification
-
 
     function logoutUser() {
         localStorage.removeItem('knowledgeCube-user');
@@ -32,9 +26,33 @@ function Header() {
 
                 {/* Menu toogle for mobile view or small screen */}
                 <div className="flex-1">
-                    <label htmlFor="left-sidebar-drawer" className="btn btn-primary drawer-button lg:hidden">
-                        <Bars3Icon className="h-5 inline-block w-5"/></label>
-                    <h1 className="text-2xl font-semibold ml-2">{'Title'}</h1>
+                    <label htmlFor="left-sidebar-drawer"
+                           className="btn btn-ghost btn-circle btn-sm swap swap-rotate drawer-button lg:hidden">
+                        {/* this hidden checkbox controls the state */}
+                        <input type="checkbox" className={'hidden'}/>
+
+                        {/* hamburger icon */}
+                        <svg
+                            className="swap-off fill-current"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 512 512">
+                            <path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z"/>
+                        </svg>
+
+                        {/* close icon */}
+                        <svg
+                            className="swap-on fill-current"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 512 512">
+                            <polygon
+                                points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49"/>
+                        </svg>
+                    </label>
+                    <h1 className="text-2xl font-semibold ml-2">{pageTitle} </h1>
                 </div>
 
 
@@ -53,17 +71,15 @@ function Header() {
 
 
                     {/* Light and dark theme selection toogle **/}
-                    <label className="swap ">
-                        <input type="checkbox"/>
-                    </label>
 
+                    <ThemeSwitcher/>
 
                     {/* Notification icon */}
                     <button className="btn btn-ghost ml-4  btn-circle">
                         <div className="indicator">
                             <BellIcon className="h-6 w-6"/>
-                            {<span
-                                className="indicator-item badge badge-secondary badge-sm">{'99+'}</span>}
+                            {noOfNotifications > 0 ? <span
+                                className="indicator-item badge badge-secondary badge-sm">{noOfNotifications}</span> : null}
                         </div>
                     </button>
 

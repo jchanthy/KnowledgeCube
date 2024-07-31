@@ -3,13 +3,14 @@ import {Route, Routes} from 'react-router-dom'
 import routes from '../../routes/index.js';
 import {lazy, Suspense, useEffect, useRef} from 'react'
 import SuspenseContent from "./SuspenseContent.js"
+import {useSelector} from "react-redux";
 
 const Page404 = lazy(() => import('../../pages/pageNotFound.js'))
 
 
 function PageContent() {
     const mainContentRef = useRef(null);
-    // const {pageTitle} = useSelector(state => state.header)
+    const {pageTitle} = useSelector((state) => state.header);
 
 
     // Scroll back to top on new page load
@@ -18,7 +19,7 @@ function PageContent() {
             top: 0,
             behavior: "smooth"
         });
-    }, [])
+    }, [pageTitle])
 
     return (
         <div className="drawer-content flex flex-col ">

@@ -1,12 +1,10 @@
 import PageContent from "./PageContent.js"
 import LeftSidebar from "./LeftSidebar.js"
-import {useEffect} from "react"
 import 'react-notifications/lib/notifications.css';
 
 function DashboardLayout() {
 
-    useEffect(() => {
-    }, []);
+
     return (
         <>
             { /* Left drawer - containing page content and side bar (always open) */}

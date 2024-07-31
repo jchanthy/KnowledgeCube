@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useContext, useState} from "react";
 import {UserContext} from "../../services/UserContextProvider.js";
 import {yupResolver} from "@hookform/resolvers/yup";
@@ -8,6 +8,7 @@ import axios from "axios";
 
 const LoginPage = () => {
     const {login} = useContext(UserContext);
+    const navigate = useNavigate();
 
     const validateSchema = yup.object().shape({
         email: yup.string().email('Invalid email format').required('Email is required'),
@@ -29,17 +30,29 @@ const LoginPage = () => {
             if (response.status === 200) {
                 login(response.data.user, response.data.token);
                 setLoading(false);
-                window.location.href = '/dashboard';
+                // Use history API for cleaner navigation (optional)
+                navigate('/dashboard'); // Replace with your history object if using a library like react-router-dom
+            } else {
+                // Handle unexpected status codes
+                console.error('Unexpected response:', response);
+                setError('Login failed. An unexpected error occurred.');
             }
         } catch (error) {
-            setLoading(false);
-            if (error.response && error.response.status === 401) {
-                setError('Incorrect email or password.');
+            console.error('Login failed:', error);
+            setLoading(false); // Ensure loading state is reset even on error
+            if (error.response) {
+                if (error.response.status === 401) {
+                    setError('Incorrect email or password.');
+                } else {
+                    setError('Login failed. Please try again later.');
+                }
             } else {
-                setError('Login failed. Please try again later.');
+                // Handle network errors
+                setError('Network error. Please check your connection and try again.');
             }
         }
     };
+
 
     return (
         <div className="hero bg-base-200 min-h-screen">
@@ -51,7 +64,7 @@ const LoginPage = () => {
                         quasi. In deleniti eaque aut repudiandae et a id nisi.
                     </p>
                     <div>
-                        <Link to={'/'} className={'link link-success'}>{'Go back'}</Link>
+                        <Link to={'/'} className={'link link-success'}>{'Visit our website'}</Link>
                     </div>
                 </div>
                 <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
@@ -93,7 +106,7 @@ const LoginPage = () => {
                         </div>
                         {error && <p className="text-red-500 text-center mt-4">{error}</p>}
                         <div className='text-center mt-4'>
-                            Don't have an account yet? <Link to="/register">
+                            Don't have an account yet? <Link to="/register" className={'link-primary link'}>
                                 <span
                                     className="inline-block hover:text-primary hover:underline hover:cursor-pointer transition duration-200">
                                     Register
