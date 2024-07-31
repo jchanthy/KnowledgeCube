@@ -1,10 +1,16 @@
 import PageContent from "./PageContent.js"
 import LeftSidebar from "./LeftSidebar.js"
 import 'react-notifications/lib/notifications.css';
+import {useEffect} from "react";
+import {setPageTitle} from "../../components/headerSlice.js";
+import {useDispatch} from "react-redux";
 
 function DashboardLayout() {
+    const dispatch = useDispatch();
 
-
+    useEffect(() => {
+        dispatch(setPageTitle({title: 'Dashboard'}))
+    }, [dispatch]);
     return (
         <>
             { /* Left drawer - containing page content and side bar (always open) */}

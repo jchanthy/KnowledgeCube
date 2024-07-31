@@ -29,11 +29,8 @@ const App = () => {
             <ThemeContext.Provider value={themeContextValue}>
                 <Router>
                     <Routes>
-                        <Route path="/login" element={<Login/>}
-
-                        />
+                        <Route path={'/login'} element={!isAuthenticated ? <Login/> : <Navigate to={'/dashboard'}/>}/>
                         <Route path="/forget-password" element={
-
                             <ForgotPassword/>
                         }
                         />

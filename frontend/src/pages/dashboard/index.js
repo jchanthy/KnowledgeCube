@@ -24,12 +24,13 @@ const statsData = [
     {title: "Active Users", value: "5.6k", icon: <UsersIcon className='w-8 h-8'/>, description: "↙ 300 (18%)"},
 ]
 
-
 const Dashboard = () => {
+
 
     const updateDashboardPeriod = (newRange) => {
         // Dashboard range changed, write code to refresh your values
     }
+
 
     return (
         <>
