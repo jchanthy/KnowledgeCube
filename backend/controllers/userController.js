@@ -40,8 +40,9 @@ export const loginAdmin = async ({email, password}) => {
 
 export const registerUser = async (req, res) => {
     try {
-        const {name, email, password} = req.body;
+        const {name, email, password, role} = req.body;
 
+        console.log(role);
         // Check if the user already exists with the provided email
         const existingUser = await User.findOne({email});
         if (existingUser) {
@@ -56,7 +57,7 @@ export const registerUser = async (req, res) => {
             name,
             email,
             password: hashedPassword,
-            role: role._id
+            role: role
         });
 
         // Save the user to the database

@@ -1,7 +1,7 @@
-function SuspenseContent(){
-    return(
-        <div className="w-full h-screen text-gray-300 dark:text-gray-200 bg-base-100">
-            Loading...
+function SuspenseContent() {
+    return (
+        <div className="h-screen flex items-center justify-center">
+            <span className={'loading loading-spinner loading-lg'}/>
         </div>
     )
 }
