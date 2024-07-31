@@ -64,7 +64,7 @@ const LoginPage = () => {
                         quasi. In deleniti eaque aut repudiandae et a id nisi.
                     </p>
                     <div>
-                        <Link to={'/'} className={'link link-success'}>{'Visit our website'}</Link>
+                        <Link to={'/'} className={'link link-success'}>{'Back to home page'}</Link>
                     </div>
                 </div>
                 <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
@@ -95,7 +95,8 @@ const LoginPage = () => {
                             />
                             {errors.password && <p className="text-red-500">{errors.password.message}</p>}
                             <label className="label">
-                                <Link to="/forget-password" className="label-text-alt link link-hover">Forgot
+                                <Link to="/forget-password"
+                                      className="link text-sm link-hover underline">Forgot
                                     password?</Link>
                             </label>
                         </div>

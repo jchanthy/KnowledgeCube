@@ -50,11 +50,10 @@ const RegisterForm = () => {
 
             const response = await axios.post('/api/users/register', userData);
             setLoading(false);
-
             if (response.data.message === 'User registered successfully') {
                 navigate('/login');
-            } else if (response.data.message === 'User already exists with this email') {
-                setError('User with this email already exists.');
+            } else if (response.data.status === 400) {
+                setError(response.data.message);
             }
         } catch (error) {
             setLoading(false);
@@ -73,7 +72,7 @@ const RegisterForm = () => {
                         quasi. In deleniti eaque aut repudiandae et a id nisi.
                     </p>
                     <div>
-                        <Link to={'/'} className={'link link-success'}>{'Visit our website'}</Link>
+                        <Link to={'/'} className={'link link-success'}>{'Back to home page'}</Link>
                     </div>
                 </div>
                 <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
@@ -122,9 +121,11 @@ const RegisterForm = () => {
                             <button type="submit" className="btn btn-primary">Register</button>
                         </div>
                         {error && <p className="text-red-500 text-center mt-4">{error}</p>}
-                        <div className="text-center mt-4">Already have an account? <Link to="/login"
-                                                                                         className={'link-primary link'}><span
-                            className="inline-block hover:text-primary hover:underline hover:cursor-pointer transition duration-200">Login</span></Link>
+                        <div className="text-center mt-4">Already have an account?
+                            <Link to="/login" className={'link-primary link'}>
+                                <span
+                                    className="inline-block hover:text-primary hover:underline hover:cursor-pointer transition duration-200">Login</span>
+                            </Link>
                         </div>
                     </form>
                 </div>

@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "nodemon ./app",
-    "dev": "concurrently \"dotenv\" \"npm run dev \" \"cd ../frontend && npm run dev\"",
+    "dev": "concurrently \"dotenv\" \"npm run start \" \"cd ../frontend && npm run dev\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
