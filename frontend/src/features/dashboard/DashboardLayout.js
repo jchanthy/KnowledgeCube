@@ -19,7 +19,7 @@ function DashboardLayout() {
 
 
             {/** Notification layout container */}
-            {/*<NotificationContainer />*/}
+            {/*<NotificationContainer/>*/}
 
             {/* Modal layout container */}
             {/*  <ModalLayout />*/}

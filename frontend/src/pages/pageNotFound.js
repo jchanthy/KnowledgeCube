@@ -10,7 +10,10 @@ const PageNotFound = () => {
                         <div className="max-w-md">
                             <h1 className="mb-5 text-5xl font-bold opacity-10 lg:text-7xl xl:text-9xl">Error</h1>
                             <p className="mb-5">Not Found</p>
-                            <Link to={"/"} className="btn btn-outline">Go back</Link>
+                            <div className={'flex gap-5'}>
+                                <Link to={"/"} className="btn btn-primary">Back to home page</Link>
+                                <Link to={"/login"} className="btn bg-base-200 btn-outline">Login</Link>
+                            </div>
                         </div>
                     </div>
                 </div>

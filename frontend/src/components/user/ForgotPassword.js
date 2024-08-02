@@ -40,7 +40,7 @@ function ForgotPassword() {
                         quasi. In deleniti eaque aut repudiandae et a id nisi.
                     </p>
                     <div>
-                        <Link to={'/'} className={'link link-success'}>Go back</Link>
+                        <Link to={'/'} className={'link link-success'}>{'Back to home page'}</Link>
                     </div>
                 </div>
                 <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
@@ -58,7 +58,7 @@ function ForgotPassword() {
                             <button className="btn btn-primary">Send Reset Link</button>
                         </div>
                         <div className='text-center mt-4'>Don't have an account yet? <Link to="/register"><span
-                            className="  inline-block  hover:text-primary hover:underline hover:cursor-pointer transition duration-200">Register</span></Link>
+                            className="inline-block  hover:text-primary hover:underline hover:cursor-pointer transition duration-200 link-primary underline">Register</span></Link>
                         </div>
                     </form>
                 </div>

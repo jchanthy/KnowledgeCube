@@ -13,7 +13,7 @@ function SidebarSubmenu({submenu, name, icon}) {
         if (submenu.filter(m => {
             return m.path === location.pathname
         })[0]) setIsExpanded(true)
-    }, [])
+    }, [location.pathname, submenu])
 
     return (
         <div className='flex flex-col'>

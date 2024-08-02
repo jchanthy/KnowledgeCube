@@ -1,13 +1,17 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import BellIcon from '@heroicons/react/24/outline/BellIcon'
 
 import {Link} from 'react-router-dom'
 import ThemeSwitcher from "../../components/ThemeSwither.js";
 import {useSelector} from "react-redux";
+import {UserContext} from "../../services/UserContextProvider.js";
 
 
 function Header() {
     const {noOfNotifications, pageTitle} = useSelector((state) => state.header);
+
+    const {user} = useContext(UserContext);
+
 
     // Opening right sidebar for notification
 
@@ -87,21 +91,22 @@ function Header() {
                     {/* Profile icon, opening menu on click */}
                     <div className="dropdown dropdown-end ml-4">
                         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                            <div className="w-10 rounded-full">
-                                <img src="https://placeimg.com/80/80/people" alt="profile"/>
+                            <div className="avatar placeholder">
+                                <div className="bg-neutral text-neutral-content w-12 rounded-full">
+                                    <span>SY</span>
+                                </div>
                             </div>
                         </label>
                         <ul tabIndex={0}
                             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                             <li className="justify-between">
-                                <Link to={'/app/settings-profile'}>
-                                    Profile Settings
-                                    <span className="badge">New</span>
+                                <Link to={'/dashboard/profile'}>
+                                    {user.name}
                                 </Link>
                             </li>
-                            <li className=''><Link to={'/app/settings-billing'}>Bill History</Link></li>
+                            <li className=''><Link to={'/dashboard/settings-billing'}>Bill History</Link></li>
                             <div className="divider mt-0 mb-0"></div>
-                            <li><a onClick={logoutUser}>Logout</a></li>
+                            <li><Link to={'/'} onClick={logoutUser}>Logout</Link></li>
                         </ul>
                     </div>
                 </div>

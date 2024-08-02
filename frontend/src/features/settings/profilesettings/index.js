@@ -4,20 +4,52 @@ import {showNotification} from "../../../components/headerSlice.js";
 import TextAreaInput from "../../../components/Input/TextAreaInput.js";
 import ToogleInput from "../../../components/Input/ToogleInput.js";
 import InputText from "../../../components/Input/InputText.js";
+import {useState} from "react";
 
 function ProfileSettings() {
 
-
     const dispatch = useDispatch()
+    dispatch(showNotification({message: "Profile Updated", status: 1}))
+
 
     // Call API to update profile settings changes
-    const updateProfile = () => {
-        dispatch(showNotification({message: "Profile Updated", status: 1}))
-    }
+    const [profileData, setProfileData] = useState({
+        name: "",
+        email: "",
+        title: "",
+        place: "",
+        about: "",
+        language: "",
+        timezone: "",
+        syncData: false,
 
+    });
+
+
+    const updateProfile = () => {
+        // Update user data in MongoDB
+        fetch('/api/user/profile', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(profileData)
+        })
+            .then(response => {
+                if (response.ok) {
+                    dispatch(showNotification({message: "Profile Updated", status: 1}));
+                } else {
+                    dispatch(showNotification({message: "Profile Update Failed", status: 0}));
+                }
+            })
+            .catch(error => console.error('Error updating profile:', error));
+    };
     const updateFormValue = ({updateType, value}) => {
-        console.log(updateType)
-    }
+        setProfileData(prevState => ({
+            ...prevState,
+            [updateType]: value
+        }));
+    };
 
     return (
         <>
