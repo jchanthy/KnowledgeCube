@@ -1,11 +1,12 @@
 import {Router} from 'express';
-import {loginUser, registerUser} from "../../controllers/userController.js";
+import {getUser, loginUser, registerUser, updateUser} from "../../controllers/userController.js";
+import jwtProtection from "../../middleware/jwtProtection.js";
 
 const router = Router();
 
 router.post('/register', registerUser);
 router.post('/login', loginUser);
-// router.put('/update/:_id', jwtProtection, userController.updateUser);
-// router.get('/:userId', jwtProtection, userController.getUser);
+router.put('/update/:_id', jwtProtection, updateUser);
+router.get('/:userId', jwtProtection, getUser);
 
 export default router;

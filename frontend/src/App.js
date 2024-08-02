@@ -3,8 +3,8 @@ import {lazy, useContext, useEffect, useState} from "react";
 import {BrowserRouter as Router, Navigate, Route, Routes} from "react-router-dom";
 import initializeApp from "./components/auth/init.js";
 import {themeChange} from "theme-change";
-import ThemeContext from "./contexts/ThemeContext.js";
 import {UserContext} from "./services/UserContextProvider.js";
+import ThemeContext from "./contexts/ThemeContext.js";
 
 const PageNotFound = lazy(() => import("./pages/pageNotFound.js"));
 const ForgotPassword = lazy(() => import("./components/user/ForgotPassword.js"));
@@ -49,9 +49,7 @@ const App = () => {
 
                         <Route path="*"
                                element={<Navigate to={isAuthenticated ? "/dashboard" : '/*'} replace/>}/>
-                        <Route path={'/'} element={
-                            <HomePageLayout/>
-                        }/>
+                        <Route path={'/'} element={<HomePageLayout/>}/>
                     </Routes>
                 </Router>
             </ThemeContext.Provider>

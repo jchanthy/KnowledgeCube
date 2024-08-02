@@ -1,8 +1,7 @@
 import Header from "./Header.js"
 import {Route, Routes} from 'react-router-dom'
 import routes from '../../routes/index.js';
-import {lazy, Suspense, useEffect, useRef} from 'react'
-import SuspenseContent from "./SuspenseContent.js"
+import {lazy, useEffect, useRef} from 'react'
 import {useSelector} from "react-redux";
 
 const Page404 = lazy(() => import('../../pages/pageNotFound.js'))
@@ -25,25 +24,23 @@ function PageContent() {
         <div className="drawer-content flex flex-col ">
             <Header/>
             <main className="flex-1 overflow-y-auto md:pt-4 pt-4 px-6  bg-base-200" ref={mainContentRef}>
-                <Suspense fallback={<SuspenseContent/>}>
-                    <Routes>
-                        {
-                            routes.map((route, key) => {
-                                return (
-                                    <Route
-                                        key={key}
-                                        exact={true}
-                                        path={`${route.path}`}
-                                        element={route.component}
-                                    />
-                                )
-                            })
-                        }
+                <Routes>
+                    {
+                        routes.map((route, key) => {
+                            return (
+                                <Route
+                                    key={key}
+                                    exact={true}
+                                    path={`${route.path}`}
+                                    element={route.component}
+                                />
+                            )
+                        })
+                    }
 
-                        {/* Redirecting unknown url to 404 page */}
-                        <Route path="*" element={<Page404/>}/>
-                    </Routes>
-                </Suspense>
+                    {/* Redirecting unknown url to 404 page */}
+                    <Route path="*" element={<Page404/>}/>
+                </Routes>
                 <div className="h-16"></div>
             </main>
         </div>

@@ -11,6 +11,9 @@ import LineChart from './components/LineChart.js'
 import BarChart from './components/BarChart.js'
 import DashboardTopBar from './components/DashboardTopBar.js'
 import DoughnutChart from './components/DoughnutChart.js'
+import {useDispatch} from "react-redux";
+import {useEffect} from "react";
+import {setPageTitle} from "../../components/headerSlice.js";
 
 const statsData = [
     {title: "New Users", value: "34.7k", icon: <UserGroupIcon className='w-8 h-8'/>, description: "↗︎ 2300 (22%)"},
@@ -26,11 +29,16 @@ const statsData = [
 
 const Dashboard = () => {
 
+    const dispatch = useDispatch()
+
 
     const updateDashboardPeriod = (newRange) => {
         // Dashboard range changed, write code to refresh your values
     }
 
+    useEffect(() => {
+        dispatch(setPageTitle({title: 'Dashboard'}))
+    }, [dispatch]);
 
     return (
         <>

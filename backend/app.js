@@ -9,12 +9,13 @@ import api from "./routes/api/index.js";
 import connectToDb from "./db/index.js";
 import {fileURLToPath} from "url";
 import {dirname, join} from "path";
-import dotenv from "dotenv";
 import cors from "cors";
 import helmet from "helmet";
 import bodyParser from "body-parser";
+import dotenv from 'dotenv';
 
 dotenv.config();
+
 const app = express();
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -65,7 +66,7 @@ app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something went wrong!');
 });
-
+console.log(process.env.VARIABLE_NAME);
 Promise.all([connectToDb()])
     .then(() =>
         app.listen(PORT, () => console.log(`Knowledge Cube is running on port ${PORT}!`))

@@ -25,6 +25,7 @@ const LoginPage = () => {
     const onSubmit = async (data) => {
         try {
             setLoading(true);
+            setError("");
             const response = await axios.post('/api/login', data);
 
             if (response.status === 200) {
