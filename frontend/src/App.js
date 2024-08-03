@@ -45,6 +45,7 @@ const App = () => {
                         <Route path="/courses" element={
                             <HomePageLayout/>
                         }/>
+
                         <Route path={'/*'} element={<PageNotFound/>}/>
 
                         <Route path="*"

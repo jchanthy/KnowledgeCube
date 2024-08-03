@@ -135,7 +135,8 @@ const UpdateUser = () => {
                             <label className="label">
                                 <span className="label-text">Select Role</span>
                             </label>
-                            <select className={"select select-primary w-full"}
+
+                            <select className={"select select-primary input-bordered w-full"}
                                     id="role"
                                     name={"role"}
                                     {...register('role')}
