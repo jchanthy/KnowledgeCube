@@ -22,13 +22,17 @@ const Header = ({children}) => {
                         isAuthenticated ?
                             profile
                             :
-                            <Link to={'/login'} className={'btn btn-sm bg-base-200 '}>
-                                Login
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                     strokeWidth={1.5} stroke="currentColor" className="size-4">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5"/>
-                                </svg>
-                            </Link>
+                            (
+                                <div className={'flex gap-4'}>
+                                    <Link to={'/login'} className={'btn btn-sm btn-outline'}>
+                                        Login
+                                    </Link>
+                                    <Link to={'/register'} className={'btn btn-sm btn-primary'}>
+                                        Register
+                                    </Link>
+                                </div>
+                            )
+
                     }
                 </div>
             </div>

@@ -4,24 +4,18 @@ import {UserContext} from "../../services/UserContextProvider.js";
 import Cog6ToothIcon from "@heroicons/react/24/outline/Cog6ToothIcon";
 import UsersIcon from "@heroicons/react/24/outline/UsersIcon";
 import {ArrowLeftStartOnRectangleIcon} from "@heroicons/react/24/outline/index.js";
+import getInitials from "../user/UserLetter.js";
+import UserIcon from "@heroicons/react/24/solid/UserIcon";
 
 const UserProfile = () => {
 
-    const {user, isAuthenticated} = useContext(UserContext);
-    const logoutUser = () => {
-        // localStorage.clear();
-        localStorage.removeItem('knowledgeCube-user');
-        localStorage.removeItem('knowledgeCube-token');
-        window.location.href = '/'
-    }
+    const {user, logoutUser, isAuthenticated} = useContext(UserContext);
+
     return (
         <div className="dropdown dropdown-end">
-            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                <div className="avatar placeholder">
-                    <div className="bg-neutral text-neutral-content w-8 rounded-full">
-                        <span className="text-xs">U</span>
-                    </div>
-                </div>
+            <div tabIndex={0} role="button" className="btn btn-sm btn-outline">
+                <UserIcon className={"w-5 h-5"}/>
+                {getInitials(user.name)}
             </div>
             <ul
                 tabIndex={0}
