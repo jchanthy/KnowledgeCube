@@ -29,7 +29,7 @@ const Sidebar = () => {
                     {/* Sidebar content here */}
                     <li className="gap-1">
                         <Link to={"/"}>Home</Link>
-                        <Link to={"/Courses"}>Courses</Link>
+                        <Link to={"/courses"}>Courses</Link>
                     </li>
                 </ul>
             </div>

@@ -6,6 +6,9 @@ import {themeChange} from "theme-change";
 import {UserContext} from "./services/UserContextProvider.js";
 import ThemeContext from "./contexts/ThemeContext.js";
 
+const HomePage = lazy(() => import("./pages/HomePage/HomePage.js"));
+
+const Jobs = lazy(() => import("./components/jobs.js"));
 const PageNotFound = lazy(() => import("./pages/pageNotFound.js"));
 const ForgotPassword = lazy(() => import("./components/user/ForgotPassword.js"));
 const Register = lazy(() => import("./components/user/Register.js"));
@@ -46,11 +49,14 @@ const App = () => {
                             <HomePageLayout/>
                         }/>
 
+                        <Route path={"/jobs"} element={
+                            <Jobs/>}/>
+
                         <Route path={'/*'} element={<PageNotFound/>}/>
 
                         <Route path="*"
                                element={<Navigate to={isAuthenticated ? "/dashboard" : '/*'} replace/>}/>
-                        <Route path={'/'} element={<HomePageLayout/>}/>
+                        <Route path={'/'} element={<HomePage/>}/>
                     </Routes>
                 </Router>
             </ThemeContext.Provider>

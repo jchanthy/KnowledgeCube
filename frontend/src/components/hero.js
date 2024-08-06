@@ -16,7 +16,7 @@ const Hero = () => {
                                     exercitationem
                                     quasi. In deleniti eaque aut repudiandae et a id nisi.
                                 </p>
-                                <Link className="btn btn-primary" to={'/Courses'}>Get Started</Link>
+                                <Link className="btn btn-primary" to={'/courses'}>Get Started</Link>
                             </div>
                         </div>
                     </div>
@@ -33,7 +33,7 @@ const Hero = () => {
                                     minds with flexible, diverse courses accessible anytime,
                                     anywhere.
                                 </p>
-                                <Link className={'btn btn-primary'} to={'/Courses'}>Explore Courses</Link>
+                                <Link className={'btn btn-primary'} to={'/courses'}>Explore Courses</Link>
                             </div>
                         </div>
                     </div>

@@ -1,14 +1,12 @@
 import HeaderPage from "./HeaderPage.js";
-import Hero from "../../components/hero.js";
 import Footer from "../../components/footer.js";
 
-const HomePageLayout = () => {
+const HomePageLayout = ({content}) => {
     return (
         <>
-
             <HeaderPage/>
 
-            <Hero/>
+            {content}
 
             <Footer/>
         </>

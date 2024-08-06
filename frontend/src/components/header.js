@@ -5,7 +5,7 @@ import {UserContext} from "../services/UserContextProvider.js";
 const Header = ({children}) => {
     // const token = checkAuth();
     const {isAuthenticated} = useContext(UserContext);
-    const [sidebar, logo, profile] =
+    const [sidebar, logo, menuItems, profile] =
         React.Children.toArray(children);
     return (
         <>
@@ -15,6 +15,7 @@ const Header = ({children}) => {
                     {logo}
                 </div>
                 <div className="flex-1">
+                    {menuItems}
                 </div>
                 <div className={'flex-none'}>
 
@@ -24,10 +25,10 @@ const Header = ({children}) => {
                             :
                             (
                                 <div className={'flex gap-4'}>
-                                    <Link to={'/login'} className={'btn btn-sm btn-outline'}>
+                                    <Link to={'/login'} className={'btn btn-sm rounded btn-outline'}>
                                         Login
                                     </Link>
-                                    <Link to={'/register'} className={'btn btn-sm btn-primary'}>
+                                    <Link to={'/register'} className={'btn btn-sm rounded btn-primary'}>
                                         Register
                                     </Link>
                                 </div>
