@@ -1,14 +1,13 @@
 import HeaderPage from "./HeaderPage.js";
-import Hero from "../../components/hero.js";
 import Footer from "../../components/footer.js";
+import {Outlet} from "react-router-dom";
 
 const HomePageLayout = () => {
     return (
         <>
-
             <HeaderPage/>
 
-            <Hero/>
+            <Outlet/>
 
             <Footer/>
         </>

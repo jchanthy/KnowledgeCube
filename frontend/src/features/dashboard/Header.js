@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom'
 import ThemeSwitcher from "../../components/ThemeSwither.js";
 import {useSelector} from "react-redux";
 import {UserContext} from "../../services/UserContextProvider.js";
+import getInitials from "../../components/user/UserLetter.js";
 
 
 function Header() {
@@ -92,8 +93,8 @@ function Header() {
                     <div className="dropdown dropdown-end ml-4">
                         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                             <div className="avatar placeholder">
-                                <div className="bg-neutral text-neutral-content w-12 rounded-full">
-                                    <span>SY</span>
+                                <div className="bg-neutral text-neutral-content w-9 rounded-full">
+                                    <span className={'text-xs'}>{getInitials(user.name)}</span>
                                 </div>
                             </div>
                         </label>

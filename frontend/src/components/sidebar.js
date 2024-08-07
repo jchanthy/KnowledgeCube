@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 const Sidebar = () => {
     return (
@@ -28,8 +28,8 @@ const Sidebar = () => {
                 <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
                     {/* Sidebar content here */}
                     <li className="gap-1">
-                        <Link to={"/"}>Home</Link>
-                        <Link to={"/Courses"}>Courses</Link>
+                        <NavLink to={"/"}>Home</NavLink>
+                        <NavLink to={"/courses"}>Courses</NavLink>
                     </li>
                 </ul>
             </div>
