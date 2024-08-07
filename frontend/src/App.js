@@ -6,6 +6,8 @@ import {themeChange} from "theme-change";
 import {UserContext} from "./services/UserContextProvider.js";
 import ThemeContext from "./contexts/ThemeContext.js";
 
+const Courses = lazy(() => import("./components/Courses.js"));
+
 const HomePage = lazy(() => import("./pages/HomePage/HomePage.js"));
 
 const Jobs = lazy(() => import("./components/jobs.js"));
@@ -33,30 +35,18 @@ const App = () => {
                 <Router>
                     <Routes>
                         <Route path={'/login'} element={!isAuthenticated ? <Login/> : <Navigate to={'/dashboard'}/>}/>
-                        <Route path="/forget-password" element={
-                            <ForgotPassword/>
-                        }
-                        />
-                        <Route path="/register" element={
-                            <Register/>
-                        }/>
-
-                        <Route path="/dashboard/*" element={
-                            <DashboardLayout/>
-                        }/>
-
-                        <Route path="/courses" element={
-                            <HomePageLayout/>
-                        }/>
-
-                        <Route path={"/jobs"} element={
-                            <Jobs/>}/>
-
+                        <Route path="/forget-password" element={<ForgotPassword/>}/>
+                        <Route path="/register" element={<Register/>}/>
+                        <Route path="/dashboard/*" element={<DashboardLayout/>}/>
                         <Route path={'/*'} element={<PageNotFound/>}/>
-
-                        <Route path="*"
-                               element={<Navigate to={isAuthenticated ? "/dashboard" : '/*'} replace/>}/>
+                        <Route path="*" element={<Navigate to={isAuthenticated ? "/dashboard" : '/*'} replace/>}/>
                         <Route path={'/'} element={<HomePage/>}/>
+
+                        <Route element={<HomePageLayout/>}>
+                            <Route path={'/courses'} element={<Courses/>}/>
+                            <Route path={'/jobs'} element={<Jobs/>}/>
+                        </Route>
+
                     </Routes>
                 </Router>
             </ThemeContext.Provider>

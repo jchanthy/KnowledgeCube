@@ -1,17 +1,19 @@
 import React from 'react';
-import HomePageLayout from './HomePageLayout.js';
 import Hero from "../../components/hero.js";
+import HeaderPage from "./HeaderPage.js";
+import Footer from "../../components/footer.js";
 
 
 const HomePage = () => {
     return (
-        <HomePageLayout
-            content={
-                <div>
-                    <Hero/>
-                </div>
-            }
-        />
+        <>
+
+            <HeaderPage/>
+            <Hero/>
+            <Footer/>
+
+        </>
+
     );
 };
 

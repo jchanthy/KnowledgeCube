@@ -5,14 +5,15 @@ import {UserContext} from "../services/UserContextProvider.js";
 const Header = ({children}) => {
     // const token = checkAuth();
     const {isAuthenticated} = useContext(UserContext);
-    const [sidebar, logo, menuItems, profile] =
+    const [sidebar, search, logo, menuItems, profile] =
         React.Children.toArray(children);
     return (
         <>
-            <div className="navbar bg-base-100">
+            <div className="navbar top-0 z-50 sticky shadow-md  bg-base-100">
                 <div className="flex-none gap-2">
-                    {sidebar}
+                    {/*{sidebar}*/}
                     {logo}
+                    {search}
                 </div>
                 <div className="flex-1">
                     {menuItems}

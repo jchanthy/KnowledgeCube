@@ -3,19 +3,19 @@ import {useContext} from "react";
 import {UserContext} from "../../services/UserContextProvider.js";
 import Cog6ToothIcon from "@heroicons/react/24/outline/Cog6ToothIcon";
 import UsersIcon from "@heroicons/react/24/outline/UsersIcon";
-import {ArrowLeftStartOnRectangleIcon} from "@heroicons/react/24/outline/index.js";
 import getInitials from "../user/UserLetter.js";
 import UserIcon from "@heroicons/react/24/solid/UserIcon";
+import {PowerIcon} from "@heroicons/react/24/solid/index.js";
 
 const UserProfile = () => {
 
-    const {user, logoutUser, isAuthenticated} = useContext(UserContext);
+    const {user, logout, isAuthenticated} = useContext(UserContext);
 
     return (
         <div className="dropdown dropdown-end">
-            <div tabIndex={0} role="button" className="btn btn-sm btn-outline">
+            <div tabIndex={0} role="button" className="avatar placeholder btn btn-ghost bg-base-200 btn-rounded">
                 <UserIcon className={"w-5 h-5"}/>
-                {getInitials(user.name)}
+                <span className={'text-sm'}> {getInitials(user.name)}</span>
             </div>
             <ul
                 tabIndex={0}
@@ -33,9 +33,12 @@ const UserProfile = () => {
                 <div className={'divider mt-0 mb-0'}></div>
                 <li>
                     {
-                        isAuthenticated ? <Link onClick={logoutUser} to={'/'} className={'justify-start'}>
-                                <ArrowLeftStartOnRectangleIcon className={'w-5 h-5'}/>
-                                Logout</Link> :
+                        isAuthenticated ?
+                            <Link onClick={logout} to={'/'} className={'justify-start'}>
+                                <PowerIcon className={'w-5 h-5'}/>
+                                Logout
+                            </Link>
+                            :
                             <Link to={'/login'}>
                                 Login
                             </Link>

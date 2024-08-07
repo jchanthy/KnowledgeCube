@@ -1,7 +1,7 @@
 /** Icons are imported separatly to reduce build time */
 import {AcademicCapIcon, BriefcaseIcon, HomeIcon} from "@heroicons/react/24/solid/index.js";
 
-const iconClasses = `h-6 w-6`
+const iconClasses = `h-5 w-5`
 const submenuIconClasses = `h-5 w-5`
 
 const routes = [
