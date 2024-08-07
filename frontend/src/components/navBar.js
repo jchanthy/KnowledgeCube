@@ -11,7 +11,7 @@ const NavBar = () => {
             {
                 navItems.map((route, k) => {
                     return (
-                        <ul key={k} className={'menu menu-horizontal menu-sm flex'}>
+                        <ul key={k} className={'menu menu-horizontal menu-sm flex link link-hover'}>
                             {
                                 route.submenu ?
                                     <SidebarSubmenu {...route}/> :

@@ -6,7 +6,7 @@ import {themeChange} from "theme-change";
 import {UserContext} from "./services/UserContextProvider.js";
 import ThemeContext from "./contexts/ThemeContext.js";
 
-const Courses = lazy(() => import("./components/Courses.js"));
+const Courses = lazy(() => import("./components/courses.js"));
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage.js"));
 
@@ -23,15 +23,19 @@ initializeApp()
 
 const App = () => {
     const {isAuthenticated} = useContext(UserContext);
-    const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
-    const themeContextValue = {theme, setTheme};
+    const [theme, setTheme] = useState(localStorage.getItem("theme") || "emerald");
+    localStorage.setItem("theme", theme);
 
     useEffect(() => {
         themeChange(false)
     }, [])
+
+    const handleThemeChange = (newTheme) => {
+        setTheme(newTheme);
+    };
     return (
         <>
-            <ThemeContext.Provider value={themeContextValue}>
+            <ThemeContext.Provider value={{theme, setTheme: handleThemeChange}}>
                 <Router>
                     <Routes>
                         <Route path={'/login'} element={!isAuthenticated ? <Login/> : <Navigate to={'/dashboard'}/>}/>
