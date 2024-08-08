@@ -92,11 +92,11 @@ const Courses = () => {
             <div className={'divider'}></div>
 
             <div
-                className={'grid lg:grid-cols-4 md:grid-cols-2 place-items-center justify-between sm:grid-cols-1 xs:grid-cols-1 items-center p-4  mb-5 gap-4'}>
+                className={'grid lg:grid-cols-4 md:grid-cols-3 place-items-center justify-between sm:grid-cols-2 xs:grid-cols-1 items-center p-4  mb-5 gap-4'}>
                 {courses.map((course, index) => (
                     <div key={index}
-                         className="card bg-base-100 shadow-xl min-w-60 relative overflow-hidden transition-transform duration-300 hover:scale-105 hover:cursor-pointer">
-                        <figure className={'min-w-60'}>
+                         className="card bg-base-100 shadow-xl w-60 relative overflow-hidden transition-transform duration-300 hover:scale-105 hover:cursor-pointer">
+                        <figure className={''}>
                             <img src={course.image} alt={course.title}/>
                         </figure>
                         <div className="card-body">
