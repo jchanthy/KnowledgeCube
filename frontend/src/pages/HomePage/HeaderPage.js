@@ -10,9 +10,14 @@ const HeaderPage = () => {
     return (
         <Header>
             <Sidebar/>
+
             <Search/>
+
             <Logo/>
+
+
             <NavBar/>
+
             <UserProfile/>
         </Header>
     )

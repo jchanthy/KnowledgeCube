@@ -9,20 +9,19 @@ const Header = ({children}) => {
         React.Children.toArray(children);
     return (
         <>
-            <div className="navbar top-0 z-50 sticky shadow-md  bg-base-100">
-                <div className="flex-none gap-2">
-                    {/*{sidebar}*/}
+            <div className="navbar w-full top-0 z-50 sticky shadow-md  bg-base-100">
+                <div className="flex flex-1 md:gap-1 lg:gap-2">
                     {logo}
                     {search}
                 </div>
-                <div className="flex-1">
+                <div className={'flex-0'}>
                     {menuItems}
-                </div>
-                <div className={'flex-none'}>
-
+                    <div className={'divider divider-horizontal'}/>
                     {
                         isAuthenticated ?
-                            profile
+                            <div className={'pl-4'}>
+                                {profile}
+                            </div>
                             :
                             (
                                 <div className={'flex gap-4'}>
@@ -34,7 +33,6 @@ const Header = ({children}) => {
                                     </Link>
                                 </div>
                             )
-
                     }
                 </div>
             </div>

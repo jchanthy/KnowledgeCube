@@ -3,7 +3,6 @@ import {useContext} from "react";
 import {UserContext} from "../../services/UserContextProvider.js";
 import Cog6ToothIcon from "@heroicons/react/24/outline/Cog6ToothIcon";
 import UsersIcon from "@heroicons/react/24/outline/UsersIcon";
-import getInitials from "../user/UserLetter.js";
 import UserIcon from "@heroicons/react/24/solid/UserIcon";
 import {PowerIcon} from "@heroicons/react/24/solid/index.js";
 
@@ -13,16 +12,14 @@ const UserProfile = () => {
 
     return (
         <div className="dropdown dropdown-end">
-            <div tabIndex={0} role="button" className="avatar placeholder btn btn-ghost bg-base-200 btn-rounded">
+            <div tabIndex={0} role="button" className="avatar placeholder btn btn-ghost bg-base-200 btn-circle ">
                 <UserIcon className={"w-5 h-5"}/>
-                <span className={'text-sm'}> {getInitials(user.name)}</span>
             </div>
             <ul
                 tabIndex={0}
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                 <li className={'flex'}>
-
-                    <Link to={'/dashboard/profile'} className="justify-start">
+                    <Link to={'/learner/profile'} className="justify-start">
                         <UsersIcon className={"w-5 h-5"}/>
                         {user.name}
                     </Link>
@@ -44,7 +41,6 @@ const UserProfile = () => {
                             </Link>
                     }
                 </li>
-
             </ul>
         </div>
     );

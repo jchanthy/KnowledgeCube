@@ -4,25 +4,13 @@ import axios from "axios";
 
 const RegisterForm = () => {
     const navigate = useNavigate();
-    const [roles, setRoles] = useState([]);
     useEffect(() => {
-        const getRole = async () => {
-            try {
-                const response = await axios.get('/api/roles');
-                setRoles(response.data);
-            } catch (error) {
-                console.error('Error fetching roles:', error);
-            }
-        };
-
-        getRole();
     }, []);
 
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         password: '',
-        role: '',
     });
 
     const [error, setError] = useState('');
@@ -44,7 +32,6 @@ const RegisterForm = () => {
                 name: formData.name,
                 email: formData.email,
                 password: formData.password,
-                role: formData.role
             };
 
             const response = await axios.post('/api/users/register', userData);
@@ -104,22 +91,6 @@ const RegisterForm = () => {
                                     onChange={handleChange}
                                     required
                                 />
-                            </div>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Select Role</span>
-                                </label>
-                                <select
-                                    className="select select-primary input-bordered w-full max-w-xs"
-                                    name="role"
-                                    onChange={handleChange}
-                                >
-                                    {roles.map((role, index) => (
-                                        <option key={index} value={role._id}>
-                                            {role.name}
-                                        </option>
-                                    ))}
-                                </select>
                             </div>
                             <div className="form-control">
                                 <label className="label">

@@ -6,6 +6,10 @@ import {themeChange} from "theme-change";
 import {UserContext} from "./services/UserContextProvider.js";
 import ThemeContext from "./contexts/ThemeContext.js";
 
+const LearnerLayout = lazy(() => import("./features/learner/LearnerLayout.js"));
+const LearnerDashboard = lazy(() => import("./pages/LearnerDashboard/index.js"));
+const LearnerCourse = lazy(() => import("./pages/LearnerDashboard/components/LearnerCourse.js"));
+
 const Courses = lazy(() => import("./components/courses.js"));
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage.js"));
@@ -22,7 +26,7 @@ initializeApp()
 // const token = checkAuth();
 
 const App = () => {
-    const {isAuthenticated} = useContext(UserContext);
+    const {user, isAuthenticated} = useContext(UserContext);
     const [theme, setTheme] = useState(localStorage.getItem("theme") || "emerald");
     localStorage.setItem("theme", theme);
 
@@ -40,16 +44,20 @@ const App = () => {
                     <Routes>
                         <Route path={'/login'} element={!isAuthenticated ? <Login/> : <Navigate to={'/dashboard'}/>}/>
                         <Route path="/forget-password" element={<ForgotPassword/>}/>
-                        <Route path="/register" element={<Register/>}/>
-                        <Route path="/dashboard/*" element={<DashboardLayout/>}/>
-                        <Route path={'/*'} element={<PageNotFound/>}/>
-                        <Route path="*" element={<Navigate to={isAuthenticated ? "/dashboard" : '/*'} replace/>}/>
                         <Route path={'/'} element={<HomePage/>}/>
-
                         <Route element={<HomePageLayout/>}>
                             <Route path={'/courses'} element={<Courses/>}/>
                             <Route path={'/jobs'} element={<Jobs/>}/>
                         </Route>
+                        <Route path="/register" element={<Register/>}/>
+                        <Route path="/dashboard/*" element={<DashboardLayout/>}/>
+                        <Route path={'/learner/*'} element={<LearnerLayout/>}>
+                            <Route index element={<LearnerDashboard/>}/>
+                            <Route path="profile" element={<LearnerDashboard/>}/>
+                            <Route path={'courses'} element={<LearnerCourse/>}/>
+                        </Route>
+
+                        <Route path={'/*'} element={<PageNotFound/>}/>
 
                     </Routes>
                 </Router>

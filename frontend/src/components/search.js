@@ -33,7 +33,7 @@ const Search = () => {
         <div>
             {/* Open the modal using document.getElementById('ID').showModal() method */}
             <button
-                className="btn btn-ghost btn-sm w-40"
+                className="btn btn-ghost drawer-button w-40"
                 onClick={() => {
 
                     const myModel = document.getElementById(

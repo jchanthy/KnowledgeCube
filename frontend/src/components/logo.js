@@ -1,7 +1,9 @@
+import {Link} from "react-router-dom";
+
 const Logo = () => {
     return (
         <div className={'flex-none'}>
-            <p className="text-xl font-bold">KnowledgeCube</p>
+            <Link to={'/'} className="text-xl font-bold">KnowledgeCube</Link>
         </div>
     )
 }
