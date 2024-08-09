@@ -5,19 +5,19 @@ import {AcademicCapIcon, CalendarIcon} from "@heroicons/react/24/solid/index.js"
 const iconClasses = `h-6 w-6`;
 const routes = [
     {
-        path: '/dashboard',
+        path: '/learner/dashboard',
         icon: <Squares2X2Icon className={iconClasses}/>,
-        name: 'Dashboard',
+        name: 'Home',
     },
     {
-        path: '/my/courses',
+        path: '/learner/my/courses',
         icon: <AcademicCapIcon className={iconClasses}/>,
         name: 'Courses',
     },
     {
-        path: '/sessions',
+        path: '/learner/sessions',
         icon: <CalendarIcon className={iconClasses}/>,
-        name: 'Dashboard',
+        name: 'Calendar',
     },
 
 

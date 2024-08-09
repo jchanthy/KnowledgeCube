@@ -4,7 +4,7 @@ import routes from '../../routes/index.js';
 import {lazy, useEffect, useRef} from 'react'
 import {useSelector} from "react-redux";
 
-const Page404 = lazy(() => import('../../pages/pageNotFound.js'))
+const Page404 = lazy(() => import('../../components/pageNotFound.js'))
 
 
 function PageContent() {
@@ -37,7 +37,6 @@ function PageContent() {
                             )
                         })
                     }
-
                     {/* Redirecting unknown url to 404 page */}
                     <Route path="*" element={<Page404/>}/>
                 </Routes>

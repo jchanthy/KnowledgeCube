@@ -1,19 +1,16 @@
 import LeftSidebar from "./LeftSidebar.js";
+import LearnerContent from "./LearnerContent.js";
 import Header from "./Header.js";
-import Footer from "../../components/footer.js";
 
 const LearnerLayout = () => {
 
     return (
         <>
-            <div className={'bg-base-200'}>
-                <Header/>
-                <div className="base-content w-full">
-                    <div className="grid grid-cols-2">
-                        <LeftSidebar/>
-                    </div>
-                    <Footer/>
-                </div>
+            <Header/>
+            <div className="drawer  lg:drawer-open">
+                <input id="my-lerner-drawer" type="checkbox" className="drawer-toggle "/>
+                <LearnerContent/>
+                <LeftSidebar/>
             </div>
         </>
     )

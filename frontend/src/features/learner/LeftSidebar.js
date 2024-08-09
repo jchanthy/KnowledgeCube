@@ -7,9 +7,11 @@ const LeftSidebar = () => {
     const location = useLocation();
     return (
         <>
-            <div className="drawer-side  z-30  ">
-                <label htmlFor="left-sidebar-drawer" className="drawer-overlay"></label>
-                <ul className="menu  pt-2 w-80 bg-base-100 min-h-full   text-base-content">
+            <div className="drawer-side sm:z-30 lg:z-10">
+                <input id="my-lerner-drawer" type="checkbox" className="drawer-overlay hidden"/>
+
+                <label htmlFor="my-lerner-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
+                <ul className="menu  pt-2 w-80 bg-base-100 min-h-full text-base-content">
                     {/* Sidebar content here */}
                     {
                         routes.map((route, k) => {
@@ -23,11 +25,7 @@ const LeftSidebar = () => {
                                                 to={route.path}
                                                 className={({isActive}) => `${isActive ? 'font-semibold  bg-base-200 ' : 'font-normal'}`}>
                                                 {route.icon} {route.name}
-                                                {
-                                                    location.pathname === route.path ? (<span
-                                                        className="absolute inset-y-0 left-0 w-1 rounded-tr-md rounded-br-md bg-primary "
-                                                        aria-hidden="true"></span>) : null
-                                                }
+
                                             </NavLink>)
                                     }
 
@@ -36,8 +34,8 @@ const LeftSidebar = () => {
                         })
                     }
                 </ul>
-            </div>
 
+            </div>
         </>
     )
 }
