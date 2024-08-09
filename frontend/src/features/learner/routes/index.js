@@ -1,23 +1,31 @@
 import {lazy} from "react";
 
-
+const Courses = lazy(() => import('../../../pages/LearnerDashboard/components/LearnerCourse.js'));
+const PageNotFound = lazy(() => import('../../../components/pageNotFound.js'));
+const Dashboard = lazy(() => import('../../../pages/dashboard/index.js'));
+const LearnerProfile = lazy(() => import('../../../pages/LearnerDashboard/components/LearnerProfile.js'));
 const routes = [
 
     {
         path: '/',
-        component: lazy(() => import('../../../pages/LearnerDashboard/index.js')),
+        component: <Dashboard/>
+    },
+
+    {
+        path: '/dashboard',
+        component: <Dashboard/>
     },
     {
         path: '/profile',
-        component: lazy(() => import('../../../features/settings/profilesettings/updateProfile/index.js')),
+        component: <LearnerProfile/>
     },
     {
         path: '/my/courses',
-        component: lazy(() => import('../../../pages/LearnerDashboard/components/LearnerCourse.js')),
+        component: <Courses/>
     },
     {
         path: '/*',
-        component: lazy(() => import('../../../components/pageNotFound.js')),
+        component: <PageNotFound/>
     }
 ]
 

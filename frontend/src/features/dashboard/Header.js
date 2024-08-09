@@ -26,8 +26,7 @@ function Header() {
         // navbar fixed  flex-none justify-between bg-base-300  z-10 shadow-md
 
         <>
-            <div className="navbar sticky top-0 bg-base-100  z-10 shadow-md ">
-
+            <div className="navbar sticky top-0 bg-base-100  z-30 shadow-md ">
 
                 {/* Menu toogle for mobile view or small screen */}
                 <div className="flex-1">

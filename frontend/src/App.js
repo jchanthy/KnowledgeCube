@@ -15,7 +15,7 @@ const Courses = lazy(() => import("./components/courses.js"));
 const HomePage = lazy(() => import("./pages/HomePage/HomePage.js"));
 
 const Jobs = lazy(() => import("./components/jobs.js"));
-const PageNotFound = lazy(() => import("./pages/pageNotFound.js"));
+const PageNotFound = lazy(() => import("./components/pageNotFound.js"));
 const ForgotPassword = lazy(() => import("./components/user/ForgotPassword.js"));
 const Register = lazy(() => import("./components/user/Register.js"));
 const HomePageLayout = lazy(() => import("./pages/HomePage/HomePageLayout.js"));
@@ -51,11 +51,7 @@ const App = () => {
                         </Route>
                         <Route path="/register" element={<Register/>}/>
                         <Route path="/dashboard/*" element={<DashboardLayout/>}/>
-                        <Route path={'/learner/*'} element={<LearnerLayout/>}>
-                            <Route index element={<LearnerDashboard/>}/>
-                            <Route path="profile" element={<LearnerDashboard/>}/>
-                            <Route path={'courses'} element={<LearnerCourse/>}/>
-                        </Route>
+                        <Route path={'/learner/*'} element={<LearnerLayout/>}/>
 
                         <Route path={'/*'} element={<PageNotFound/>}/>
 

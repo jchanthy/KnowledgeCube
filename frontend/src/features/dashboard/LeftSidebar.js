@@ -12,7 +12,7 @@ function LeftSidebar() {
 
     return (
         <>
-            <div className="drawer-side  z-30  ">
+            <div className="drawer-side z-10  ">
                 <label htmlFor="left-sidebar-drawer" className="drawer-overlay"></label>
                 <ul className="menu  pt-2 w-80 bg-base-100 min-h-full   text-base-content">
                     <button
