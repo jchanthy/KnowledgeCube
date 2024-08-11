@@ -1,18 +1,38 @@
-const LearnerCourse = () => {
+import {useSelector} from "react-redux";
 
+const LearnerCourse = () => {
+    const enrolledCourses = useSelector((state) => state.auth.user.enrolledCourses);
+    const courses = useSelector((state) =>
+        state.courses.filter((course) => enrolledCourses.includes(course.id))
+    );
     return (
-        <div className="hero bg-base-200 min-h-screen">
-            <div className="hero-content text-center">
-                <div className="max-w-md">
-                    <h1 className="text-5xl font-bold">Hello there</h1>
-                    <p className="py-6">
-                        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-                        quasi. In deleniti eaque aut repudiandae et a id nisi.
-                    </p>
-                    <button className="btn btn-primary">Get Started</button>
+        <>
+            <div className="container mx-auto p-4">
+                <h1 className="text-3xl font-bold mb-4">Courses</h1>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {courses.map((course) => (
+                        <div key={course.id} className="card w-full flex flex-col sm:flex-row bg-base-100 shadow-xl">
+                            <figure>
+                                <img src={course.image} alt={course.title}/>
+                            </figure>
+                            <div className="card-body">
+                                <h2 className="card-title">{course.title}</h2>
+
+                                <p>{course.description}</p>
+
+                                <div className="card-actions justify-end">
+                                    <button className="btn btn-primary">
+
+                                        Start Learning
+
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 export default LearnerCourse;

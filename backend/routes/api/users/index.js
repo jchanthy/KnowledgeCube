@@ -1,6 +1,6 @@
 import {Router} from 'express';
-import {getUser, loginUser, registerUser, updateUser} from "../../controllers/userController.js";
-import jwtProtection from "../../middleware/jwtProtection.js";
+import {getUser, loginUser, registerUser, updateUser} from "../../../controllers/userController.js";
+import jwtProtection from "../../../middleware/jwtProtection.js";
 
 const router = Router();
 

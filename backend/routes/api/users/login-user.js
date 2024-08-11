@@ -1,4 +1,4 @@
-import {loginUser} from "../../controllers/userController.js";
+import {loginUser} from "../../../controllers/userController.js";
 
 const LoginUser = async (req, res) => {
     try {

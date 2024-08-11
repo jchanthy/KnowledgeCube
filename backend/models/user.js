@@ -54,6 +54,10 @@ const userSchema = new Schema({
         type: [mongoose.Schema.Types.ObjectId],
         ref: 'Notification', // Reference to Notification model (optional)
     },
+    skills: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Skill",
+    }],
 });
 
 const User = model('User', userSchema);
