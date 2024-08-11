@@ -10,7 +10,7 @@ const LearnerLayout = lazy(() => import("./features/learner/LearnerLayout.js"));
 const LearnerDashboard = lazy(() => import("./pages/LearnerDashboard/index.js"));
 const LearnerCourse = lazy(() => import("./pages/LearnerDashboard/components/LearnerCourse.js"));
 
-const Courses = lazy(() => import("./components/courses.js"));
+const Courses = lazy(() => import("./components/Courses/ListAllCourses.js"));
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage.js"));
 

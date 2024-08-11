@@ -1,23 +1,31 @@
-const EditUserProfile = () => {
+import Modal from "../../../components/modalForm.js";
 
+const EditSkill = () => {
+    const handleSave = () => {
+        console.log('Data saved');
+    };
+
+    const handleCancel = () => {
+        console.log('Modal closed');
+    };
     return (
-
         <>
-            {/* Open the modal using document.getElementById('ID').showModal() method */}
-            <dialog id="edit_profile" className="modal">
-                <div className="modal-box">
-                    <h3 className="font-bold text-lg">Hello!</h3>
-                    <p className="py-4">Press ESC key or click the button below to close</p>
-                    <div className="modal-action">
-                        <form method="dialog">
-                            {/* if there is a button in form, it will close the modal */}
-                            <button className="btn">Close</button>
-                        </form>
-                    </div>
-                </div>
-            </dialog>
 
+            <div>
+                <Modal
+                    title="My Modal"
+                    onSave={handleSave}
+                    onCancel={handleCancel}
+                >
+                    {/* Modal content */}
+                    <input/>
+                    <input/>
+                    <input/>
+                    <input/>
+                </Modal>
+
+            </div>
         </>
     )
 }
-export default EditUserProfile;
+export default EditSkill;
