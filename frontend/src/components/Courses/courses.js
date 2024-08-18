@@ -55,7 +55,6 @@ const Courses = () => {
                                         <Link to={'/tags'}>
                                             {tag}
                                         </Link>
-
                                     </div>
                                 ))}
                             </div>

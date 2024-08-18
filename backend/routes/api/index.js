@@ -1,9 +1,9 @@
 import {Router} from "express";
 import catchAll from "./catch-all.js";
-import userRoutes from "./userRoutes.js"
 import jobRoutes from "./jobRoutes.js";
 import courseRoutes from "./courseRoutes.js";
 import {storeImage} from "../../controllers/course.js";
+import userRoutes from "./userRoutes.js";
 
 const router = Router();
 
