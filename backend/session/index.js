@@ -1,8 +1,6 @@
-import session from "express-session";
 // import connectRedis from "connect-redis";
 import memoryStore from "memorystore";
-import redisClient from "../cache/index.js";
-import RedisStore from "connect-redis";
+import session from "express-session";
 
 // const RedisStore = connectRedis(session);
 
@@ -10,12 +8,9 @@ const MemoryStore = memoryStore(session);
 
 export default (app) =>
     session({
-        store:
-            app.get("env") === "production"
-                ? new RedisStore({client: redisClient})
-                : new MemoryStore(),
+        store: new MemoryStore(),
         name: "sessId",
-        secret: process.env.sessionSecret,
+        secret: process.env.SESSIONSECRET,
         resave: false,
         saveUninitialized: true,
         cookie: {

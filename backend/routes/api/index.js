@@ -1,22 +1,16 @@
 import {Router} from "express";
 import catchAll from "./catch-all.js";
-import userRoutes from "./users/index.js"
-import {loginUser, registerUser} from "../../controllers/userController.js";
-import userRoles from "./userRoles/index.js";
-import {searchSkills} from "../../controllers/skillController.js";
-import courseRoutes from "./courses/index.js";
-import userPermissions from "./permissions/index.js";
+import jobRoutes from "./jobRoutes.js";
+import courseRoutes from "./courseRoutes.js";
+import {storeImage} from "../../controllers/course.js";
+import userRoutes from "./userRoutes.js";
 
 const router = Router();
 
 router.use("/users", userRoutes);
+router.use("/jobs", jobRoutes);
 router.use("/courses", courseRoutes);
-router.use('/permissions', userPermissions);
-router.post("/signup", registerUser)
-router.post("/login", loginUser);
-router.use('/roles', userRoles);
-
-router.get('/skills', searchSkills);
+router.post('/image/upload', storeImage);
 router.use(catchAll);
 
 export default router;

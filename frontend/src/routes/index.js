@@ -1,6 +1,6 @@
 import {lazy} from "react";
 
-const CourseCreation = lazy(() => import("../components/Courses/CreateCourse.js"));
+const CourseCreation = lazy(() => import("../components/Courses/create-course.js"));
 const LoginPage = lazy(() => import("../components/user/Login.js"));
 const PageNotFound = lazy(() => import("../components/pageNotFound.js"));
 const RegisterForm = lazy(() => import("../components/user/Register.js"));

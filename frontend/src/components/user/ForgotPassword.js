@@ -1,70 +1,73 @@
-import {useState} from 'react'
-import {Link} from 'react-router-dom'
+import React, {useState} from 'react';
+import axios from 'axios';
+import {Link} from "react-router-dom";
 
-function ForgotPassword() {
+const ResetPassword = () => {
+    const [email, setEmail] = useState('');
+    const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(null);
 
-    const INITIAL_USER_OBJ = {
-        emailId: ""
-    }
-
-    const [loading, setLoading] = useState(false)
-    const [errorMessage, setErrorMessage] = useState("")
-    const [linkSent, setLinkSent] = useState(false)
-    const [userObj, setUserObj] = useState(INITIAL_USER_OBJ)
-
-    const submitForm = (e) => {
-        e.preventDefault()
-        setErrorMessage("")
-
-        if (userObj.emailId.trim() === "") return setErrorMessage("Email Id is required! (use any value)")
-        else {
-            setLoading(true)
-            // Call API to send password reset link
-            setLoading(false)
-            setLinkSent(true)
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        setError('');
+        setSuccess('');
+        try {
+            const response = await axios.post('/api/forget-password', {email});
+            if (response.data.success) {
+                setSuccess('Password reset email sent successfully!');
+                setError(null);
+            } else {
+                setError(response.data.error);
+                setSuccess(null);
+            }
+        } catch (error) {
+            setError('Error sending password reset email');
+            setSuccess(null);
         }
-    }
-
-    const updateFormValue = ({updateType, value}) => {
-        setErrorMessage("")
-        setUserObj({...userObj, [updateType]: value})
-    }
+    };
 
     return (
-        <div className="hero bg-base-200 min-h-screen">
-            <div className="hero-content flex-col lg:flex-row-reverse">
-                <div className="text-center lg:text-left">
-                    <h1 className="text-5xl font-bold">Forget Password</h1>
-                    <p className="py-6">
-                        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-                        quasi. In deleniti eaque aut repudiandae et a id nisi.
-                    </p>
-                    <div>
-                        <Link to={'/'} className={'link link-success'}>{'Back to home page'}</Link>
+        <div className="form-control max-w-md mx-auto p-4 bg-white rounded-lg shadow-md">
+            <h2 className="text-lg font-bold mb-4">Reset Password</h2>
+            <form onSubmit={handleSubmit}>
+                <div className="form-control mb-4">
+                    <label className="label">
+                        Email
+                    </label>
+                    <input
+                        className="input input-primary shadow w-full"
+                        id="email"
+                        type="email"
+                        value={email}
+                        onChange={(event) => setEmail(event.target.value)}
+                    />
+                </div>
+                {error && (
+                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+                        <span className="block sm:inline">{error}</span>
                     </div>
-                </div>
-                <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-                    <form className="card-body" onSubmit={submitForm}>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Email</span>
-                            </label>
-                            <input type="email" placeholder="email" className="input input-bordered" required/>
-                        </div>
+                )}
+                {success && (
+                    <div
+                        className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
+                        <span className="block sm:inline">{success}</span>
+                    </div>
+                )}
 
-                        <h1 className="text-l font-bold pt-4">We will send password reset link on your email.</h1>
+                <div className={'flex justify-between items-center'}>
+                    <button
+                        className="btn btn-primary shadow-xl"
+                        type="submit"
+                    >
+                        Send Password Reset Email
+                    </button>
 
-                        <div className="form-control mt-6">
-                            <button className="btn btn-primary">Send Reset Link</button>
-                        </div>
-                        <div className='text-center mt-4'>Don't have an account yet? <Link to="/register"><span
-                            className="inline-block  hover:text-primary hover:underline hover:cursor-pointer transition duration-200 link-primary underline">Register</span></Link>
-                        </div>
-                    </form>
+                    <Link to={'/'} className={'link link-success gap-4'}>{'Back to home page'}</Link>
+
                 </div>
-            </div>
+            </form>
         </div>
-    )
-}
+    );
+};
 
-export default ForgotPassword
+export default ResetPassword;

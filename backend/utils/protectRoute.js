@@ -1,4 +1,4 @@
-import {verifyUser} from "../controllers/userController.js";
+import {verifyUser} from "../controllers/user.js";
 import {csrfSync} from "csrf-sync";
 
 const {generateToken, csrfSynchronisedProtection} = csrfSync({
