@@ -13,6 +13,7 @@ import helmet from "helmet";
 import session from "./session/index.js";
 import bodyParser from "body-parser";
 import dotenv from 'dotenv';
+import mongoose from "mongoose";
 
 dotenv.config();
 
@@ -69,9 +70,9 @@ app.use((err, req, res, next) => {
 console.log(process.env.VARIABLE_NAME);
 Promise.all([connectToDb()])
     .then(() =>
-        app.listen(PORT, () => console.log(`Knowledge Cube is running on port ${PORT}!`))
+        app.listen(PORT, () => console.log(`Knowledge Cube is running on port ${PORT}! ${mongoose.connection.host}`))
     )
     .catch((error) => {
-        console.error(`MongoDB Atlas Error: ${error}`);
+        console.error(`MongoDB Atlas Error: ${error.message} `);
         process.exit();
     });
