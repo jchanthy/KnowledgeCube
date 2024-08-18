@@ -1,4 +1,4 @@
-import {verifyToken} from "../controllers/userController.js";
+import {verifyToken} from "../controllers/user.js";
 
 const protectApi = async (req, res, next) => {
     try {

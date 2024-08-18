@@ -9,12 +9,18 @@ const UserContextProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [token, setToken] = useState(null);
-
+    const [isAdmin, setIsAdmin] = useState(false);
+    useEffect(() => {
+        if (user && user.isAdmin) {
+            setIsAdmin(user.isAdmin);
+        }
+    }, [user]);
     useEffect(() => {
         // Load the user from localStorage
         const user = JSON.parse(localStorage.getItem('knowledgeCube-user'));
         // Load the token from localStorage
         const token = localStorage.getItem('knowledgeCube-token');
+
         themeChange(false);
         if (user) {
             setUser(user);
@@ -24,6 +30,9 @@ const UserContextProvider = ({children}) => {
     }, []);
 
     function login(user, token) {
+
+
+        console.log(user);
         // Save the user to localStorage
         localStorage.setItem('knowledgeCube-user', JSON.stringify(user));
         // Save the token to localStorage
@@ -32,6 +41,12 @@ const UserContextProvider = ({children}) => {
         setUser(user);
         setIsAuthenticated(true);
         setToken(token);
+
+        if (isAdmin) {
+            window.location.href = '/dashboard';
+        } else {
+            window.location.href = '/learner';
+        }
     }
 
     function updateUser(user) {

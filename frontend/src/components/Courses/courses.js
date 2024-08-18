@@ -1,78 +1,22 @@
 import {Link} from "react-router-dom";
-
-const courses = [
-    {
-        title: 'Shoes!',
-        image: 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp',
-        description: 'If a dog chews shoes whose shoes does he choose?',
-        tags: ['Fashion', 'Products'],
-        badge: 'Free'
-    },
-
-    {
-        title: 'Shoes!',
-        image: 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp',
-        description: 'If a dog chews shoes whose shoes does he choose?',
-        tags: ['Fashion', 'Products'],
-        badge: 'Free'
-    },
-
-    {
-        title: 'Shoes!',
-        image: 'https://images.pexels.com/photos/261316/pexels-photo-261316.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750',
-        description: 'If a dog chews shoes whose shoes does he choose?',
-        tags: ['Fashion', 'Products'],
-        badge: 'NEW'
-    },
-
-    {
-        title: 'Shoes!',
-        image: 'https://images.pexels.com/photos/261316/pexels-photo-261316.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750',
-        description: 'If a dog chews shoes whose shoes does he choose?',
-        tags: ['Fashion', 'Products'],
-        badge: 'NEW'
-    },
-    {
-        title: 'Shoes!',
-        image: 'https://images.pexels.com/photos/261316/pexels-photo-261316.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750',
-        description: 'If a dog chews shoes whose shoes does he choose?',
-        tags: ['Fashion', 'Products'],
-        badge: 'NEW'
-    },
-    {
-        title: 'Shoes!',
-        image: 'https://images.pexels.com/photos/261316/pexels-photo-261316.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750',
-        description: 'If a dog chews shoes whose shoes does he choose?',
-        tags: ['Fashion', 'Products'],
-        badge: 'NEW'
-    },
-
-    {
-        title: 'Shoes!',
-        image: 'https://images.pexels.com/photos/261316/pexels-photo-261316.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750',
-        description: 'If a dog chews shoes whose shoes does he choose?',
-        tags: ['Fashion', 'Products'],
-        badge: 'NEW'
-    },
-
-    {
-        title: 'Shoes!',
-        image: 'https://images.pexels.com/photos/261316/pexels-photo-261316.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750',
-        description: 'If a dog chews shoes whose shoes does he choose?',
-        tags: ['Fashion', 'Products'],
-        badge: 'NEW'
-    },
-
-    {
-        title: 'Shoes!',
-        image: 'https://images.pexels.com/photos/261316/pexels-photo-261316.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750',
-        description: 'If a dog chews shoes whose shoes does he choose?',
-        tags: ['Fashion', 'Products'],
-        badge: 'NEW'
-    },
-];
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 const Courses = () => {
+    const [courses, setCourses] = useState([]);
+
+    useEffect(() => {
+        const fetchCourses = async () => {
+            try {
+                const response = await axios.get('/api/courses');
+                setCourses(response.data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        fetchCourses();
+    }, []);
+
     return (
         <>
             <div className="hero bg-base-200">

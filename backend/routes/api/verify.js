@@ -1,6 +1,6 @@
-import {verifyToken} from "../../controllers/userController.js";
+import {verifyToken} from "../../controllers/user.js";
 
-export default async (req, res) => {
+const verify = async (req, res) => {
     try {
         const {token} = req.body;
 
@@ -10,3 +10,5 @@ export default async (req, res) => {
         res.status(403).json(error);
     }
 };
+
+export default verify;

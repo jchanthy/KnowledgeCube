@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from 'react';
-import {Link, useNavigate} from "react-router-dom";
+import React, {useContext, useEffect, useState} from 'react';
+import {Link} from "react-router-dom";
+import {UserContext} from "../../services/UserContextProvider.js";
 import axios from "axios";
 
-const RegisterForm = () => {
-    const navigate = useNavigate();
+const LoginPage = () => {
+    const {login} = useContext(UserContext);
     const inputRef = React.createRef();
     useEffect(() => {
         if (inputRef.current) {
@@ -12,7 +13,6 @@ const RegisterForm = () => {
     }, []);
 
     const [formData, setFormData] = useState({
-        name: '',
         email: '',
         password: '',
     });
@@ -33,22 +33,23 @@ const RegisterForm = () => {
         try {
             setLoading(true);
             const userData = {
-                name: formData.name,
                 email: formData.email,
                 password: formData.password,
             };
+            const response = await axios.post('/admin/login', userData);
 
-            const response = await axios.post('/api/users/register', userData);
-            setLoading(false);
-            if (response.data.message === 'User registered successfully') {
-                navigate('/login');
-            } else if (response.data.message === 'Request failed with status code 400') {
-                setError(response.data.message);
+            setLoading(false)
+            if (response.status === 200) {
+                login(response.data.user, response.data.token);
+            } else {
+                console.error('Invalid response:', response);
+                setLoading(false);
+                setError('Invalid response from server');
             }
         } catch (error) {
             setLoading(false);
-            console.error('Register failed:', error);
-            setError(`${error.response.data.message}`);
+            console.error('Login failed:', error);
+            setError(`Login failed: ${error.response.data.message}`);
         }
     };
 
@@ -57,11 +58,7 @@ const RegisterForm = () => {
             <div className="hero bg-base-200 min-h-screen">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div className="text-center lg:text-left">
-                        <h1 className="text-5xl font-bold">Register now!</h1>
-                        <p className="py-6">
-                            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-                            quasi. In deleniti eaque aut repudiandae et a id nisi.
-                        </p>
+                        <h1 className="text-5xl font-bold">Admin Login now!</h1>
                         <div>
                             <Link to={'/'} className={'link link-success'}>{'Back to home page'}</Link>
                         </div>
@@ -70,30 +67,16 @@ const RegisterForm = () => {
                         <form className="card-body" onSubmit={handleSubmit}>
                             <div className="form-control">
                                 <label className="label">
-                                    <span className="label-text">Name</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    placeholder="Full Name"
-                                    className="input input-primary input-bordered"
-                                    value={formData.name}
-                                    name="name"
-                                    onChange={handleChange}
-                                    ref={inputRef}
-                                    required
-                                />
-                            </div>
-                            <div className="form-control">
-                                <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
                                 <input
                                     type="email"
                                     placeholder="email"
-                                    className="input input-primary input-bordered"
+                                    className="input input-bordered"
                                     value={formData.email}
                                     name="email"
                                     onChange={handleChange}
+                                    ref={inputRef}
                                     required
                                 />
                             </div>
@@ -112,21 +95,12 @@ const RegisterForm = () => {
                                 />
                             </div>
                             <div className="form-control mt-6">
-                                <button type="submit" className="btn btn-primary">
-                                    Register
+                                <button type="submit" className="btn btn-primary" disabled={loading}>
+                                    {loading ? <span className="loading loading-spinner"> loading...</span> : 'Login'}
                                 </button>
                             </div>
                             {error && <div className="text-red-500 text-center mt-4">{error}</div>}
-                            <div className="text-center mt-4">
-                                Already have an account?
-                                <Link to="/login" className="link-primary link">
-      <span className="inline-block hover:text-primary hover:underline hover:cursor-pointer transition duration-200">
-        Login
-      </span>
-                                </Link>
-                            </div>
                         </form>
-
                     </div>
                 </div>
             </div>
@@ -134,4 +108,4 @@ const RegisterForm = () => {
     );
 }
 
-export default RegisterForm;
+export default LoginPage;

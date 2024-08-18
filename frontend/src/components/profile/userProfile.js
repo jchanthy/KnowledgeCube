@@ -27,9 +27,16 @@ const UserProfile = () => {
                             {user.name}
                         </Link>
                     </li>
-                    <li><Link to={'/dashboard/settings'} className={'justify-start'}>
-                        <Cog6ToothIcon className={'w-5 h-5'}/>
-                        Settings</Link></li>
+                    <li>
+                        {
+
+                            <Link to={'/learner/help'}>
+                                <Cog6ToothIcon className={'w-5 h-5'}/>
+                                Help
+                            </Link>
+                        }
+
+                    </li>
                     <div className={'divider mt-0 mb-0'}></div>
                     <li>
                         {

@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import User from "../models/user.js";
+import nodemailer from "nodemailer";
 
 const sign = (obj) => {
     return new Promise((resolve, reject) => {
@@ -28,8 +29,13 @@ export const signUpAdmin = async ({name, email, password}) => {
     }
 };
 export const loginAdmin = async ({email, password}) => {
+
     try {
         const user = await User.findOne({email, isAdmin: true});
+
+
+        console.log(user);
+
         await user.checkPassword(password);
         await user.updateLoggedIn();
         return Promise.resolve(user);
@@ -113,16 +119,23 @@ export const loginUser = async (req, res) => {
 };
 
 export const updateUser = async (req, res) => {
+    const updateUser = async (_id, updatedUserData) => {
+        try {
+            return await User.findByIdAndUpdate(_id, updatedUserData, {
+                new: true,
+            });
+        } catch (error) {
+            throw error;
+        }
+    };
+
     try {
         const {_id} = req.params;
         const {password, ...body} = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
         const updatedUserData = {...body, password: hashedPassword};
 
-        // Find the user by ID and update their information
-        const updatedUser = await User.findByIdAndUpdate(_id, updatedUserData, {
-            new: true,
-        });
+        const updatedUser = await updateUser(_id, updatedUserData);
 
         if (!updatedUser) {
             return res.status(404).json({message: 'User not found'});
@@ -152,6 +165,51 @@ export const getUser = async (req, res) => {
     }
 };
 
+export const forgetPassword = (req, res) => {
+    const {email} = req.body;
+
+    // Generate a random password reset token
+    const token = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+
+    // Send the password reset email
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'john.chanthy@gmail.com',
+            pass: 'gdhi dyqo uotw tccp',
+        },
+    });
+
+    const mailOptions = {
+        from: 'john.chanthy@gmail.com',
+        to: email,
+        subject: 'Password Reset Request',
+        html: `<p>You have requested to reset your password. Please click the following link to reset your password: <a href="${process.env.REACT_API_HOST}/reset-password?token=${token}">Reset Password</a></p>`,
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log(error);
+            res.status(500).json({success: false, error: 'Error sending password reset email'});
+        } else {
+            console.log('Email sent: ' + info.response);
+            res.json({success: true});
+        }
+    });
+};
+
+export const getUsers = async (req, res) => {
+    try {
+        const users = await User.find();
+        const totalUsers = users.length;
+        res.status(200).json({users, total: totalUsers});
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({message: 'Internal server error'});
+    }
+
+}
+
 export const verifyToken = async (token) => {
     try {
         const user = jwt.decode(token);
@@ -168,7 +226,7 @@ export const verifyUser = (email) =>
     new Promise(async (resolve, reject) => {
         try {
             const user = await User.findOne({email});
-            return resolve(user ? true : false);
+            return resolve(!!user);
         } catch {
             return reject(false);
         }

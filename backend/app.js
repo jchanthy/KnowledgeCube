@@ -1,7 +1,6 @@
 import express from "express";
 // import {createWriteStream} from "fs";
 // import morgan from "morgan";
-import session from "./session/index.js";
 import compression from "compression";
 import home from "./routes/home/index.js";
 import admin from "./routes/admin/index.js";
@@ -11,6 +10,7 @@ import {fileURLToPath} from "url";
 import {dirname, join} from "path";
 import cors from "cors";
 import helmet from "helmet";
+import session from "./session/index.js";
 import bodyParser from "body-parser";
 import dotenv from 'dotenv';
 
