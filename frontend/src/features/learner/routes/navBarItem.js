@@ -1,5 +1,5 @@
 import Squares2X2Icon from "@heroicons/react/24/outline/Squares2X2Icon.js";
-import {AcademicCapIcon, CalendarIcon} from "@heroicons/react/24/solid/index.js";
+import {AcademicCapIcon, CalendarIcon} from "@heroicons/react/24/outline/index.js";
 
 
 const iconClasses = `h-6 w-6`;

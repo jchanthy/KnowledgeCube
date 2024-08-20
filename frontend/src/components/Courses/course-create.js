@@ -1,52 +1,54 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import {useNavigate} from "react-router-dom";
 
-const CreateCourse = () => {
+const CourseCreate = () => {
+    const [loading, setLoading] = useState(false);
+
+    const fileInputRef = React.createRef(null);
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         title: '',
-        image: '',
         description: '',
         tags: '',
         badge: '',
+        image: null,
     });
-    const [selectedFile, setSelectedFile] = useState(null);
 
     const handleChange = (e) => {
-        const {name, type, value, checked} = e.target;
-
-        setFormData((prevFormData) => {
-            if (type === 'checkbox') {
-                return {...prevFormData, [name]: checked};
-            }
-
-            return {...prevFormData, [name]: value};
-        });
+        setFormData({...formData, [e.target.name]: e.target.value});
     };
 
+    const handleFileChange = (e) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+            if (reader.readyState === 2) {
+                setFormData({...formData, image: reader.result});
+            }
+        };
+        reader.readAsDataURL(e.target.files[0]);
+    };
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const formDataCopy = {...formData};
+
+        setLoading(true);
+        const formDataToSend = new FormData();
+
+        formDataToSend.append('title', formData.title);
+        formDataToSend.append('description', formData.description);
+        formDataToSend.append('tags', formData.tags);
+        formDataToSend.append('badge', formData.badge);
+        formDataToSend.append('image', formData.image);
+
         try {
-            if (selectedFile) {
-                const data = new FormData();
-                data.append('file', selectedFile);
-                data.append('upload_preset', 'ml_default');
-                const imageResponse = await axios.post(
-                    `/image/upload`,
-                    data
-                );
-                formDataCopy.image = imageResponse.data.url;
-            }
-            const response = await axios.post('/api/courses/create', formDataCopy);
+            const response = await axios.post('/api/courses/create', formDataToSend);
             console.log(response.data);
             // Handle successful course creation
+            navigate('/course-creation');
+            setLoading(false);
         } catch (error) {
             console.error(error);
         }
-    };
-
-    const handleImageChange = (file) => {
-        setSelectedFile(file);
     };
 
     return (
@@ -71,14 +73,12 @@ const CreateCourse = () => {
                         className={'file-input file-input-bordered file-input-primary w-full max-w-xs'}
                         id="image"
                         type="file"
+                        ref={fileInputRef}
+                        name={'image'}
                         accept="image/*"
-                        onChange={(e) => handleImageChange(e.target.files[0])}
+                        multiple={true}
+                        onChange={handleFileChange}
                     />
-                    {selectedFile && (
-                        <p className="text-sm text-gray-600">
-                            Selected file: {selectedFile.name}
-                        </p>
-                    )}
                 </div>
                 <div className="mb-4 form-control">
                     <label className="label">Description</label>
@@ -118,7 +118,7 @@ const CreateCourse = () => {
                     />
                 </div>
                 <div className="form-control">
-                    <button className="btn btn-primary" type="submit" onClick={handleSubmit}>
+                    <button className="btn btn-primary" type="submit" onClick={handleSubmit} disabled={loading}>
                         Create Course
                     </button>
                 </div>
@@ -127,4 +127,4 @@ const CreateCourse = () => {
     );
 };
 
-export default CreateCourse;
+export default CourseCreate;

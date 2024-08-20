@@ -31,8 +31,6 @@ const UserContextProvider = ({children}) => {
 
     function login(user, token) {
 
-
-        console.log(user);
         // Save the user to localStorage
         localStorage.setItem('knowledgeCube-user', JSON.stringify(user));
         // Save the token to localStorage

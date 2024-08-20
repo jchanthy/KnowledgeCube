@@ -112,7 +112,7 @@ const RegisterForm = () => {
                                 />
                             </div>
                             <div className="form-control mt-6">
-                                <button type="submit" className="btn btn-primary">
+                                <button type="submit" className="btn btn-primary" disabled={loading}>
                                     Register
                                 </button>
                             </div>

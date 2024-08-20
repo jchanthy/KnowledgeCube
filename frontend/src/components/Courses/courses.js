@@ -38,28 +38,30 @@ const Courses = () => {
             <div
                 className={'grid lg:grid-cols-4 md:grid-cols-3 place-items-center justify-between sm:grid-cols-2 xs:grid-cols-1 items-center p-4  mb-5 gap-4'}>
                 {courses.map((course, index) => (
-                    <div key={index}
-                         className="card bg-base-100 shadow-xl w-60 relative overflow-hidden transition-transform duration-300 hover:scale-105 hover:cursor-pointer">
-                        <figure className={''}>
-                            <img src={course.image} alt={course.title}/>
-                        </figure>
-                        <div className="card-body">
-                            <h2 className="card-title">
-                                {course.title}
-                                <div className={`badge badge-secondary bg-primary`}>{course.badge}</div>
-                            </h2>
-                            <p>{course.description}</p>
-                            <div className="card-actions justify-end">
-                                {course.tags.map((tag, index) => (
-                                    <div key={index} className="badge badge-outline hover:bg-primary">
-                                        <Link to={'/tags'}>
-                                            {tag}
-                                        </Link>
-                                    </div>
-                                ))}
+                    <Link key={index} to={`/courses/${course._id}`}>
+                        <div
+                            className="card bg-base-100 shadow-xl w-60 relative overflow-hidden transition-transform duration-300 hover:scale-105 hover:cursor-pointer">
+                            <figure className={''}>
+                                <img src={course.image} alt={course.title}/>
+                            </figure>
+                            <div className="card-body">
+                                <h2 className="card-title">
+                                    {course.title}
+                                    <div className={`badge badge-secondary bg-primary`}>{course.badge}</div>
+                                </h2>
+                                <p>{course.description}</p>
+                                <div className="card-actions justify-end">
+                                    {course.tags.map((tag, index) => (
+                                        <div key={index} className="badge badge-outline hover:bg-primary">
+                                            <Link to={'/tags'}>
+                                                {tag}
+                                            </Link>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </Link>
                 ))}
             </div>
 

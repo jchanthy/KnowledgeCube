@@ -64,11 +64,11 @@ const CreateCourse = () => {
 
     return (
         <div>
-            <h1>Create Course</h1>
+            <h1>Create Courses</h1>
             <form onSubmit={handleSubmit}>
                 {/* Form fields for title, description, etc. */}
                 <input type="text" name="title" value={courseData.title} onChange={handleChange}
-                       placeholder="Course Title" required/>
+                       placeholder="Courses Title" required/>
                 {/* ... other form fields ... */}
 
                 {/* Module creation section */}
@@ -96,7 +96,7 @@ const CreateCourse = () => {
                 ))}
                 <button type="button" onClick={handleAddModule}>Add Module</button>
 
-                <button type="submit">Create Course</button>
+                <button type="submit">Create Courses</button>
             </form>
         </div>
     );

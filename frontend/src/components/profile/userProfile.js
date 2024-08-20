@@ -16,7 +16,7 @@ const UserProfile = () => {
         <>
             <div className="dropdown dropdown-hover dropdown-end">
                 <div tabIndex={0} role="button" className="btn m-1  ">
-                    <span className={'text-md'}>{getInitials(user.name)}</span>
+                    <span className={'text-md'}>{isAuthenticated ? getInitials(user.name) : ''}</span>
                     <ChevronDownIcon className={'w-5 h-5'}/>
 
                 </div>
@@ -24,7 +24,7 @@ const UserProfile = () => {
                     <li className={'flex'}>
                         <Link to={'/learner/profile'} className="justify-start">
                             <UsersIcon className={"w-5 h-5"}/>
-                            {user.name}
+                            {isAuthenticated ? user.name : ''}
                         </Link>
                     </li>
                     <li>

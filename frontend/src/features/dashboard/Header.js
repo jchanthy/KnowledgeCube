@@ -8,7 +8,7 @@ import {UserContext} from "../../services/UserContextProvider.js";
 import getInitials from "../../components/user/UserLetter.js";
 
 
-function Header() {
+const Header = () => {
     const {noOfNotifications, pageTitle} = useSelector((state) => state.header);
 
     const {user} = useContext(UserContext);
@@ -16,7 +16,7 @@ function Header() {
 
     // Opening right sidebar for notification
 
-    function logoutUser() {
+    const logoutUser = () => {
         localStorage.removeItem('knowledgeCube-user');
         localStorage.removeItem('knowledgeCube-token');
         window.location.href = '/'
