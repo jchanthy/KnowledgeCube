@@ -6,6 +6,11 @@ import {UserContext} from "./services/UserContextProvider.js";
 import ThemeContext from "./contexts/ThemeContext.js";
 import initializeApp from "./services/auth/init.js";
 
+const Support = lazy(() => import("./pages/Support/index.js"));
+
+
+const CourseDetail = lazy(() => import("./pages/courses/index.js"));
+
 const ChangePassword = lazy(() => import("./components/user/ChangePassword.js"));
 
 const AdminLogin = lazy(() => import("./components/Admin/AdminLogin.js"));
@@ -48,9 +53,10 @@ const App = () => {
                         <Route element={<HomePageLayout/>}>
                             <Route path={'/courses'} element={<Courses/>}/>
                             <Route path={'/jobs'} element={<Jobs/>}/>
+                            <Route path={'/courses/:courseName'} element={<CourseDetail/>}/>
                         </Route>
                         <Route path={'/admin/login'}
-                               element={!isAuthenticated ? <AdminLogin/> : <Navigate to={'/admin/dashboard'}/>}/>
+                               element={!isAuthenticated ? <AdminLogin/> : <Navigate to={'/dashboard'}/>}/>
                         <Route path={'/admin/*'}
                                element={isAuthenticated ? <Navigate to={'/dashboard'}/> : <AdminLogin/>}/>
                         <Route path="/register" element={<Register/>}/>

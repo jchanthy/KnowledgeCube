@@ -50,7 +50,7 @@ const userSchema = new Schema({
     },
     completedCourses: {
         type: [mongoose.Schema.Types.ObjectId],
-        ref: 'Course', // Reference to Course model
+        ref: 'Course', // Reference to Courses model
     },
     notifications: {
         type: [mongoose.Schema.Types.ObjectId],

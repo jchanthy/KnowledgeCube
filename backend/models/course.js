@@ -21,6 +21,11 @@ const courseSchema = new Schema({
     badge: {
         type: String,
         required: false
+    },
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: false,
     }
 }, {timestamps: true});
 

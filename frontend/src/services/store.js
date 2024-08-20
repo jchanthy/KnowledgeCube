@@ -3,6 +3,7 @@ import headerSlice from "../components/headerSlice.js";
 
 const combinedReducer = {
     header: headerSlice,
+
 }
 
 export default configureStore({

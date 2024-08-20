@@ -3,7 +3,6 @@ import {Link} from "react-router-dom";
 import {UserContext} from "../services/UserContextProvider.js";
 
 const Header = ({children}) => {
-    // const token = checkAuth();
     const {isAuthenticated} = useContext(UserContext);
     const [sidebar, search, logo, menuItems, profile] =
         React.Children.toArray(children);

@@ -1,4 +1,6 @@
 import Course from "../models/course.js";
+import multer from "multer";
+
 
 export const createCourse = async (req, res) => {
     try {
@@ -30,7 +32,7 @@ export const createCourse = async (req, res) => {
 export const getCourses = async (req, res) => {
     try {
         const courses = await Course.find();
-        res.json(courses);
+        res.json({courses, total: courses.length});
     } catch (error) {
         console.error(error);
         res.status(500).json({error: 'Server Error'});
@@ -41,7 +43,7 @@ export const getCourseById = async (req, res) => {
     try {
         const course = await Course.findById(req.params.id);
         if (!course) {
-            return res.status(404).json({error: 'Course not found'});
+            return res.status(404).json({error: 'Courses not found'});
         }
         res.json(course);
     } catch (error) {
@@ -54,7 +56,7 @@ export const updateCourse = async (req, res) => {
     try {
         const updatedCourse = await Course.findByIdAndUpdate(req.params.id, req.body, {new: true});
         if (!updatedCourse) {
-            return res.status(404).json({error: 'Course not found'});
+            return res.status(404).json({error: 'Courses not found'});
         }
         res.json(updatedCourse);
     } catch (error) {
@@ -67,34 +69,82 @@ export const deleteCourse = async (req, res) => {
     try {
         const deletedCourse = await Course.findByIdAndDelete(req.params.id);
         if (!deletedCourse) {
-            return res.status(404).json({error: 'Course not found'});
+            return res.status(404).json({error: 'Courses not found'});
         }
-        res.json({message: 'Course deleted successfully'});
+        res.json({message: 'Courses deleted successfully'});
     } catch (error) {
         console.error(error);
         res.status(500).json({error: 'Server Error'});
     }
 }
 
+export const getCoursesByUserId = async (req, res) => {
+    try {
+        const courses = await Course.find({user: req.params.userId});
+        res.json(courses);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({error: 'Server Error'});
+    }
+
+}
+
+const upload = multer({
+    dest: 'public/uploads' // Destination directory for uploaded images
+});
+
 export const storeImage = async (req, res) => {
+    try {
+        const {title, description, tags, badge} = req.body;
 
-    if (!req.files || Object.keys(req.files).length === 0) {
-        return res.status(400).json({error: 'No files were uploaded.'});
+        // Use upload.single('image') as middleware (not nested)
+        upload.single('image/*')(req, res, async (err) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({error: 'Upload failed'});
+            }
+
+            const imageUrl = req.file ? req.file.path : ''; // Handle cases where no image is uploaded
+
+            const newCourse = new Course({
+                title,
+                description,
+                tags,
+                badge,
+                imageUrl,
+            });
+
+            const savedCourse = await newCourse.save();
+            res.status(201).json(savedCourse);
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            error:
+                'Server Error'
+        });
+    }
+};
+
+export const getCourseBySearch = async (req, res) => {
+    const {searchQuery} = req.query;
+    try {
+        const title = new RegExp(searchQuery, 'i');
+        const courses = await Course.find({title});
+        res.json(courses);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({error: 'Server Error'});
     }
 
-    const file = req.files.image;
-    const imageBuffer = await file.arrayBuffer();
-    const imageBase64 = Buffer.from(imageBuffer).toString('base64');
+}
 
-    const course = await Course.findById(req.params.id);
-    if (!course) {
-        return res.status(404).json({error: 'Course not found'});
+export const getCourseByName = async (req, res) => {
+    try {
+        const course = await Course.find({title: req.params.name});
+        res.json(course);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({error: 'Server Error'});
     }
-
-    course.image = imageBase64;
-
-    await course.save();
-
-    res.json({message: 'Image uploaded successfully'});
-
 }

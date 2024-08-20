@@ -1,5 +1,5 @@
 import {NavLink, useLocation} from 'react-router-dom'
-import routes from "../../routes/sidebar.js";
+import routes from "../../routes/dashboard/sidebar.js";
 import SidebarSubmenu from "./SidebarSubmenu.js";
 import Logo from "../../components/logo.js";
 
@@ -14,7 +14,7 @@ function LeftSidebar() {
         <>
             <div className="drawer-side z-10  ">
                 <label htmlFor="left-sidebar-drawer" className="drawer-overlay"></label>
-                <ul className="menu  pt-2 w-80 bg-base-100 min-h-full   text-base-content">
+                <ul className="menu  pt-2 w-60 bg-base-100 min-h-full   text-base-content">
                     <button
                         className="btn btn-ghost btn-sm mr-3  btn-circle z-50  right-0 absolute lg:hidden"
                         onClick={() => close()}>

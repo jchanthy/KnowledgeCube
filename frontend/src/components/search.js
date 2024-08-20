@@ -1,13 +1,28 @@
 import {useEffect, useState} from "react";
+import {MagnifyingGlassIcon} from "@heroicons/react/24/outline/index.js";
+import axios from "axios";
+import {Link} from "react-router-dom";
 
-
-const handleSearch = () => {
-}
 
 const Search = () => {
     const [open, setOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
+    const [courses, setCourses] = useState([]);
+
+
+    const handleSearch = async () => {
+        try {
+            const response = await axios.get(`/api/courses?search=${searchTerm}`);
+            const filteredCourses = (response.data || []).filter((course) => course.title.toLowerCase().includes(searchTerm.toLowerCase()));
+            setCourses(filteredCourses);
+        } catch (error) {
+            console.error('Error searching for courses:', error);
+        }
+    };
+
+
 // Toggle the menu when control k is pressed
+
     useEffect(() => {
         const down = (e: KeyboardEvent) => {
             const input = document.querySelector(".input");
@@ -25,7 +40,6 @@ const Search = () => {
                 }
             }
         };
-
         document.addEventListener("keydown", down);
         return () => document.removeEventListener("keydown", down);
     }, []);
@@ -42,23 +56,9 @@ const Search = () => {
                     if (myModel) {
                         myModel.showModal();
                     }
-
                 }}
             >
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                    />
-                </svg>
+                <MagnifyingGlassIcon className="h-5 w-5"/>
                 <kbd className="kbd kbd-xs">ctrl</kbd>+
                 <kbd className="kbd kbd-xs">k</kbd>
             </button>
@@ -66,24 +66,15 @@ const Search = () => {
                 <div className="modal-box ">
                     <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-auto">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="absolute h-5 w-5"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                                />
-                            </svg>
+                            <MagnifyingGlassIcon
+                                className="h-5 w-5 text-gray-400"
+                                aria-hidden="true"
+                            />
                         </div>
                         <input
                             type="text"
                             placeholder="Search ..."
+                            name={'search'}
                             className="input input-bordered block pl-10"
                             style={{width: "100%"}}
                             onChange={handleSearch}
@@ -94,9 +85,20 @@ const Search = () => {
                     <div className="divider"></div>
                     <div>
                         <div className="overflow-x-auto">
-                            <ul>
 
-                            </ul>
+
+                            {courses.map((course) => (
+                                <ul>
+                                    <Link
+                                        to={`/courses/${course._id}`}
+                                        className="link link-hover"
+                                    >
+                                        {course.title}
+                                    </Link>
+                                </ul>
+                            ))}
+
+
                         </div>
                     </div>
                 </div>

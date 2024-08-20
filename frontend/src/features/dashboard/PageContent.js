@@ -1,6 +1,6 @@
 import Header from "./Header.js"
 import {Route, Routes} from 'react-router-dom'
-import routes from '../../routes/index.js';
+import routes from '../../routes/dashboard/index.js';
 import {lazy, useEffect, useRef} from 'react'
 import {useSelector} from "react-redux";
 
