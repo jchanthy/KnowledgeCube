@@ -5,19 +5,19 @@ import {Link} from 'react-router-dom'
 import ThemeSwitcher from "../../components/ThemeSwither.js";
 import {useSelector} from "react-redux";
 import {UserContext} from "../../services/UserContextProvider.js";
-import getInitials from "../../components/user/UserLetter.js";
+import getInitials from "../../components/User/UserLetter.js";
 
 
 const Header = () => {
     const {noOfNotifications, pageTitle} = useSelector((state) => state.header);
 
-    const {user} = useContext(UserContext);
+    const {user, isAuthenticated} = useContext(UserContext);
 
 
     // Opening right sidebar for notification
 
     const logoutUser = () => {
-        localStorage.removeItem('knowledgeCube-user');
+        localStorage.removeItem('knowledgeCube-User');
         localStorage.removeItem('knowledgeCube-token');
         window.location.href = '/'
     }
@@ -28,7 +28,7 @@ const Header = () => {
         <>
             <div className="navbar sticky top-0 bg-base-100  z-30 shadow-md ">
 
-                {/* Menu toogle for mobile view or small screen */}
+                {/* Menu toggle for mobile view or small screen */}
                 <div className="flex-1">
                     <label htmlFor="left-sidebar-drawer"
                            className="btn btn-ghost btn-circle btn-sm swap swap-rotate drawer-button lg:hidden">
@@ -62,20 +62,6 @@ const Header = () => {
 
                 <div className="flex-none ">
 
-                    {/* Multiple theme selection, uncomment this if you want to enable multiple themes selection,
-                also includes corporate and retro themes in tailwind.config file */}
-
-                    {/* <select className="select select-sm mr-4" data-choose-theme>
-                    <option disabled selected>Theme</option>
-                    <option value="light">Default</option>
-                    <option value="dark">Dark</option>
-                    <option value="corporate">Corporate</option>
-                    <option value="retro">Retro</option>
-                </select> */}
-
-
-                    {/* Light and dark theme selection toogle **/}
-
                     <ThemeSwitcher/>
 
                     {/* Notification icon */}
@@ -93,18 +79,18 @@ const Header = () => {
                         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                             <div className="avatar placeholder">
                                 <div className="bg-neutral text-neutral-content w-9 rounded-full">
-                                    <span className={'text-xs'}>{getInitials(user.name)}</span>
+                                    <span className={'text-xs'}>{isAuthenticated ? getInitials(user.name) : ''}</span>
                                 </div>
                             </div>
                         </label>
                         <ul tabIndex={0}
                             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                             <li className="justify-between">
-                                <Link to={'/dashboard/profile'}>
-                                    {user.name}
+                                <Link to={'/admin/dashboard/profile'}>
+                                    {isAuthenticated ? user.name : ''}
                                 </Link>
                             </li>
-                            <li className=''><Link to={'/dashboard/settings-billing'}>Bill History</Link></li>
+                            <li className=''><Link to={'/admin/dashboard/support'}>Support</Link></li>
                             <div className="divider mt-0 mb-0"></div>
                             <li><Link to={'/'} onClick={logoutUser}>Logout</Link></li>
                         </ul>

@@ -1,15 +1,30 @@
 import {Link} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {lazy, useEffect, useState} from "react";
 import axios from "axios";
+
+const CourseCard = lazy(() => import("./CourseCard.js"));
 
 const Courses = () => {
     const [courses, setCourses] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        })
+    })
 
     useEffect(() => {
         const fetchCourses = async () => {
+            setIsLoading(true);
+            setCourses([]);
             try {
                 const response = await axios.get('/api/courses');
-                setCourses(response.data);
+                if (response.data) {
+                    setIsLoading(false);
+                    setCourses(response.data.courses);
+                }
             } catch (error) {
                 console.error(error);
             }
@@ -24,45 +39,27 @@ const Courses = () => {
                     <div className="max-w-md">
                         <h1 className="text-5xl font-bold">Explore Our Courses</h1>
                         <p className="py-6">
-                            This course provides an overview of the basics of online learning and how it can be used to
-                            enhance one's knowledge and skills. It covers topics such as course creation, course
-                            management, and course discovery. By the end of the course, learners will have a solid
-                            understanding of the benefits and capabilities of online learning.
+                            Find the perfect course for your learning journey.
                         </p>
-                        <button className="btn btn-primary">Get Started</button>
                     </div>
                 </div>
             </div>
-            <div className={'divider'}></div>
-
+            <div className={'divider'}/>
+            <p className={'text-3xl font-bold p-4'}>Courses</p>
             <div
                 className={'grid lg:grid-cols-4 md:grid-cols-3 place-items-center justify-between sm:grid-cols-2 xs:grid-cols-1 items-center p-4  mb-5 gap-4'}>
-                {courses.map((course, index) => (
-                    <Link key={index} to={`/courses/${course._id}`}>
-                        <div
-                            className="card bg-base-100 shadow-xl w-60 relative overflow-hidden transition-transform duration-300 hover:scale-105 hover:cursor-pointer">
-                            <figure className={''}>
-                                <img src={course.image} alt={course.title}/>
-                            </figure>
-                            <div className="card-body">
-                                <h2 className="card-title">
-                                    {course.title}
-                                    <div className={`badge badge-secondary bg-primary`}>{course.badge}</div>
-                                </h2>
-                                <p>{course.description}</p>
-                                <div className="card-actions justify-end">
-                                    {course.tags.map((tag, index) => (
-                                        <div key={index} className="badge badge-outline hover:bg-primary">
-                                            <Link to={'/tags'}>
-                                                {tag}
-                                            </Link>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                    </Link>
-                ))}
+                {
+                    courses.length > 0 ? (
+                        courses.map((course) => (
+                            <Link key={course._id} to={`/courses/${course._id}`} state={{courseData: course}}>
+                                <CourseCard course={course}/>
+                            </Link>
+                        ))
+                    ) : (
+                        isLoading ? <span className={'loading loading-spinner items-center'}>Loading...</span> :
+                            <p>No courses found</p>
+                    )
+                }
             </div>
 
         </>

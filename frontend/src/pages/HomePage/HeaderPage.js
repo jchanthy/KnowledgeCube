@@ -18,7 +18,6 @@ const HeaderPage = () => {
                 <Logo/>
             </Link>
 
-
             <NavBar/>
 
             <UserProfile/>

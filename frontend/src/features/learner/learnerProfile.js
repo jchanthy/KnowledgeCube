@@ -4,8 +4,8 @@ import {UserContext} from "../../services/UserContextProvider.js";
 import Cog6ToothIcon from "@heroicons/react/24/outline/Cog6ToothIcon";
 import UsersIcon from "@heroicons/react/24/outline/UsersIcon";
 import {PowerIcon} from "@heroicons/react/24/solid/index.js";
-import getInitials from "../User/UserLetter.js";
 import ChevronDownIcon from "@heroicons/react/24/outline/ChevronDownIcon";
+import getInitials from "../../components/User/UserLetter.js";
 
 const UserProfile = () => {
 
@@ -16,12 +16,13 @@ const UserProfile = () => {
         <>
             <div className="dropdown dropdown-hover dropdown-end">
                 <div tabIndex={0} role="button" className="btn m-1  ">
-                    <span className={'text-md'}>{isAuthenticated ? getInitials(user.name) : ''}</span>
+                    <span className={'text-md'}>{isAuthenticated ? getInitials(user.name) : null}</span>
                     <ChevronDownIcon className={'w-5 h-5'}/>
+
                 </div>
                 <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
                     <li className={'flex'}>
-                        <Link to={'/learner/dashboard'} className="justify-start">
+                        <Link to={'/learner/profile'} className="justify-start">
                             <UsersIcon className={"w-5 h-5"}/>
                             {isAuthenticated ? user.name : null}
                         </Link>

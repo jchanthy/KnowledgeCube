@@ -1,6 +1,10 @@
 const Filter = (props) => {
 
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        props.onSearch(e.target.value)
+    }
     return (
         <>
             <div className="join">
@@ -19,10 +23,7 @@ const Filter = (props) => {
                 </select>
                 <div className="indicator">
                     <button className="btn join-item btn-primary"
-                            onSubmit={(e) => {
-                                e.preventDefault();
-                                props.onSearch(e.target.value)
-                            }}
+                            onSubmit={handleSubmit}
                     >Search
                     </button>
                 </div>

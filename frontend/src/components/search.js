@@ -1,7 +1,6 @@
 import {useEffect, useState} from "react";
 import {MagnifyingGlassIcon} from "@heroicons/react/24/outline/index.js";
 import axios from "axios";
-import {Link} from "react-router-dom";
 
 
 const Search = () => {
@@ -9,12 +8,24 @@ const Search = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [courses, setCourses] = useState([]);
 
+    const navigate = (courseId) => {
+        window.location.href = `/courses/${courseId}`;
+    };
 
-    const handleSearch = async () => {
+    useEffect(() => {
+        setCourses([]);
+    }, []);
+    const handleSearch = async (event) => {
+        event.preventDefault();
+
         try {
             const response = await axios.get(`/api/courses?search=${searchTerm}`);
-            const filteredCourses = (response.data || []).filter((course) => course.title.toLowerCase().includes(searchTerm.toLowerCase()));
-            setCourses(filteredCourses);
+            if (searchTerm) {
+                const filteredCourses = (response.data.courses || []).filter((course) => course.title.toLowerCase().includes(searchTerm.toLowerCase()));
+                setCourses(filteredCourses);
+            } else {
+                setCourses(response.data.courses || []);
+            }
         } catch (error) {
             console.error('Error searching for courses:', error);
         }
@@ -28,9 +39,11 @@ const Search = () => {
             const input = document.querySelector(".input");
             if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
                 e.preventDefault();
-                setOpen(true);
+                if (!open) {
+                    setOpen(true);
+                }
                 // set focus on input
-                input.focus();
+                input?.focus();
             }
             // Close the modal when escape is pressed
             if (e.key === "Escape") {
@@ -42,7 +55,7 @@ const Search = () => {
         };
         document.addEventListener("keydown", down);
         return () => document.removeEventListener("keydown", down);
-    }, []);
+    }, [open]);
     return (
         <div>
             {/* Open the modal using document.getElementById('ID').showModal() method */}
@@ -89,12 +102,12 @@ const Search = () => {
 
                             {courses.map((course) => (
                                 <ul>
-                                    <Link
-                                        to={`/courses/${course._id}`}
+                                    <button
+                                        onClick={() => navigate(course._id)}
                                         className="link link-hover"
                                     >
                                         {course.title}
-                                    </Link>
+                                    </button>
                                 </ul>
                             ))}
 

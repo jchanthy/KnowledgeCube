@@ -1,17 +1,20 @@
 import {useEffect, useState} from "react";
-import {setPageTitle} from "../../../components/headerSlice.js";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
-import CourseStats from "./CourseStats.js";
+import CourseStats from "./CourseInfo.js";
+import {setPageTitle} from "../../../components/headerSlice.js";
+import {useNavigate} from "react-router-dom";
+
 
 const Courses = () => {
-
-    const [courses, setCourses] = useState([]);
-    const dispatch = useDispatch()
+    const {pageTitle} = useSelector((state) => state.header);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(setPageTitle({title: 'Courses'}))
     }, [dispatch]);
+    const [courses, setCourses] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -29,14 +32,20 @@ const Courses = () => {
 
     return (
         <>
-            <div className="stat stats-vertical bg-base-100 shadow rounded-box">
-                <div className={'text-3xl font-bold'}>Courses</div>
+            <div className="card bg-base-100 shadow rounded-box p-4">
+                <div className={'flex justify-between items-center'}>
+                    <div className={'text-3xl font-bold'}>{pageTitle}</div>
+                    <div className={''}>
+                        <button className={'btn btn-sm btn-primary'}
+                                onClick={() => navigate("/admin/dashboard/courses/create")}
+                        >Create Course
+                        </button>
+                    </div>
+                </div>
                 {
-                    courses.map((course, index) => {
-                        return (
-                            <CourseStats key={index} {...course}/>
-                        )
-                    })
+                    courses.map((course) => (
+                        <CourseStats key={course._id} {...course} course={course}/>
+                    ))
                 }
             </div>
         </>

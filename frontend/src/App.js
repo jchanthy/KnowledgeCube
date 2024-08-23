@@ -8,10 +8,9 @@ import initializeApp from "./services/auth/init.js";
 
 const Support = lazy(() => import("./pages/Support/index.js"));
 
+const CourseDetail = lazy(() => import("./components/Courses/CourseDetail.js"));
 
-const CourseDetail = lazy(() => import("./pages/courses/index.js"));
-
-const ChangePassword = lazy(() => import("./components/user/ChangePassword.js"));
+const ChangePassword = lazy(() => import("./components/User/ChangePassword.js"));
 
 const AdminLogin = lazy(() => import("./components/Admin/AdminLogin.js"));
 
@@ -22,11 +21,11 @@ const HomePage = lazy(() => import("./pages/HomePage/HomePage.js"));
 
 const Jobs = lazy(() => import("./pages/Jobs/index.js"));
 const PageNotFound = lazy(() => import("./components/pageNotFound.js"));
-const ForgotPassword = lazy(() => import("./components/user/ForgotPassword.js"));
-const Register = lazy(() => import("./components/user/Register.js"));
+const ForgotPassword = lazy(() => import("./components/User/ForgotPassword.js"));
+const Register = lazy(() => import("./components/User/Register.js"));
 const HomePageLayout = lazy(() => import("./pages/HomePage/HomePageLayout.js"));
 const DashboardLayout = lazy(() => import("./features/dashboard/DashboardLayout.js"));
-const Login = lazy(() => import('./components/user/Login.js'));
+const Login = lazy(() => import('./components/User/Login.js'));
 
 initializeApp()
 const App = () => {
@@ -53,15 +52,17 @@ const App = () => {
                         <Route element={<HomePageLayout/>}>
                             <Route path={'/courses'} element={<Courses/>}/>
                             <Route path={'/jobs'} element={<Jobs/>}/>
-                            <Route path={'/courses/:courseName'} element={<CourseDetail/>}/>
+                            <Route path={'/courses/:id'} element={<CourseDetail/>}/>
                         </Route>
                         <Route path={'/admin/login'}
-                               element={!isAuthenticated ? <AdminLogin/> : <Navigate to={'/dashboard'}/>}/>
+                               element={!isAuthenticated ? <AdminLogin/> : <Navigate to={'/admin/dashboard'}/>}/>
                         <Route path={'/admin/*'}
-                               element={isAuthenticated ? <Navigate to={'/dashboard'}/> : <AdminLogin/>}/>
+                               element={isAuthenticated ? <Navigate to={'/admin/dashboard'}/> : <AdminLogin/>}/>
                         <Route path="/register" element={<Register/>}/>
-                        <Route path="/dashboard/*" element={<DashboardLayout/>}/>
-                        <Route path={'/learner/*'} element={<LearnerLayout/>}/>
+                        <Route path="/admin/dashboard/*"
+                               element={isAuthenticated ? <DashboardLayout/> : <Navigate to={'/login'}/>}/>
+                        <Route path={'/learner/*'}
+                               element={isAuthenticated ? <LearnerLayout/> : <Navigate to={'/login'}/>}/>
 
                         <Route path={'/*'} element={<PageNotFound/>}/>
 

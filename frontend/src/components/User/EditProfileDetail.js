@@ -10,7 +10,7 @@ const EditProfileDetail = () => {
     });
 
     const onSubmit = async (data) => {
-        // Update user information API call
+        // Update User information API call
         console.log(data);
     };
 

@@ -19,8 +19,8 @@ const LearnerProfile = () => {
     const [isOpen, setIsOpen] = useState(false);
     const handleUpdate = (e) => {
         e.preventDefault();
-        // Update user logic here
-        console.log('Update user:', username, photo);
+        // Update User logic here
+        console.log('Update User:', username, photo);
         closeModal();
     };
 
@@ -136,7 +136,6 @@ const LearnerProfile = () => {
                         <EnvelopeIcon className={'w-4 h-4'}/>
                         {user.email}
                     </span>
-                    <button className={'btn btn-outline'}>Upload Photo</button>
                 </div>
             </div>
 

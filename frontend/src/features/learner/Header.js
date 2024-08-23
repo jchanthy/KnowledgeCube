@@ -1,8 +1,8 @@
 import {Link, useLocation} from "react-router-dom";
 import LearnerNavBar from "./NavBar.js";
-import UserProfile from "../../components/profile/userProfile.js";
 import {Bars3Icon} from "@heroicons/react/24/solid/index.js";
 import React from "react";
+import LearnerProfile from "./learnerProfile.js";
 
 const LearnerHeader = () => {
     useLocation();
@@ -21,7 +21,7 @@ const LearnerHeader = () => {
                     <LearnerNavBar/>
                 </div>
                 <div className={'flex-0'}>
-                    <UserProfile/>
+                    <LearnerProfile/>
                 </div>
             </div>
         </>

@@ -1,36 +1,29 @@
-import React, {useState} from 'react';
+import {useRef, useState} from "react";
 
-const MyModal = ({title, children, labelBtn}) => {
+const Modal = ({title, children}) => {
     const [isOpen, setIsOpen] = useState(false);
+
+    const modalRef = useRef(null);
 
     const openModal = () => {
         setIsOpen(true);
     };
 
-    const closeModal = () => {
-        setIsOpen(false);
-    };
-
     return (
         <>
-            <button onClick={openModal} className="btn btn-sm btn-primary">
-                {labelBtn}
+            <button className={'btn btn-outline'} onClick={openModal}>
+                Edit
             </button>
-            {isOpen && (
-                <div className="modal">
-                    <div className="modal-box">
-                        <h3 className="font-bold">{title}</h3>
-                        <div className="modal-body">{children}</div>
-                        <div className="modal-action">
-                            <button className="btn" onClick={closeModal}>
-                                Close
-                            </button>
+            {isOpen
+                && (
+                    <dialog ref={modalRef} className="modal" open={isOpen}>
+                        <div className="modal-box">
+                            <div className="modal-body">{children}</div>
                         </div>
-                    </div>
-                </div>
-            )}
+                    </dialog>
+                )}
         </>
     );
 };
 
-export default MyModal;
+export default Modal;

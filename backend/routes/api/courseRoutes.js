@@ -18,7 +18,7 @@ router.post('/create', createCourse);
 router.post('/image/upload', storeImage);
 router.get('/:id', getCourseById);
 router.get('/:courseName', getCourseByName);
-router.put('/:id', updateCourse);
+router.put('/edit/:id', updateCourse);
 router.delete('/:id', deleteCourse);
 router.get('/enrolled/:userId', getCoursesByUserId);
 router.get('/search/:searchTerm', getCourseBySearch);

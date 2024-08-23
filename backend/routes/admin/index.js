@@ -5,17 +5,18 @@ import login from "./login.js";
 import dashboard from "./dashboard.js";
 import logOut from "./logout.js";
 import signUpAdmin from "./signup-admin.js";
-import {loginAdminValidation, signUpAdminValidation,} from "../../utils/validation.js";
+import {signUpAdminValidation,} from "../../utils/validation.js";
 
 const router = Router();
 
 router.get("/", home);
-router
-    .route("/login")
-    .get(csrfSynchronisedProtection, (req, res) =>
-        res.render("login", {csrfToken: generateToken(req)}),
-    )
-    .post(csrfSynchronisedProtection, loginAdminValidation, login);
+router.post("/login", login);
+// router
+//     .route("/login")
+//     .get(csrfSynchronisedProtection, (req, res) =>
+//         res.render("login", {csrfToken: generateToken(req)}),
+//     )
+//     .post(csrfSynchronisedProtection, loginAdminValidation, login);
 
 router
     .route("/signup")

@@ -71,7 +71,7 @@ const UpdateUser = () => {
             });
 
             toast.success(response?.data?.message);
-            // Update the user data in local storage
+            // Update the User data in local storage
             updateUser({
                 _id: user._id,
                 name: value.name,
