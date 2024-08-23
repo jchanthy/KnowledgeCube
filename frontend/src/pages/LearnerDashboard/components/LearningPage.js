@@ -14,7 +14,9 @@ const LearningPage = ({courseData}) => {
                 <div
                     className="progress-bar-fill"
                     style={{width: `${progress}%`}}
-                />
+                >
+                    {progress}
+                </div>
             </div>
         </div>
     );

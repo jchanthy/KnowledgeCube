@@ -26,7 +26,6 @@ function UserStats() {
         const fetchData = async () => {
             try {
                 const response = await axios.get('/api/courses');
-                console.log(response);
                 if (response.data) {
                     setTotalCourses(response.data.total)
                 }

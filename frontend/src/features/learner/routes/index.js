@@ -5,7 +5,7 @@ const LearningPage = lazy(() => import("../../../pages/LearnerDashboard/componen
 const Support = lazy(() => import("../../../pages/Support/index.js"));
 const Courses = lazy(() => import('../../../pages/LearnerDashboard/components/LearnerCourse.js'));
 const PageNotFound = lazy(() => import('../../../components/pageNotFound.js'));
-const Dashboard = lazy(() => import('../../../pages/dashboard/index.js'));
+const Dashboard = lazy(() => import('../../../pages/learner/index.js'));
 const LearnerProfile = lazy(() => import('../../../pages/LearnerDashboard/components/LearnerProfile.js'));
 const routes = [
 

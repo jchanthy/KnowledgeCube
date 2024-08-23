@@ -9,23 +9,23 @@ const submenuIconClasses = `h-5 w-5`
 const routes = [
 
     {
-        path: '/dashboard',
+        path: '/admin/dashboard',
         icon: <Squares2X2Icon className={iconClasses}/>,
         name: 'Dashboard',
     },
     {
-        path: '/dashboard/users',
+        path: '/admin/dashboard/users',
         icon: <UsersIcon className={`${iconClasses} inline`}/>, // icon component
         name: 'Users',
     },
 
     {
-        path: '/dashboard/courses', //no url needed as this has submenu
+        path: '/admin/dashboard/courses', //no url needed as this has submenu
         icon: <AcademicCapIcon className={`${iconClasses} inline`}/>, // icon component
         name: 'Courses', // name that appear in Sidebar
     },
     {
-        path: '/dashboard/contents', //no url needed as this has submenu
+        path: '/admin/dashboard/contents', //no url needed as this has submenu
         icon: <BookOpenIcon className={`${iconClasses} inline`}/>, // icon component
         name: 'Contents', // name that appear in Sidebar
     },

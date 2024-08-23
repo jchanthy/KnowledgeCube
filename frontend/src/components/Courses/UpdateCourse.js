@@ -1,50 +1,62 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import {useNavigate} from "react-router-dom";
 
-const CourseCreate = () => {
+const UpdateCourse = ({courseId}) => {
+
+    console.log(courseId);
+
+    const [courseData, setCourseData] = useState(null);
+    const [imageFile, setImageFile] = useState(null);
     const [loading, setLoading] = useState(false);
 
-    const fileInputRef = React.createRef(null);
-    const navigate = useNavigate();
-    const [formData, setFormData] = useState({
-        title: '',
-        description: '',
-        tags: '',
-        badge: '',
-        image: null,
-    });
+    useEffect(() => {
+        const fetchCourseData = async () => {
+            try {
+                const response = await axios.get(`/api/courses/${courseId}`);
+                if (response.data) {
+                    console.log(response.data);
+                    setCourseData(response.data);
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchCourseData();
+    }, [courseId]);
 
     const handleChange = (e) => {
-        setFormData({...formData, [e.target.name]: e.target.value});
+        setCourseData({...courseData, [e.target.name]: e.target.value});
     };
 
     const handleFileChange = (e) => {
-        const reader = new FileReader();
-        reader.onload = () => {
-            if (reader.readyState === 2) {
-                setFormData({...formData, image: reader.result});
-            }
-        };
-        reader.readAsDataURL(e.target.files[0]);
+        setImageFile(e.target.files[0]);
     };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         setLoading(true);
-        const formDataToSend = new FormData();
 
-        formDataToSend.append('title', formData.title);
-        formDataToSend.append('description', formData.description);
-        formDataToSend.append('tags', formData.tags);
-        formDataToSend.append('badge', formData.badge);
-        formDataToSend.append('image', formData.image);
+        const formData = new FormData();
+
+        if (!courseData || !courseData.title || !courseData.description || !courseData.tags || !courseData.badge) {
+            console.log('Missing required fields.');
+            return;
+        }
+        formData.append('title', courseData.title);
+        formData.append('description', courseData.description);
+        formData.append('tags', JSON.stringify(courseData.tags)); // Convert tags array to string
+        formData.append('badge', courseData.badge);
+        if (imageFile && imageFile.size > 0) {
+            formData.append('image', imageFile);
+        }
 
         try {
-            const response = await axios.post('/api/courses/create', formDataToSend);
+            const response = await axios.put(`/api/courses/${courseId}`, formData);
+
             console.log(response.data);
-            // Handle successful course creation
-            navigate('/course-creation');
+            // Handle successful course update
+            setCourseData(response.data);
             setLoading(false);
         } catch (error) {
             console.error(error);
@@ -54,26 +66,25 @@ const CourseCreate = () => {
     return (
         <div className={'card bg-base-100 shadow-xl p-10'}>
             <form className="form-control" onSubmit={handleSubmit}>
-                <h2 className="text-lg font-bold mb-4">Create a New Course</h2>
+                <h2 className="text-lg font-bold mb-4">Update Course</h2>
                 <div className="form-control mb-4">
-                    <label className="lablel">Title</label>
+                    <label className="label">Title</label>
                     <input
                         className="input input-primary w-full"
                         id="title"
                         type="text"
                         name={'title'}
                         placeholder="Enter course title"
-                        value={formData.title}
+                        value={courseData ? courseData.title : ''}
                         onChange={handleChange}
                     />
                 </div>
                 <div className="mb-4 form-control">
-                    <label className="lablel">Image URL</label>
+                    <label className="label">Image URL</label>
                     <input
                         className={'file-input file-input-bordered file-input-primary w-full max-w-xs'}
                         id="image"
                         type="file"
-                        ref={fileInputRef}
                         name={'image'}
                         accept="image/*"
                         multiple={true}
@@ -86,7 +97,7 @@ const CourseCreate = () => {
                         className="input input-primary"
                         id="description"
                         placeholder="Enter course description"
-                        value={formData.description}
+                        value={courseData ? courseData.description : ''}
                         name={'description'}
                         onChange={handleChange}
                     ></textarea>
@@ -99,7 +110,7 @@ const CourseCreate = () => {
                         type="text"
                         name={'tags'}
                         placeholder="Enter tags (comma separated)"
-                        value={formData.tags}
+                        value={courseData ? courseData.tags : ''}
                         onChange={handleChange}
                     />
                 </div>
@@ -113,13 +124,13 @@ const CourseCreate = () => {
                         type="text"
                         name={'badge'}
                         placeholder="Enter badge"
-                        value={formData.badge}
+                        value={courseData ? courseData.badge : ''}
                         onChange={handleChange}
                     />
                 </div>
                 <div className="form-control">
                     <button className="btn btn-primary" type="submit" onClick={handleSubmit} disabled={loading}>
-                        Create Course
+                        Update Course
                     </button>
                 </div>
             </form>
@@ -127,4 +138,4 @@ const CourseCreate = () => {
     );
 };
 
-export default CourseCreate;
+export default UpdateCourse;

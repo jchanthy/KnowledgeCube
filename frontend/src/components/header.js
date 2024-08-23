@@ -1,9 +1,10 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import {Link} from "react-router-dom";
 import {UserContext} from "../services/UserContextProvider.js";
 
 const Header = ({children}) => {
     const {isAuthenticated} = useContext(UserContext);
+    const [isOpen, setIsOpen] = useState(false);
     const [sidebar, search, logo, menuItems, profile] =
         React.Children.toArray(children);
     return (

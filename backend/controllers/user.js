@@ -48,16 +48,16 @@ export const registerUser = async (req, res) => {
     try {
         const {name, email, password} = req.body;
 
-        // Check if the user already exists with the provided email
+        // Check if the User already exists with the provided email
         const existingUser = await User.findOne({email});
         if (existingUser) {
             return res.status(400).json({message: 'User already exists with this email'});
         }
 
-        // Hash the user's password and security answer
+        // Hash the User's password and security answer
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // Create a new user
+        // Create a new User
         const user = new User({
             name,
             email,
@@ -65,7 +65,7 @@ export const registerUser = async (req, res) => {
 
         });
 
-        // Save the user to the database
+        // Save the User to the database
         await user.save();
         res.status(201).json({message: 'User registered successfully', user});
     } catch (error) {
@@ -78,7 +78,7 @@ export const loginUser = async (req, res) => {
     try {
         const {email, password} = req.body;
 
-        // Check if the user exists
+        // Check if the User exists
         const user = await User.findOne({email});
 
         if (!user) {
@@ -93,7 +93,7 @@ export const loginUser = async (req, res) => {
         }
 
 
-        // Generate a JWT token with user data in the payload
+        // Generate a JWT token with User data in the payload
         const token = jwt.sign(
             {
                 _id: user._id,
@@ -119,35 +119,24 @@ export const loginUser = async (req, res) => {
 };
 
 export const updateUser = async (req, res) => {
-    const updateUser = async (_id, updatedUserData) => {
-        try {
-            return await User.findByIdAndUpdate(_id, updatedUserData, {
-                new: true,
-            });
-        } catch (error) {
-            throw error;
-        }
-    };
-
     try {
         const {_id} = req.params;
         const {password, ...body} = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
         const updatedUserData = {...body, password: hashedPassword};
 
-        const updatedUser = await updateUser(_id, updatedUserData);
+        const updatedUser = await User.findByIdAndUpdate(_id, updatedUserData, {new: true});
 
         if (!updatedUser) {
             return res.status(404).json({message: 'User not found'});
         }
 
-        res.status(200).json({message: 'User updated successfully', user: body});
+        res.status(200).json({message: 'User updated successfully', user: updatedUser});
     } catch (error) {
         console.error(error);
         res.status(500).json({message: 'Internal server error'});
     }
 };
-
 export const getUser = async (req, res) => {
     console.log(req.body);
     try {

@@ -16,8 +16,8 @@ const UserContextProvider = ({children}) => {
         }
     }, [user]);
     useEffect(() => {
-        // Load the user from localStorage
-        const user = JSON.parse(localStorage.getItem('knowledgeCube-user'));
+        // Load the User from localStorage
+        const user = JSON.parse(localStorage.getItem('knowledgeCube-User'));
         // Load the token from localStorage
         const token = localStorage.getItem('knowledgeCube-token');
 
@@ -31,11 +31,11 @@ const UserContextProvider = ({children}) => {
 
     function login(user, token) {
 
-        // Save the user to localStorage
-        localStorage.setItem('knowledgeCube-user', JSON.stringify(user));
+        // Save the User to localStorage
+        localStorage.setItem('knowledgeCube-User', JSON.stringify(user));
         // Save the token to localStorage
         localStorage.setItem('knowledgeCube-token', token);
-        // Set the user and token in state
+        // Set the User and token in state
         setUser(user);
         setIsAuthenticated(true);
         setToken(token);
@@ -48,17 +48,17 @@ const UserContextProvider = ({children}) => {
     }
 
     function updateUser(user) {
-        // Save the user to localStorage
-        localStorage.setItem('knowledgeCube-user', JSON.stringify(user));
-        // Set the user and token in state
+        // Save the User to localStorage
+        localStorage.setItem('knowledgeCube-User', JSON.stringify(user));
+        // Set the User and token in state
         setUser(user);
     }
 
     function logout() {
-        // Remove the user and token from localStorage
-        localStorage.removeItem('knowledgeCube-user');
+        // Remove the User and token from localStorage
+        localStorage.removeItem('knowledgeCube-User');
         localStorage.removeItem('knowledgeCube-token');
-        // Remove the user and token from state
+        // Remove the User and token from state
         setUser(null);
         setIsAuthenticated(false);
         setToken(null);

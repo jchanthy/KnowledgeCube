@@ -61,7 +61,7 @@ app.use("/admin", admin);
 app.use("/api", api);
 app.use("/", home);
 
-
+console.log(process.env.VARIABLE_NAME);
 // Error handling middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);
