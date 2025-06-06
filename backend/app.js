@@ -61,13 +61,11 @@ app.use("/admin", admin);
 app.use("/api", api);
 app.use("/", home);
 
-console.log(process.env.VARIABLE_NAME);
 // Error handling middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something went wrong!');
 });
-console.log(process.env.VARIABLE_NAME);
 Promise.all([connectToDb()])
     .then(() =>
         app.listen(PORT, () => console.log(`Knowledge Cube is running on port ${PORT}! ${mongoose.connection.host}`))
