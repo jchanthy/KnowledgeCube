@@ -222,6 +222,7 @@ export const verifyToken = async (token) => {
 
         if (!findUser) return Promise.reject({error: "Unauthorized"});
         await verify(token);
+        return findUser;
     } catch (error) {
         return Promise.reject({error: "Unauthorized"});
     }
