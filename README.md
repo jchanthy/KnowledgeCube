@@ -26,7 +26,7 @@ store and manage all relevant data, including user information, course details, 
 1. **Clone the Repository**
    ```sh
    git clone https://github.com/jchanthy/KnowledgeCube.git
-   cd knowledge_cube 
+   cd KnowledgeCube
    ```
 
 2. **Install Dependencies**
