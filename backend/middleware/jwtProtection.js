@@ -1,6 +1,6 @@
-import verify from "../routes/api/verify.js";
+import {verifyToken as validateToken} from "../controllers/user.js";
 
-const verifyToken = (req, res, next) => {
+const verifyToken = async (req, res, next) => {
     const authHeader = req.headers['Authorization'];
 
     if (!authHeader) {
@@ -15,11 +15,11 @@ const verifyToken = (req, res, next) => {
     }
 
     try {
-        req.user = verify(token, process.env.JWT_SECRET);
+        req.user = await validateToken(token);
+        return next();
     } catch (err) {
         return res.status(401).send('Invalid Token');
     }
-    return next();
 };
 
 export default verifyToken;
