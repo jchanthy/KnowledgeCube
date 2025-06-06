@@ -49,6 +49,8 @@ store and manage all relevant data, including user information, course details, 
    ```plaintext
    JWT_SECRET=<unique-string>
    DB_URI=<mongodb-url>
+   EMAIL_USER=<gmail-account>
+   EMAIL_PASS=<gmail-password>
    ```
 
 5. **Start the Application**

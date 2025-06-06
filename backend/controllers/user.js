@@ -165,8 +165,8 @@ export const forgetPassword = (req, res) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'john.chanthy@gmail.com',
-            pass: 'gdhi dyqo uotw tccp',
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS,
         },
     });
 
