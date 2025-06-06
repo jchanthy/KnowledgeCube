@@ -12,7 +12,7 @@ const ResetPassword = () => {
         setError('');
         setSuccess('');
         try {
-            const response = await axios.post('/api/forget-password', {email});
+            const response = await axios.post('/api/users/forget-password', {email});
             if (response.data.success) {
                 setSuccess('Password reset email sent successfully!');
                 setError(null);
